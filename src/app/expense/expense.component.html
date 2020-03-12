@@ -1,0 +1,21 @@
+<div class="card">
+    <div class="card-content">
+      <span class="card-title">Expense</span>
+      <div class="divider"></div>
+    </div>
+    <div class="card-content">
+
+
+        <div>
+                Choose a date
+            
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </div> <!-- End -->
+
+        <input matInput type="number" placeholder="Expense" #expense>
+        
+        <button class="waves-effect waves-light btn-small red darken-2" (click)="getExpense(expense.value)">- Expense</button>
+    </div>
+  </div>
