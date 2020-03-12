@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import 'firebase/firestore';
+
+
+
 
 @Component({
   selector: 'app-deposit',
@@ -8,8 +14,15 @@ import { Component, OnInit } from '@angular/core';
 export class DepositComponent implements OnInit {
 
   depositArray = [];
+  deposits:any;
 
-  constructor() { }
+  constructor(firestore: AngularFirestore) {
+     firestore.collection('deposits').valueChanges().subscribe(object=> {
+      this.deposits = object;
+
+      console.log(object);
+     });
+  }
 
   ngOnInit(): void {
   }
