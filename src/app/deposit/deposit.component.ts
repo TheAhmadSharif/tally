@@ -35,7 +35,6 @@ export class DepositComponent implements OnInit {
                 this.total = parseFloat(this.deposits[i].deposit.amount) + this.total;
             }
 
-            console.log(this.total, 'this.total');
 
 
      });

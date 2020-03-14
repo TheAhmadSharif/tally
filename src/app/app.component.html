@@ -7,8 +7,13 @@
   </div> <!-- End row -->
   
   <div class="row">
-    <div class="col-sm-6"><app-deposit></app-deposit></div>
-    <div class="col-sm-6"><app-expense></app-expense></div>
+    <div class="col-sm-6">
+      <app-deposit></app-deposit>
+    </div> <!-- End row -->
+
+    <div class="col-sm-6">
+      <app-expense (getExpenseEvent)="getTotalExpense($event)"></app-expense>
+    </div><!-- End row -->
   </div> <!-- End row -->
 
   <div class="row mt-4">

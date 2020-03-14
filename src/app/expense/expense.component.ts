@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -16,15 +16,25 @@ export class ExpenseComponent implements OnInit {
   expenseArray = [];
   expenseInput:any;
   today = new FormControl(new Date());
+  total:any = 0;
+
+  @Output() getExpenseEvent = new EventEmitter();
+
 
   constructor(private firestore: AngularFirestore) {
 
   firestore.collection('Tally', ref => ref.orderBy('expense.datetime').limitToLast(5)).valueChanges().subscribe(object=> {
 
 
-      this.expenses = object;
 
-      console.log(object, 'expenses');
+        this.expenses = object;
+
+        for(var i = 0; i < this.expenses.length; i++) {
+            this.total = parseFloat(this.expenses[i].expense.amount) + this.total;
+        }
+
+
+
 
      });
 
@@ -49,6 +59,10 @@ export class ExpenseComponent implements OnInit {
 
     this.expenseInput = null;
 
+  }
+
+  getTotalExpense() {
+    this.getExpenseEvent.emit('event');
   }
 
 }
