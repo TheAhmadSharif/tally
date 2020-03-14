@@ -12,15 +12,15 @@
             <mat-datepicker #picker></mat-datepicker>
             
           </div> <!-- End -->
-        <input type="number" placeholder="Deposit Amount" #deposit>
+        <input type="number" placeholder="Deposit Amount" #deposit [(ngModel)]="depositInput">
         
         <button class="waves-effect waves-light btn-small green darken-1" (click)="getDeposit(deposit.value, depositDate.value)">+ Deposit</button>
     </div>
 
     <div class="card-content">
         <div>
-            <li *ngFor="let object of deposits">
-                {{ object.deposit.amount }}
+            <li *ngFor="let object of deposits; let i = index;">
+                {{ i }}:: {{ object.deposit.amount }}
               
             </li>
         </div>

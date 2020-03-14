@@ -18,16 +18,22 @@ export class DepositComponent implements OnInit {
   depositArray = [];
   deposits:any;
   today = new FormControl(new Date());
+  depositInput:any;
 
 
 
   constructor(private firestore: AngularFirestore) {
-     firestore.collection('Tally').valueChanges().subscribe(object=> {
+     
+
+     firestore.collection('Tally', ref => ref.orderBy('deposit.datetime').limitToLast(5)).valueChanges().subscribe(object=> {
+
+
       this.deposits = object;
 
       console.log(object, 'object');
 
      });
+
 
   }
 
@@ -50,6 +56,8 @@ export class DepositComponent implements OnInit {
         }
 
     });
+
+    this.depositInput = null;
 
 
   }
