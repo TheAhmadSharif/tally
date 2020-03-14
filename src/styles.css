@@ -9088,3 +9088,9 @@
   }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-datepicker-toggle {
+  position: absolute;
+  z-index: 12;
+  right: 20px;
+}

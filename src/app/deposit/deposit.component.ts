@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import 'firebase/firestore';
@@ -15,21 +17,41 @@ export class DepositComponent implements OnInit {
 
   depositArray = [];
   deposits:any;
+  today = new FormControl(new Date());
 
-  constructor(firestore: AngularFirestore) {
-     firestore.collection('deposits').valueChanges().subscribe(object=> {
+
+
+  constructor(private firestore: AngularFirestore) {
+     firestore.collection('Tally').valueChanges().subscribe(object=> {
       this.deposits = object;
 
-      console.log(object);
+      console.log(object, 'object');
+
      });
+
   }
 
   ngOnInit(): void {
+    
   }
 
-  getDeposit(deposit:number) {
-    this.depositArray.push(deposit);
-    console.log(this.depositArray);
+  getDeposit(deposit:number, depositDate:any) {
+
+    var d = new Date().getTime().toString(); 
+
+
+
+    this.firestore.collection('Tally').doc(d).set({
+        deposit: {
+          amount: deposit,
+          deposit_type: "savings",
+          datetime: d,
+          userdate: depositDate
+        }
+
+    });
+
+
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-expense',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class ExpenseComponent implements OnInit {
 
   expenseArray = [];
+  today = new FormControl(new Date());
 
   constructor() { }
 
