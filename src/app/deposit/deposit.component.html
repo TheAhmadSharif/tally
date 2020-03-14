@@ -1,28 +1,28 @@
 <div class="card">
-    <div class="card-content">
+    <div class="card-body">
       <span class="card-title">Deposit</span>
       <div class="divider"></div>
     </div>
-    <div class="card-content">
-          <div>
-            Choose a date
-        
-            <input matInput [matDatepicker]="picker" name="today" [value]="today.value" #depositDate>
+    <div class="card-body">
+          <div class="form-group">        
+            <input matInput [matDatepicker]="picker" name="today" [value]="today.value" #depositDate class="form-control">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             
           </div> <!-- End -->
-        <input type="number" placeholder="Deposit Amount" #deposit [(ngModel)]="depositInput">
         
-        <button class="waves-effect waves-light btn-small green darken-1" (click)="getDeposit(deposit.value, depositDate.value)">+ Deposit</button>
-    </div>
 
-    <div class="card-content">
-        <div>
-            <li *ngFor="let object of deposits; let i = index;">
+        <div class="form-group">  
+          <input type="number" placeholder="Deposit Amount" #deposit [(ngModel)]="depositInput" class="form-control mb-2">
+        
+          <button class="btn btn-sm btn-success" (click)="getDeposit(deposit.value, depositDate.value)">+ Deposit</button>
+        </div> <!-- End form-group-->
+
+        <ul class="list-group list-group-flush">
+            <li *ngFor="let object of deposits; let i = index;" class="list-group-item">
                 {{ i }}:: {{ object.deposit.amount }}
               
             </li>
-        </div>
-    </div> <!-- End card content -->
+        </ul>
+    </div>  <!-- End Card body -->
   </div>
