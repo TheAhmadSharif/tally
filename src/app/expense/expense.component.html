@@ -16,7 +16,7 @@
         </div> <!-- End -->
 
 
-        <div class="form-group mb-2">  
+        <div class="form-group">  
             <input matInput type="number" placeholder="Expense Amount" #expense class="form-control mb-2" [(ngModel)]="expenseInput">
         
              <button class="btn btn-sm btn-danger" (click)="getExpense(expense.value, expenseDate.value)">- Expense</button>

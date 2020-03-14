@@ -24,7 +24,7 @@ export class ExpenseComponent implements OnInit {
 
       this.expenses = object;
 
-      console.log(object, 'object');
+      console.log(object, 'expenses');
 
      });
 

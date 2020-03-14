@@ -10227,5 +10227,10 @@ a.text-dark:hover, a.text-dark:focus {
   position: absolute;
   z-index: 12;
   right: 0;
-  top: 20px;
+  top: 0;
+}
+
+.form-group {
+  position: relative;
+  z-index: 10;
 }

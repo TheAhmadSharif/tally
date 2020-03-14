@@ -19,6 +19,7 @@ export class DepositComponent implements OnInit {
   deposits:any;
   today = new FormControl(new Date());
   depositInput:any;
+  total: number = 0;
 
 
 
@@ -28,9 +29,14 @@ export class DepositComponent implements OnInit {
      firestore.collection('Tally', ref => ref.orderBy('deposit.datetime').limitToLast(5)).valueChanges().subscribe(object=> {
 
 
-      this.deposits = object;
+          this.deposits = object;
 
-      console.log(object, 'object');
+            for(var i = 0; i < this.deposits.length; i++) {
+                this.total = parseFloat(this.deposits[i].deposit.amount) + this.total;
+            }
+
+            console.log(this.total, 'this.total');
+
 
      });
 
