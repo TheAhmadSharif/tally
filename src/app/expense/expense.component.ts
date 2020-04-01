@@ -13,35 +13,39 @@ import 'firebase/firestore';
 export class ExpenseComponent implements OnInit {
 
   expenses:any;
-  expenseArray = [];
   expenseInput:any;
   today = new FormControl(new Date());
   total:any = 0;
-
-  @Output() getExpenseEvent = new EventEmitter();
-
+  totalExpense:number = 0;
 
   constructor(private firestore: AngularFirestore) {
-
-  firestore.collection('Tally', ref => ref.orderBy('expense.datetime').limitToLast(5)).valueChanges().subscribe(object=> {
-
-
-
-        this.expenses = object;
-
-        for(var i = 0; i < this.expenses.length; i++) {
-            this.total = parseFloat(this.expenses[i].expense.amount) + this.total;
-        }
-
-
-
-
-     });
 
   }
 
   ngOnInit(): void {
-  }
+    this.getTotalExpense();
+
+
+    this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime').limitToLast(5)).valueChanges().subscribe(object=> {
+      this.expenses = object;
+   });
+  
+}
+
+  getTotalExpense() {
+    this.totalExpense = 0;
+    this.firestore.collection('Tally', ref => ref.where('expense.amount', '>', '0')).get().subscribe(object => {
+      object.forEach(doc => {
+        this.totalExpense = parseInt(doc.data().expense.amount) + this.totalExpense;
+     
+      });
+      console.log(this.totalExpense, 'this.totalExpense');
+
+    });
+    
+
+}
+
   getExpense(expense:number, expenseDate:any) {
     var d = new Date().getTime().toString(); 
 
@@ -58,11 +62,8 @@ export class ExpenseComponent implements OnInit {
     });
 
     this.expenseInput = null;
+    this.getTotalExpense();
 
-  }
-
-  getTotalExpense() {
-    this.getExpenseEvent.emit('event');
   }
 
 }

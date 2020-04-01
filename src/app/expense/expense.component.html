@@ -22,15 +22,22 @@
              <button class="btn btn-sm btn-danger" (click)="getExpense(expense.value, expenseDate.value)">- Expense</button>
          </div> <!-- End --> 
 
-         <ul class="list-group list-group-flush">
-            <li *ngFor="let object of expenses; let i = index;" class="list-group-item">
-                {{ i }}:: {{ object.expense.amount }}
-              
-            </li>
-        </ul>
+         
+        <table class="table">
+            <tr>
+              <td>#Serial</td>
+              <td>Amount</td>
+              <td>Date</td>
+            </tr>
+            <tr *ngFor="let object of expenses; let i = index;">
+              <td> {{ i + 1 }} </td>
+              <td> {{ object.expense.amount }} </td>
+              <td> {{ object.expense.userdate | date:'MMM d, y, EE, h:mm:ss a' }} </td>
+            </tr>
+        </table>
 
         <div class="mt-4">
-            Total Expense: <span class="h5">{{ total }}</span>
+            Total Expense: <span class="h5">{{ totalExpense }}</span>
         </div>
 
 

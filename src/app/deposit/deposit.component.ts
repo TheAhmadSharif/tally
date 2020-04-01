@@ -27,7 +27,16 @@ export class DepositComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   
+      this.getTotalDeposit();
+
+
+      var time = new Date();
+
+      console.log(time.toString());
+
+      this.firestore.collection('Tally', ref => ref.orderBy('deposit.datetime').limitToLast(5)).valueChanges().subscribe(object=> {
+        this.deposits = object;
+     });
     
   }
 
@@ -50,6 +59,8 @@ export class DepositComponent implements OnInit {
  
 
   getDeposit(deposit:number, depositDate:any) {
+
+    //throw new Error("My error message");
 
     var d = new Date().getTime().toString(); 
     this.firestore.collection('Tally').doc(d).set({

@@ -18,12 +18,20 @@
           <button class="btn btn-sm btn-success" (click)="getDeposit(deposit.value, depositDate.value)">+ Deposit</button>
         </div> <!-- End form-group-->
 
-        <ul class="list-group list-group-flush">
-            <li *ngFor="let object of deposits; let i = index;" class="list-group-item">
-                {{ i }}- {{ object.deposit.amount }}
-              
-            </li>
-        </ul>
+        <table class="table">
+          <tr>
+            <td>#Serial</td>
+            <td>Amount</td>
+            <td>Date</td>
+          </tr>
+          <tr *ngFor="let object of deposits; let i = index;">
+            <td> {{ i + 1 }} </td>
+            <td> {{ object.deposit.amount }} </td>
+            <td> {{ object.deposit.userdate | date:'MMM d, y, EE, h:mm:ss a' }} </td>
+          </tr>
+        </table>
+
+        
 
         <div class="mt-4">
             Total Deposit <span class="h5">{{ totalDeposit }}</span>
