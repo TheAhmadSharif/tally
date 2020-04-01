@@ -1,21 +1,40 @@
 <div class="card">
-    <div class="card-content">
+    <div class="card-body">
       <span class="card-title">Expense</span>
       <div class="divider"></div>
     </div>
-    <div class="card-content">
+    <div class="card-body">
 
 
-        <div>
-                Choose a date
+        <div class="form-group">    
+            <div style="position: relative; z-index: 10">
+                    <input matInput [matDatepicker]="picker" [value]="today.value" class="form-control" #expenseDate>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+            </div>        <!-- End -->  
             
-            <input matInput [matDatepicker]="picker">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
         </div> <!-- End -->
 
-        <input matInput type="number" placeholder="Expense" #expense>
+
+        <div class="form-group">  
+            <input matInput type="number" placeholder="Expense Amount" #expense class="form-control mb-2" [(ngModel)]="expenseInput">
         
-        <button class="waves-effect waves-light btn-small red darken-2" (click)="getExpense(expense.value)">- Expense</button>
+             <button class="btn btn-sm btn-danger" (click)="getExpense(expense.value, expenseDate.value)">- Expense</button>
+         </div> <!-- End --> 
+
+         <ul class="list-group list-group-flush">
+            <li *ngFor="let object of expenses; let i = index;" class="list-group-item">
+                {{ i }}:: {{ object.expense.amount }}
+              
+            </li>
+        </ul>
+
+        <div class="mt-4">
+            Total Expense: <span class="h5">{{ total }}</span>
+        </div>
+
+
+
+        
     </div>
   </div>
