@@ -7,6 +7,7 @@ import 'firebase/firestore';
 
 
 
+
 @Component({
   selector: 'app-deposit',
   templateUrl: './deposit.component.html',
@@ -14,12 +15,10 @@ import 'firebase/firestore';
 })
 export class DepositComponent implements OnInit {
 
-  depositArray = [];
-  deposits:any;
   today = new FormControl(new Date());
   depositInput:any;
-  total: number = 0;
   totalDeposit: number = 0;
+  deposits:any;
 
 
 
@@ -33,19 +32,20 @@ export class DepositComponent implements OnInit {
   }
 
   getTotalDeposit() {
-
-       
-
-        let citiesRef = this.firestore.collection('Tally');
-        let allCities = citiesRef.get().forEach(doc => {
-          console.log(doc);
-        });
-              
+    this.totalDeposit = 0;
 
 
+    this.firestore.collection('Tally', ref => ref.where('deposit.amount', '>', '0')).get().subscribe(object => {
+    
+      object.forEach(doc => {
+        this.totalDeposit = parseInt(doc.data().deposit.amount) + this.totalDeposit;
+     
+      });
+      console.log(this.totalDeposit, 'this.totalDeposit');
 
+    });
 
-  }
+}
 
  
 
@@ -63,6 +63,8 @@ export class DepositComponent implements OnInit {
     });
 
     this.depositInput = null;
+
+    this.getTotalDeposit();
 
   }
 
