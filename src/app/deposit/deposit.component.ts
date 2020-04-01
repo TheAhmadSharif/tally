@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 import 'firebase/firestore';
 
 
@@ -24,9 +23,8 @@ export class DepositComponent implements OnInit {
 
 
 
+
   constructor(private firestore: AngularFirestore) {
-
-
   }
 
   ngOnInit(): void {
@@ -36,10 +34,7 @@ export class DepositComponent implements OnInit {
 
   getTotalDeposit() {
 
-        // this.firestore.collection("Tally").get().subscribe(object => {
-        //   console.log(object);
-        // });
-    
+       
 
         let citiesRef = this.firestore.collection('Tally');
         let allCities = citiesRef.get().forEach(doc => {
@@ -48,14 +43,15 @@ export class DepositComponent implements OnInit {
               
 
 
+
+
   }
+
+ 
 
   getDeposit(deposit:number, depositDate:any) {
 
     var d = new Date().getTime().toString(); 
-
-
-
     this.firestore.collection('Tally').doc(d).set({
         deposit: {
           amount: deposit,
@@ -67,9 +63,6 @@ export class DepositComponent implements OnInit {
     });
 
     this.depositInput = null;
-
-    this.getTotalDeposit();
-
 
   }
 

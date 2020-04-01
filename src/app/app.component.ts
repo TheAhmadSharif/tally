@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
+
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import 'firebase/firestore';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +12,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'accounting-app';
+  total:any;
+
+  constructor(private firestore: AngularFirestore) {
+
+  firestore.collection('Tally', ref => ref.orderBy('expense.datetime').limitToLast(5)).valueChanges().subscribe(object=> {
+
+
+      this.total = object;
+
+      console.log(object, 'object');
+
+     });
+
+  }
+
+  getTotalExpense (event) {
+    console.log(event);
+  }
+
 }
