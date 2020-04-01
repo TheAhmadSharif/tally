@@ -16,14 +16,7 @@ export class AppComponent {
 
   constructor(private firestore: AngularFirestore) {
 
-  firestore.collection('Tally', ref => ref.orderBy('expense.datetime').limitToLast(5)).valueChanges().subscribe(object=> {
-
-
-      this.total = object;
-
-      console.log(object, 'object');
-
-     });
+  
 
   }
 

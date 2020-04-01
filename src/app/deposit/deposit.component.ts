@@ -19,6 +19,7 @@ export class DepositComponent implements OnInit {
   depositInput:any;
   totalDeposit: number = 0;
   deposits:any;
+  depositholder:any;
 
 
 
@@ -54,6 +55,16 @@ export class DepositComponent implements OnInit {
 
     });
 
+
+    this.firestore.collection('Tally').doc('totalDeposit').get().subscribe(object => {
+      this.depositholder = object.data();
+      console.log(this.depositholder, 'this.depositholder');
+
+    });
+
+
+    
+
 }
 
  
@@ -76,6 +87,19 @@ export class DepositComponent implements OnInit {
     this.depositInput = null;
 
     this.getTotalDeposit();
+
+    console.log(this.depositholder.totalDeposit.amount, 'this.depositholder91');
+
+    var depositAmount = parseFloat(this.depositholder) + deposit;
+
+    console.log(depositAmount, 'depositAmount95');
+
+    this.firestore.collection('Tally').doc('totalDeposit').set({
+      totalDeposit: {
+          amount: depositAmount,
+          datetime: d,
+        }
+    });
 
   }
 
