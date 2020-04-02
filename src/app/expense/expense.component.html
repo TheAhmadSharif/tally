@@ -1,47 +1,77 @@
-<div class="card">
-    <div class="card-body">
-      <span class="card-title">Expense</span>
-      <div class="divider"></div>
-    </div>
-    <div class="card-body">
-
-
-        <div class="form-group">    
-            <div style="position: relative; z-index: 10">
-                    <input matInput [matDatepicker]="picker" [value]="today.value" class="form-control" #expenseDate>
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-            </div>        <!-- End -->  
-            
-        </div> <!-- End -->
-
-
-        <div class="form-group">  
-            <input matInput type="number" placeholder="Expense Amount" #expense class="form-control mb-2" [(ngModel)]="expenseInput">
-        
-             <button class="btn btn-sm btn-danger" (click)="getExpense(expense.value, expenseDate.value)">- Expense</button>
-         </div> <!-- End --> 
-
-         
-        <table class="table">
-            <tr>
-              <td>#Serial</td>
-              <td>Amount</td>
-              <td>Date</td>
-            </tr>
-            <tr *ngFor="let object of expenses; let i = index;">
-              <td> {{ i + 1 }} </td>
-              <td> {{ object.expense.amount }} </td>
-              <td> {{ object.expense.userdate | date:'MMM d, y, EE, h:mm:ss a' }} </td>
-            </tr>
-        </table>
-
-        <div class="mt-4">
-            Total Expense: <span class="h5">{{ totalExpense }}</span>
+<div class="row">
+  <div class="col-sm-4"> 
+    <div class="card">
+        <div class="card-body">
+          <span class="card-title">Expense</span>
+          <div class="divider"></div>
         </div>
-
-
-
-        
-    </div>
-  </div>
+        <div class="card-body">
+    
+          <div *ngIf="notification" class="alert alert-warning">
+              {{ notification }}
+          </div> <!-- End Alert -->
+    
+    
+            <div class="form-group">    
+                <div style="position: relative; z-index: 10">
+                        <input matInput [matDatepicker]="picker" [value]="today.value" class="form-control" #expenseDate>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                </div>        <!-- End -->  
+                
+            </div> <!-- End -->
+    
+    
+            <div class="form-group">  
+                <input type="number" min="0" placeholder="Expense Amount" class="form-control mb-2" [(ngModel)]="expense.amount">
+             </div> <!-- End --> 
+    
+    
+             <div class="form-group">
+              <select name="expense_type" class="custom-select" #expenseCategory>
+                  <option selected="true" disabled value="0">Select Bill Type </option>
+                  <option value="Utility Bill">Utlity Bill</option>
+                  <option value="Overtime Bill">Employee Overtime Bill</option>
+                  <option value="Office Foods">Foods</option>
+                  <option value="Others">Others</option>
+              </select>          
+             
+            </div> <!-- End form-group-->
+    
+            <div class="form-group">  
+              <input type="text" placeholder="Expense note" class="form-control mb-2" [(ngModel)]="expense.note">
+           </div> <!-- End form-group-->
+    
+            <div class="form-group">
+              <button class="btn btn-sm btn-success" (click)="postExpense(expenseDate.value, expenseCategory.value, expense)"> Expense</button>
+            </div>  <!-- End form-group-->
+    
+            <div class="mt-4">
+                Total Expense: <span class="h5">{{ totalExpense }}</span>
+            </div>
+        </div> <!-- End card body -->
+      </div> <!-- End card  -->
+    </div> <!-- End col 6 -->
+    
+    <div class="col-sm-8">
+      <div class="card">
+        <table class="table">
+              <tr>
+                <td>#Serial</td>
+                <td>Amount</td>
+                <td>Category</td>
+                <td>Date</td>
+                <td>Note</td>
+              </tr>
+              <tr *ngFor="let object of expenses; let i = index;">
+                <td> {{ i + 1 }} </td>
+                <td> {{ object.expense.amount }} </td>
+                <td> {{ object.expense.category  }} </td>
+                <td> {{ object.expense.userdate | date:'MMM d, y, EE, h:mm:ss a' }} </td>
+                <td> {{ object.expense.note  }} </td>
+              </tr>
+          </table>
+          
+      </div> <!-- End card  -->
+    </div>  <!-- End col -->
+</div> <!-- End row -->

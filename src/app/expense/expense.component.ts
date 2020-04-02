@@ -13,11 +13,17 @@ import 'firebase/firestore';
 export class ExpenseComponent implements OnInit {
 
   expenses:any;
+  expenseNote:any;
   expenseInput:any;
   today = new FormControl(new Date());
   total:any = 0;
   totalExpense:number = 0;
+  notification:any;
 
+  expense = {
+    amount: '',
+    note: ''
+  }
   constructor(private firestore: AngularFirestore) {
 
   }
@@ -26,7 +32,7 @@ export class ExpenseComponent implements OnInit {
     this.getTotalExpense();
 
 
-    this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime').limitToLast(5)).valueChanges().subscribe(object=> {
+    this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime').limitToLast(20)).valueChanges().subscribe(object=> {
       this.expenses = object;
    });
   
@@ -37,33 +43,42 @@ export class ExpenseComponent implements OnInit {
     this.firestore.collection('Tally', ref => ref.where('expense.amount', '>', '0')).get().subscribe(object => {
       object.forEach(doc => {
         this.totalExpense = parseInt(doc.data().expense.amount) + this.totalExpense;
-     
       });
-      console.log(this.totalExpense, 'this.totalExpense');
-
     });
-    
-
 }
 
-  getExpense(expense:number, expenseDate:any) {
+  postExpense(expenseDate:any, expenseCategory:any, expense:any) {
+    this.notification = null;
+
+    console.log(expense, expenseCategory, expenseCategory.length > 1);
+    // throw new Error("My error message");
     var d = new Date().getTime().toString(); 
 
 
 
-    this.firestore.collection('Tally').doc(d).set({
-        expense: {
-          amount: expense,
-          deposit_type: "savings",
-          datetime: d,
-          userdate: expenseDate
-        }
+    if(expense.amount > 0 && expenseCategory.length > 1) {
+      this.firestore.collection('Tally').doc(d).set({
+          expense: {
+            amount: expense.amount,
+            note: expense.note,
+            category: expenseCategory,
+            deposit_type: "savings",
+            datetime: d,
+            userdate: expenseDate
+          }
 
-    });
+      });
 
-    this.expenseInput = null;
-    this.getTotalExpense();
+      this.expense.amount = null;
+      this.getTotalExpense();
 
+    }
+    else {
+        this.notification = 'Please put the financial information correctly.'
+    }
+  }
+  remove() {
+    this.firestore.collection('Tally').doc().delete();
   }
 
 }

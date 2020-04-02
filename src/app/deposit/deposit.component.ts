@@ -29,12 +29,6 @@ export class DepositComponent implements OnInit {
 
   ngOnInit(): void {
       this.getTotalDeposit();
-
-
-      var time = new Date();
-
-      console.log(time.toString());
-
       this.firestore.collection('Tally', ref => ref.orderBy('deposit.datetime').limitToLast(5)).valueChanges().subscribe(object=> {
         this.deposits = object;
      });
@@ -43,36 +37,24 @@ export class DepositComponent implements OnInit {
 
   getTotalDeposit() {
     this.totalDeposit = 0;
-
-
-    this.firestore.collection('Tally', ref => ref.where('deposit.amount', '>', '0')).get().subscribe(object => {
+    this.firestore.collection('TallyDeposit').doc('TotalDeposit').get().subscribe(object => {
     
-      object.forEach(doc => {
-        this.totalDeposit = parseInt(doc.data().deposit.amount) + this.totalDeposit;
-     
-      });
-      console.log(this.totalDeposit, 'this.totalDeposit');
-
+      if( typeof this.depositholder === 'undefined' || this.depositholder === null ){
+        this.depositholder = this.totalDeposit = 0;
+        console.log(object.data().amount, this.totalDeposit, '44');
+      }
+      else {
+        this.depositholder = object.data().amount;
+        console.log(object.data().amount, '48');
+      }
+      
+    }, (error)=> {
+      console.log(error, 'error44');
     });
-
-
-    this.firestore.collection('Tally').doc('totalDeposit').get().subscribe(object => {
-      this.depositholder = object.data();
-      console.log(this.depositholder, 'this.depositholder');
-
-    });
-
-
-    
-
 }
 
- 
-
-  getDeposit(deposit:number, depositDate:any) {
-
+  postDeposit(deposit:number, depositDate:any) {
     //throw new Error("My error message");
-
     var d = new Date().getTime().toString(); 
     this.firestore.collection('Tally').doc(d).set({
         deposit: {
@@ -81,20 +63,13 @@ export class DepositComponent implements OnInit {
           datetime: d,
           userdate: depositDate
         }
-
     });
 
     this.depositInput = null;
-
     this.getTotalDeposit();
-
-    console.log(this.depositholder.totalDeposit.amount, 'this.depositholder91');
-
     var depositAmount = parseFloat(this.depositholder) + deposit;
 
-    console.log(depositAmount, 'depositAmount95');
-
-    this.firestore.collection('Tally').doc('totalDeposit').set({
+    this.firestore.collection('TallyDeposit').doc('TotalDeposit').set({
       totalDeposit: {
           amount: depositAmount,
           datetime: d,
