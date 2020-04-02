@@ -17,12 +17,12 @@ export class ExpenseComponent implements OnInit {
   expenseInput:any;
   today = new FormControl(new Date());
   total:any = 0;
-  totalExpense:number = 0;
+  totalExpense:any;
   notification:any;
 
   expense = {
-    amount: '',
-    note: ''
+    amount: '12',
+    note: 'test'
   }
   constructor(private firestore: AngularFirestore) {
 
@@ -30,32 +30,29 @@ export class ExpenseComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTotalExpense();
-
-
     this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime').limitToLast(20)).valueChanges().subscribe(object=> {
       this.expenses = object;
    });
   
 }
 
-  getTotalExpense() {
-    this.totalExpense = 0;
-    this.firestore.collection('Tally', ref => ref.where('expense.amount', '>', '0')).get().subscribe(object => {
-      object.forEach(doc => {
-        this.totalExpense = parseInt(doc.data().expense.amount) + this.totalExpense;
-      });
+getTotalExpense() {
+
+    this.firestore.collection('TallyExpense').doc('TotalExpense').get().subscribe(object => {
+      this.totalExpense = object.data().totalExpense.amount;
+     //  console.log(this.totalExpense, object.data(), object.data().amount, 'Object Data');
+  
+    }, (error)=> {
+      this.totalExpense = 0;
+      console.log(error, 'error44');
     });
+
 }
 
   postExpense(expenseDate:any, expenseCategory:any, expense:any) {
     this.notification = null;
 
-    console.log(expense, expenseCategory, expenseCategory.length > 1);
-    // throw new Error("My error message");
     var d = new Date().getTime().toString(); 
-
-
-
     if(expense.amount > 0 && expenseCategory.length > 1) {
       this.firestore.collection('Tally').doc(d).set({
           expense: {
@@ -68,8 +65,18 @@ export class ExpenseComponent implements OnInit {
           }
 
       });
+      this.getTotalExpense()
+
+      var expenseAmount = parseInt(expense.amount) + parseInt(this.totalExpense); 
+      this.firestore.collection('TallyExpense').doc('TotalExpense').set({
+        totalExpense: {
+            amount: expenseAmount,
+            datetime: d,
+          }
+      });
 
       this.expense.amount = null;
+      this.expense.note = null;
       this.getTotalExpense();
 
     }
@@ -77,8 +84,6 @@ export class ExpenseComponent implements OnInit {
         this.notification = 'Please put the financial information correctly.'
     }
   }
-  remove() {
-    this.firestore.collection('Tally').doc().delete();
-  }
+  
 
 }

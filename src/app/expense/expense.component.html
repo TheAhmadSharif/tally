@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-4"> 
+  <div class="col-sm-4" style="margin-bottom: 20px;"> 
     <div class="card">
         <div class="card-body">
           <span class="card-title">Expense</span>
@@ -45,10 +45,7 @@
             <div class="form-group">
               <button class="btn btn-sm btn-success" (click)="postExpense(expenseDate.value, expenseCategory.value, expense)"> Expense</button>
             </div>  <!-- End form-group-->
-    
-            <div class="mt-4">
-                Total Expense: <span class="h5">{{ totalExpense }}</span>
-            </div>
+            
         </div> <!-- End card body -->
       </div> <!-- End card  -->
     </div> <!-- End col 6 -->
@@ -71,6 +68,10 @@
                 <td> {{ object.expense.note  }} </td>
               </tr>
           </table>
+
+          <div class="p-4 mt-4">
+            Total Expense: <span class="h5">{{ totalExpense }}</span>
+           </div> <!-- End -->
           
       </div> <!-- End card  -->
     </div>  <!-- End col -->
