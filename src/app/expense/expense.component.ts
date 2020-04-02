@@ -19,10 +19,15 @@ export class ExpenseComponent implements OnInit {
   total:any = 0;
   totalExpense:any;
   notification:any;
+  subcategory:string;
+  sub_others:boolean = false;
 
   expense = {
-    amount: '12',
-    note: 'test'
+    amount: '',
+    note: '',
+    subcategory: 'Select a Sub category',
+    others: '',
+    utility_options: ['Electric Bill', 'Internet Bill', 'Market Maintainance Bill', 'Others']
   }
   constructor(private firestore: AngularFirestore) {
 
@@ -34,6 +39,21 @@ export class ExpenseComponent implements OnInit {
       this.expenses = object;
    });
   
+}
+getCategory(category:string) {
+    console.log(category, 'category');
+    if(category === 'Utility Bill') {
+        this.subcategory = 'Utility Bill';
+    }
+}
+getSubCategory(subcategory:string) {
+  console.log(subcategory, 'subcategory');
+  if(subcategory=== 'Others'){
+      this.sub_others = true;
+  }
+  else {
+    this.sub_others = false;
+  }
 }
 
 getTotalExpense() {

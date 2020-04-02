@@ -20,6 +20,32 @@
                 </div>        <!-- End -->  
                 
             </div> <!-- End -->
+
+            <div class="form-group">
+              <select name="expense_type" class="custom-select" #expenseCategory (click)="getCategory(expenseCategory.value)">
+                  <option selected="true" disabled value="0">Select Bill Type </option>
+                  <option value="Utility Bill">Utlity Bill</option>
+                  <option value="Overtime Bill">Employee Overtime/Bounus Bill</option>
+                  <option value="Office Foods">Foods</option>
+                  <option value="Employee Salary">Employee Salary</option>
+                  <option value="Others">Others</option>
+              </select>    
+            </div> <!-- End form-group-->
+
+
+            <div *ngIf="subcategory" class="form-group" (click)="getSubCategory(subcategory.value)">
+              <select name="expense_type" class="custom-select" #subcategory [(ngModel)]="expense.subcategory" name="expense.subcategory">
+                  <option selected="true" disabled value="0">Select a Sub category</option>
+                  <option value="Utility Bill">Electric Bill</option>
+                  <option value="Internet Bill">Internet Bill</option>
+                  <option value="Market Maintainance Bill">Market Maintainance Bill</option>
+                  <option value="Others">Others</option>
+              </select>    
+              <div *ngIf="sub_others">
+                <input type="text" placeholder="Write " [(ngModel)]="expense.others" name ="expense.others" class="form-control">
+              </div>
+            </div> <!-- End form-group-->
+            
     
     
             <div class="form-group">  
@@ -27,16 +53,7 @@
              </div> <!-- End --> 
     
     
-             <div class="form-group">
-              <select name="expense_type" class="custom-select" #expenseCategory>
-                  <option selected="true" disabled value="0">Select Bill Type </option>
-                  <option value="Utility Bill">Utlity Bill</option>
-                  <option value="Overtime Bill">Employee Overtime Bill</option>
-                  <option value="Office Foods">Foods</option>
-                  <option value="Others">Others</option>
-              </select>          
-             
-            </div> <!-- End form-group-->
+            
     
             <div class="form-group">  
               <input type="text" placeholder="Expense note" class="form-control mb-2" [(ngModel)]="expense.note">
@@ -56,7 +73,7 @@
               <tr>
                 <td>#Serial</td>
                 <td>Amount</td>
-                <td>Category</td>
+                <td>Bill Type</td>
                 <td>Date</td>
                 <td>Note</td>
               </tr>
@@ -69,8 +86,8 @@
               </tr>
           </table>
 
-          <div class="p-4 mt-4">
-            Total Expense: <span class="h5">{{ totalExpense }}</span>
+          <div class="p-2 mt-2">
+            Total Expense: <span class="h5">{{ totalExpense }} </span> <span>BDT</span>
            </div> <!-- End -->
           
       </div> <!-- End card  -->
