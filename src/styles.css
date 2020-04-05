@@ -10238,3 +10238,10 @@ button.calendar, button.calendar:active {
   background-size: 23px;
   background-position: 50%;
 }
+
+.nav li a {
+  color: #666;
+}
+.nav li span {
+  margin: 10px 0 0 0;
+}

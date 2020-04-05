@@ -33,6 +33,7 @@
               <td>Amount</td>
               <td>Bill Type</td>
               <td>Date</td>
+              <td>Creatime Time</td>
               <td>Note</td>
             </tr>
             <tr *ngFor="let object of expenses; let i = index;">
@@ -40,6 +41,7 @@
               <td> {{ object.expense.amount }} </td>
               <td> {{ object.expense.category  }} </td>
               <td> {{ object.expense.userdate | date:'MMM d, y, EE' }} </td>
+              <td> {{ object.expense.datetime | date:'MMM d, y, EE, h:mm:ss a' }} </td>
               <td> {{ object.expense.note  }} </td>
             </tr>
         </table>

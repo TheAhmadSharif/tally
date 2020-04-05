@@ -12,7 +12,7 @@ import 'firebase/firestore';
 })
 export class BillCategoryComponent implements OnInit {
   parameter:string;
-  totalExpense:number;
+  totalExpense:number = 0;
   expenses:any;
   selected_day:any = {
     year: new Date().getFullYear(), 
