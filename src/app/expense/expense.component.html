@@ -65,7 +65,7 @@
            </div> <!-- End form-group-->
     
             <div class="form-group">
-              <button class="btn btn-sm btn-success" (click)="postExpense(expenseDate, expenseCategory.value, expense)"> Expense</button>
+              <button class="btn btn-sm btn-success" (click)="postExpense(expenseCategory.value, expense)"> Expense</button>
             </div>  <!-- End form-group-->
             
         </div> <!-- End card body -->
@@ -86,10 +86,14 @@
                 <div class="form-group">
                   <div class="input-group">
                     <input class="form-control" placeholder="yyyy/mm/dd"
-                           name="d1" #c2="ngModel" [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()">
+                           name="selected_day" [(ngModel)]="selected_day" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()">
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary disabled calendar" (click)="d2.toggle()">
                         </button>
+                    </div>
+
+                    <div style="margin-left: 20px;">
+                      <span class="btn btn-success" (click)="getDayData(selected_day)">Get Data</span>
                     </div>
                   </div>
                 </div>
@@ -108,7 +112,7 @@
                 <td> {{ i + 1 }} </td>
                 <td> {{ object.expense.amount }} </td>
                 <td> {{ object.expense.category  }} </td>
-                <td> {{ object.expense.userdate | date:'MMM d, y, EE, h:mm:ss a' }} </td>
+                <td> {{ object.expense.userdate | date:'MMM d, y, EE' }} </td>
                 <td> {{ object.expense.note  }} </td>
               </tr>
           </table>

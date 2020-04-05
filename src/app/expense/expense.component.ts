@@ -15,13 +15,15 @@ export class ExpenseComponent implements OnInit {
   expenses:any;
   expenseNote:any;
   expenseInput:any;
-  today = '2020-04-05';
-  total:any = 0;
   totalExpense:any;
   notification:any;
   subcategory:string;
   sub_others:boolean = false;
-  model2;
+  selected_day:any = {
+    year: new Date().getFullYear(), 
+    month: new Date().getMonth() + 1, 
+    day: new Date().getDate()
+  };
 
   expense = {
     amount: '',
@@ -31,6 +33,7 @@ export class ExpenseComponent implements OnInit {
     others: '',
     utility_options: ['Electric Bill', 'Internet Bill', 'Market Maintainance Bill', 'Others']
   }
+  
   constructor(private firestore: AngularFirestore) {
 
   }
@@ -58,11 +61,28 @@ getSubCategory(subcategory:string) {
   }
 }
 
+getDayData(date:any) {
+
+  this.totalExpense = 0;
+
+  var givendate = date.month + '/' + date.day + '/' + date.year; 
+
+
+  this.firestore.collection('Tally', ref => ref.where('expense.userdate', '==', givendate)).valueChanges().subscribe(object=> {
+       this.expenses = object;
+       this.expenses.forEach(element => {
+        this.totalExpense = element.expense.amount + this.totalExpense;
+       });
+
+    });
+    
+
+}
+
 getTotalExpense() {
 
     this.firestore.collection('TallyExpense').doc('TotalExpense').get().subscribe(object => {
       this.totalExpense = object.data().totalExpense.amount;
-     //  console.log(this.totalExpense, object.data(), object.data().amount, 'Object Data');
   
     }, (error)=> {
       this.totalExpense = 0;
@@ -71,16 +91,13 @@ getTotalExpense() {
 
 }
 
-  postExpense(expenseDate:any, expenseCategory:any, expense:any) {
+  postExpense(expenseCategory:any, expense:any) {
     this.notification = null;
 
-    console.log(expense);
-
-
-    throw new Error("message");
-
-
     var d = new Date().getTime().toString(); 
+    var userdate = expense.date.month + '/' + expense.date.day + '/' + expense.date.year;
+    console.log(userdate);
+    // throw new Error("message");
     if(expense.amount > 0 && expenseCategory.length > 1) {
       this.firestore.collection('Tally').doc(d).set({
           expense: {
@@ -89,7 +106,7 @@ getTotalExpense() {
             category: expenseCategory,
             deposit_type: "savings",
             datetime: d,
-            userdate: expenseDate
+            userdate: userdate
           }
 
       });
