@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -34,7 +35,10 @@ export class ExpenseComponent implements OnInit {
     utility_options: ['Electric Bill', 'Internet Bill', 'Market Maintainance Bill', 'Others']
   }
   
-  constructor(private firestore: AngularFirestore) {
+  constructor(
+    private firestore: AngularFirestore,
+    private router: Router
+    ) {
 
   }
 
@@ -75,7 +79,6 @@ getDayData(date:any) {
        });
 
     });
-    
 
 }
 

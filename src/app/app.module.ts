@@ -15,12 +15,14 @@ import { DepositComponent } from './deposit/deposit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { environment } from '../environments/environment';
+import { BillcategoryComponent } from './billcategory/billcategory.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ExpenseComponent,
-    DepositComponent
+    DepositComponent,
+    BillcategoryComponent
   ],
   imports: [
     BrowserModule,
