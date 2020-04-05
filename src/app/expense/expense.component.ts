@@ -34,12 +34,24 @@ export class ExpenseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getTotalExpense();
-    this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime').limitToLast(20)).valueChanges().subscribe(object=> {
-      this.expenses = object;
-   });
-  
+      this.getTotalExpense();
+      this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime').limitToLast(20)).valueChanges().subscribe(object=> {
+        this.expenses = object;
+     });
+    
+  }
+
+
+getinsertdate(date:string) {
+   
+
+
+   this.firestore.collection('Tally', ref => ref.where('expense.datetime', '==', '1585835449764')).valueChanges().subscribe(object=> {
+        this.expenses = object;
+        console.log(this.expenses, 'object');
+     });
 }
+
 getCategory(category:string) {
     console.log(category, 'category');
     if(category === 'Utility Bill') {
@@ -60,7 +72,6 @@ getTotalExpense() {
 
     this.firestore.collection('TallyExpense').doc('TotalExpense').get().subscribe(object => {
       this.totalExpense = object.data().totalExpense.amount;
-     //  console.log(this.totalExpense, object.data(), object.data().amount, 'Object Data');
   
     }, (error)=> {
       this.totalExpense = 0;

@@ -5,11 +5,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
-import { environment } from '../environments/environment';
-
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +14,7 @@ import { ExpenseComponent } from './expense/expense.component';
 import { DepositComponent } from './deposit/deposit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -29,13 +26,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase), 
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
-  providers: [MatDatepickerModule,],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

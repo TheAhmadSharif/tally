@@ -14,10 +14,8 @@
     
             <div class="form-group">    
                 <div style="position: relative; z-index: 10">
-                        <input matInput [matDatepicker]="picker" [value]="today.value" class="form-control" #expenseDate>
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                </div>        <!-- End -->  
+                        <input [value]="today.value" class="form-control" #expenseDate>
+                </div>   <!-- End -->  
                 
             </div> <!-- End -->
 
@@ -66,9 +64,22 @@
         </div> <!-- End card body -->
       </div> <!-- End card  -->
     </div> <!-- End col 6 -->
+
+
+
+
+
+
     
     <div class="col-sm-8">
       <div class="card">
+          <div class="card-body">
+              <div class="" style="margin: 20px 0;">
+
+                <input type="text" class="form-control mb-4" placeholder="Select a date ..." name="getdate" ngbDatepicker #d="ngbDatepicker"/>
+                <button class="btn btn-sm btn-success" (click)="d.toggle()">Get Details</button>
+              </div>  <!-- End -->
+          </div>    <!-- End -->
         <table class="table">
               <tr>
                 <td>#Serial</td>
