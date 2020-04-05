@@ -42,11 +42,9 @@ export class BillCategoryComponent implements OnInit {
   getDayData(date:any) {
 
     this.totalExpense = 0;
-  
     var givendate = date.month + '/' + date.day + '/' + date.year; 
-  
-  
-    this.firestore.collection('Tally', ref => ref.where('expense.userdate', '==', givendate)).valueChanges().subscribe(object=> {
+    this.firestore.collection('Tally', ref => ref.where('expense.category', '==', this.parameter).where('expense.userdate', '==',givendate)).valueChanges().subscribe(object=> {
+        console.log(object, 'object');
          this.expenses = object;
          this.expenses.forEach(element => {
           this.totalExpense = element.expense.amount + this.totalExpense;
