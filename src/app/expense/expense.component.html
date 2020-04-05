@@ -15,8 +15,8 @@
                         
                 <div class="form-group">
                   <div class="input-group">
-                    <input class="form-control" placeholder="dd/mm/yyyy" [value]="today.value"
-                           name="d1" #c2="ngModel" [(ngModel)]="model1" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" #expenseDate>
+                    <input class="form-control" placeholder="yyyy/mm/dd"
+                           name="d1" [(ngModel)]="model1" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" #expenseDate>
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary disabled calendar" (click)="d1.toggle()">
                         </button>
@@ -85,7 +85,7 @@
 
                 <div class="form-group">
                   <div class="input-group">
-                    <input class="form-control" placeholder="dd/mm/yyyy"
+                    <input class="form-control" placeholder="yyyy/mm/dd"
                            name="d1" #c2="ngModel" [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()">
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary disabled calendar" (click)="d2.toggle()">

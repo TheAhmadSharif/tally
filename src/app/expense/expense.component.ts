@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -15,17 +15,18 @@ export class ExpenseComponent implements OnInit {
   expenses:any;
   expenseNote:any;
   expenseInput:any;
-  today = new FormControl(new Date());
+  today = '2020-04-05';
   total:any = 0;
   totalExpense:any;
   notification:any;
   subcategory:string;
   sub_others:boolean = false;
-  model1:any;
-  model2:any;
+  model1;
+  model2;
 
   expense = {
     amount: '',
+    date: '2020-04-05',
     note: '',
     subcategory: 'Select a Sub category',
     others: '',
@@ -36,24 +37,12 @@ export class ExpenseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.getTotalExpense();
-      this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime').limitToLast(20)).valueChanges().subscribe(object=> {
-        this.expenses = object;
-     });
-    
-  }
-
-
-getinsertdate(date:string) {
-   
-
-
-   this.firestore.collection('Tally', ref => ref.where('expense.datetime', '==', '1585835449764')).valueChanges().subscribe(object=> {
-        this.expenses = object;
-        console.log(this.expenses, 'object');
-     });
+    this.getTotalExpense();
+    this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime').limitToLast(20)).valueChanges().subscribe(object=> {
+      this.expenses = object;
+   });
+  
 }
-
 getCategory(category:string) {
     console.log(category, 'category');
     if(category === 'Utility Bill') {
@@ -74,6 +63,7 @@ getTotalExpense() {
 
     this.firestore.collection('TallyExpense').doc('TotalExpense').get().subscribe(object => {
       this.totalExpense = object.data().totalExpense.amount;
+     //  console.log(this.totalExpense, object.data(), object.data().amount, 'Object Data');
   
     }, (error)=> {
       this.totalExpense = 0;
