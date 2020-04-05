@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
+
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -15,14 +16,14 @@ import { DepositComponent } from './deposit/deposit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { environment } from '../environments/environment';
-import { BillcategoryComponent } from './billcategory/billcategory.component';
+import { BillCategoryComponent } from './billcategory/billcategory.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ExpenseComponent,
     DepositComponent,
-    BillcategoryComponent
+    BillCategoryComponent
   ],
   imports: [
     BrowserModule,

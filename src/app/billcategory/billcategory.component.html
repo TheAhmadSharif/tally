@@ -1,1 +1,52 @@
-<p>billcategory works!</p>
+<div class="row">
+    
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="" style="margin: 20px 0;">
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input class="form-control" placeholder="yyyy/mm/dd"
+                             name="selected_day" [(ngModel)]="selected_day" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary disabled calendar" (click)="d2.toggle()">
+                          </button>
+                      </div>  <!-- End input group append -->
+                
+                      <div style="margin-left: 20px;">
+                        <span class="btn btn-success" (click)="getDayData(selected_day)">Get Data</span>
+                      </div> <!-- End Form group -->
+                    </div> <!-- End input group -->
+                  </div> <!-- End Form group -->
+                </div> <!-- End Col 3 -->
+               
+              </div> <!-- End -->
+              
+            </div>  <!-- End -->
+        </div>    <!-- End -->
+      <table class="table">
+            <tr>
+              <td>#Serial</td>
+              <td>Amount</td>
+              <td>Bill Type</td>
+              <td>Date</td>
+              <td>Note</td>
+            </tr>
+            <tr *ngFor="let object of expenses; let i = index;">
+              <td> {{ i + 1 }} </td>
+              <td> {{ object.expense.amount }} </td>
+              <td> {{ object.expense.category  }} </td>
+              <td> {{ object.expense.userdate | date:'MMM d, y, EE' }} </td>
+              <td> {{ object.expense.note  }} </td>
+            </tr>
+        </table>
+
+        <div class="p-2 mt-2">
+          Total Expense: <span class="h5">{{ totalExpense }} </span> <span>BDT</span>
+         </div> <!-- End -->
+    </div> <!-- End card  -->
+  </div>  <!-- End col -->
+</div>  <!-- End row -->

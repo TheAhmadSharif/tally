@@ -44,7 +44,7 @@ export class ExpenseComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTotalExpense();
-    this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime').limitToLast(20)).valueChanges().subscribe(object=> {
+    this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime').limitToLast(10)).valueChanges().subscribe(object=> {
       this.expenses = object;
    });
   

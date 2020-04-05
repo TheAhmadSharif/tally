@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BillcategoryComponent } from './billcategory/billcategory.component';
+
+import { BillCategoryComponent } from './billcategory/billcategory.component';
 import { ExpenseComponent } from './expense/expense.component';
 
 
 const routes: Routes = [
-  { path: ' ',  component: ExpenseComponent}, 
-  { path: 'category/:billtype', component: BillcategoryComponent},
-
-
+  { path: '', component: ExpenseComponent},
+  { path: 'category/:type', component: BillCategoryComponent},
 ];
 
 

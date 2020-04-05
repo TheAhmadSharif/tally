@@ -29,10 +29,10 @@
             <div class="form-group">
               <select name="expense_type" class="custom-select" #expenseCategory (click)="getCategory(expenseCategory.value)">
                   <option selected="true" disabled value="0">Select Bill Type </option>
-                  <option value="Utility Bill">Utlity Bill</option>
-                  <option value="Overtime Bill">Employee Overtime/Bounus Bill</option>
-                  <option value="Office Foods">Foods</option>
-                  <option value="Employee Salary">Employee Salary</option>
+                  <option value="Utility">Utlity Bill</option>
+                  <option value="Overtime">Employee Overtime/Bounus Bill</option>
+                  <option value="Foods">Foods</option>
+                  <option value="Salary">Employee Salary</option>
                   <option value="Others">Others</option>
               </select>    
             </div> <!-- End form-group-->
@@ -116,7 +116,7 @@
               <tr *ngFor="let object of expenses; let i = index;">
                 <td> {{ i + 1 }} </td>
                 <td> {{ object.expense.amount }} </td>
-                <td> <a routerLink="category/{{ object.expense.category.split(' ')[0]  }}" target="_blank">{{ object.expense.category  }}</a> </td>
+                <td> <a routerLink="category/{{ object.expense.category.split(' ')[0] }}">{{ object.expense.category  }}</a> </td>
                 <td> {{ object.expense.userdate | date:'MMM d, y, EE' }} </td>
                 <td> {{ object.expense.note  }} </td>
               </tr>
