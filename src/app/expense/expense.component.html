@@ -16,9 +16,9 @@
                 <div class="form-group">
                   <div class="input-group">
                     <input class="form-control" placeholder="yyyy/mm/dd"
-                           name="d1" [(ngModel)]="model1" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" #expenseDate>
+                            ngbDatepicker #expenseDate="ngbDatepicker" (click)="expenseDate.toggle()" [(ngModel)]="expense.date">
                     <div class="input-group-append">
-                      <button class="btn btn-outline-secondary disabled calendar" (click)="d1.toggle()">
+                      <button class="btn btn-outline-secondary disabled calendar" (click)="expenseDate.toggle()">
                         </button>
                     </div>
                   </div> <!-- End input group -->
@@ -65,7 +65,7 @@
            </div> <!-- End form-group-->
     
             <div class="form-group">
-              <button class="btn btn-sm btn-success" (click)="postExpense(expenseDate.value, expenseCategory.value, expense)"> Expense</button>
+              <button class="btn btn-sm btn-success" (click)="postExpense(expenseDate, expenseCategory.value, expense)"> Expense</button>
             </div>  <!-- End form-group-->
             
         </div> <!-- End card body -->

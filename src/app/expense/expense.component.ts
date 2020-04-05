@@ -21,12 +21,11 @@ export class ExpenseComponent implements OnInit {
   notification:any;
   subcategory:string;
   sub_others:boolean = false;
-  model1;
   model2;
 
   expense = {
     amount: '',
-    date: '2020-04-05',
+    date: {year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate()},
     note: '',
     subcategory: 'Select a Sub category',
     others: '',
@@ -74,6 +73,12 @@ getTotalExpense() {
 
   postExpense(expenseDate:any, expenseCategory:any, expense:any) {
     this.notification = null;
+
+    console.log(expense);
+
+
+    throw new Error("message");
+
 
     var d = new Date().getTime().toString(); 
     if(expense.amount > 0 && expenseCategory.length > 1) {
