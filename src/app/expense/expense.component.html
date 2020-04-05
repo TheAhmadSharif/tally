@@ -12,12 +12,19 @@
           </div> <!-- End Alert -->
     
     
-            <div class="form-group">    
-                <div style="position: relative; z-index: 10">
-                        <input [value]="today.value" class="form-control" #expenseDate>
-                </div>   <!-- End -->  
-                
-            </div> <!-- End -->
+                        
+                <div class="form-group">
+                  <div class="input-group">
+                    <input class="form-control" placeholder="dd/mm/yyyy" [value]="today.value"
+                           name="d1" #c2="ngModel" [(ngModel)]="model1" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" #expenseDate>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary disabled calendar" (click)="d1.toggle()">
+                        </button>
+                    </div>
+                  </div> <!-- End input group -->
+                </div> <!-- End form group -->
+
+
 
             <div class="form-group">
               <select name="expense_type" class="custom-select" #expenseCategory (click)="getCategory(expenseCategory.value)">
@@ -76,8 +83,17 @@
           <div class="card-body">
               <div class="" style="margin: 20px 0;">
 
-                <input type="text" class="form-control mb-4" placeholder="Select a date ..." name="getdate" ngbDatepicker #d="ngbDatepicker"/>
-                <button class="btn btn-sm btn-success" (click)="d.toggle()">Get Details</button>
+                <div class="form-group">
+                  <div class="input-group">
+                    <input class="form-control" placeholder="dd/mm/yyyy"
+                           name="d1" #c2="ngModel" [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary disabled calendar" (click)="d2.toggle()">
+                        </button>
+                    </div>
+                  </div>
+                </div>
+                
               </div>  <!-- End -->
           </div>    <!-- End -->
         <table class="table">

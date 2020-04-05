@@ -21,6 +21,8 @@ export class ExpenseComponent implements OnInit {
   notification:any;
   subcategory:string;
   sub_others:boolean = false;
+  model1:any;
+  model2:any;
 
   expense = {
     amount: '',
