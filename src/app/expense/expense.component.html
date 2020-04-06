@@ -52,13 +52,10 @@
             </div> <!-- End form-group-->
             
     
-    
             <div class="form-group">  
                 <input type="number" min="0" placeholder="Expense Amount" class="form-control mb-2" [(ngModel)]="expense.amount">
              </div> <!-- End --> 
     
-    
-            
     
             <div class="form-group">  
               <input type="text" placeholder="Expense note" class="form-control mb-2" [(ngModel)]="expense.note">
@@ -82,7 +79,6 @@
       <div class="card">
           <div class="card-body">
               <div class="" style="margin: 20px 0;">
-
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
@@ -114,7 +110,7 @@
   
                 <tr *ngFor="let object of expenses | paginate: { itemsPerPage: 2, currentPage: p }; let i = index;">
                   <td> {{ i + 1 }} </td>
-                  <td> {{ object.expense.amount }}/ </td>
+                  <td> {{ object.expense.amount }} </td>
                   <td> <a routerLink="category/{{ object.expense.category.split(' ')[0] }}">{{ object.expense.category  }}</a> </td>
                   <td> {{ object.expense.userdate | date:'MMM d, y, EE' }} </td>
                   <td> {{ object.expense.note  }} </td>
@@ -125,7 +121,7 @@
   
   
             <div class="p-2 mt-2">
-              Total Expense: <span class="h5">{{ totalExpense }}/ </span> <span>BDT</span>
+              Total Expense: <span class="h5">{{ totalExpense }}/ </span> <span>TK</span>
              </div> <!-- End -->
           </div>    <!-- End card body -->
         

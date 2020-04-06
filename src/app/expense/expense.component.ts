@@ -6,11 +6,21 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import 'firebase/firestore';
 
+interface Expense {
+  amount: string,
+  date: object,
+  note: string,
+  subcategory: string,
+  others: string,
+  utility_options: string[]
+}
+
 @Component({
   selector: 'app-expense',
   templateUrl: './expense.component.html',
   styleUrls: ['./expense.component.css']
 })
+
 export class ExpenseComponent implements OnInit {
 
   expenses:any;
@@ -27,7 +37,7 @@ export class ExpenseComponent implements OnInit {
   };
   p: number = 1;
 
-  expense = {
+  expense:Expense = {
     amount: '',
     date: {year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate()},
     note: '',
