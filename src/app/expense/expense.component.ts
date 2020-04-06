@@ -24,8 +24,6 @@ interface Expense {
 export class ExpenseComponent implements OnInit {
 
   expenses:any;
-  expenseNote:any;
-  expenseInput:any;
   totalExpense:any;
   notification:any;
   subcategory:string;

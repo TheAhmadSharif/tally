@@ -2,10 +2,8 @@
   <div class="col-sm-4" style="margin-bottom: 20px;"> 
     <div class="card">
         <div class="card-body">
-          <span class="card-title">Expense</span>
+          <h6 class="h6">Add Expense</h6>
           <div class="divider"></div>
-        </div>
-        <div class="card-body">
     
           <div *ngIf="notification" class="alert alert-warning">
               {{ notification }}
@@ -62,10 +60,9 @@
            </div> <!-- End form-group-->
     
             <div class="form-group">
-              <button class="btn btn-sm btn-success" (click)="postExpense(expenseCategory.value, expense)"> Expense</button>
+              <button class="btn btn-sm btn-success" (click)="postExpense(expenseCategory.value, expense)">Add Expense</button>
             </div>  <!-- End form-group-->
-            
-        </div> <!-- End card body -->
+      </div> <!-- End card body -->
       </div> <!-- End card  -->
     </div> <!-- End col 6 -->
 
