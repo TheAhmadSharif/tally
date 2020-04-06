@@ -9,10 +9,11 @@ import 'firebase/firestore';
 interface Expense {
   amount: string,
   date: object,
-  note: string,
+  category: string,
   subcategory: string,
-  others: string,
-  utility_options: string[]
+  subcategory_others: string,
+  utility_options: string[],
+  note: string
 }
 
 @Component({
@@ -38,10 +39,11 @@ export class ExpenseComponent implements OnInit {
   expense:Expense = {
     amount: '',
     date: {year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate()},
+    category: '',
+    subcategory: '',
+    subcategory_others: '',
+    utility_options: ['Electric Bill', 'Internet Bill', 'Market Maintainance Bill', 'Others'],
     note: '',
-    subcategory: 'Select a Sub category',
-    others: '',
-    utility_options: ['Electric Bill', 'Internet Bill', 'Market Maintainance Bill', 'Others']
   }
   
   constructor(
@@ -59,13 +61,11 @@ export class ExpenseComponent implements OnInit {
   
 }
 getCategory(category:string) {
-    console.log(category, 'category');
-    if(category === 'Utility Bill') {
-        this.subcategory = 'Utility Bill';
-    }
+    this.expense.category = category;
 }
 getSubCategory(subcategory:string) {
   console.log(subcategory, 'subcategory');
+  this.expense.subcategory = subcategory;
   if(subcategory=== 'Others'){
       this.sub_others = true;
   }
@@ -103,19 +103,21 @@ getTotalExpense() {
 
 }
 
-  postExpense(expenseCategory:any, expense:any) {
+  postExpense(expense:any) {
     this.notification = null;
 
     var d = new Date().getTime().toString(); 
     var userdate = expense.date.month + '/' + expense.date.day + '/' + expense.date.year;
-    console.log(userdate);
-    // throw new Error("message");
-    if(expense.amount > 0 && expenseCategory.length > 1) {
+    console.log(expense);
+     throw new Error("message");
+    if(expense.amount > 0 && expense.category.length > 1) {
       this.firestore.collection('Tally').doc(d).set({
           expense: {
             amount: expense.amount,
             note: expense.note,
-            category: expenseCategory,
+            category: expense.category,
+            subcategory: expense.subcategory,
+            subcategory_others: expense.subcategory_others,
             deposit_type: "savings",
             datetime: d,
             userdate: userdate

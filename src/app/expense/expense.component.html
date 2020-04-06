@@ -24,30 +24,34 @@
 
 
 
-            <div class="form-group">
-              <select name="expense_type" class="custom-select" #expenseCategory (click)="getCategory(expenseCategory.value)">
-                  <option selected="true" disabled value="0">Select Bill Type </option>
-                  <option value="Utility">Utlity Bill</option>
-                  <option value="Overtime">Employee Overtime/Bounus Bill</option>
-                  <option value="Foods">Foods</option>
-                  <option value="Salary">Employee Salary</option>
-                  <option value="Others">Others</option>
-              </select>    
-            </div> <!-- End form-group-->
-
-
-            <div *ngIf="subcategory" class="form-group" (click)="getSubCategory(subcategory.value)">
-              <select name="expense_type" class="custom-select" #subcategory [(ngModel)]="expense.subcategory" name="expense.subcategory">
-                  <option selected="true" disabled value="0">Select a Sub category</option>
-                  <option value="Utility Bill">Electric Bill</option>
-                  <option value="Internet Bill">Internet Bill</option>
-                  <option value="Market Maintainance Bill">Market Maintainance Bill</option>
-                  <option value="Others">Others</option>
-              </select>    
-              <div *ngIf="sub_others">
-                <input type="text" placeholder="Write " [(ngModel)]="expense.others" name ="expense.others" class="form-control">
-              </div>
-            </div> <!-- End form-group-->
+                <div class="form-group">
+                  <input type="hidden" [(ngModel)]="expense.category">
+                  <select name="expense_type" class="custom-select" #category (click)="getCategory(category.value)">
+                      <option selected="true" disabled value="0">Select Bill Type </option>
+                      <option value="Utility">Utlity Bill</option>
+                      <option value="Overtime">Employee Overtime/Bounus Bill</option>
+                      <option value="Foods">Foods</option>
+                      <option value="Salary">Employee Salary</option>
+                      <option value="Others">Others</option>
+                  </select>    
+                </div> <!-- End form-group-->
+    
+    
+                <div *ngIf="category.value == 'Utility' " class="form-group" (click)="getSubCategory(subcategory.value)">
+                 
+                  <input type="hidden" [(ngModel)]="expense.subcategory">
+                  <select name="expense_type" class="custom-select" #subcategory>
+                      <option selected="true" disabled value="0">Select a Sub category</option>
+                      <option value="Electric">Electric Bill</option>
+                      <option value="Internet">Internet Bill</option>
+                      <option value="Market Maintainance">Market Maintainance</option>
+                      <option value="Others">Others</option>
+                  </select>    
+                  <div *ngIf="sub_others">
+                    <input type="text" placeholder="Write " [(ngModel)]="expense.subcategory_others" name ="expense.others" class="form-control">
+                  </div>
+                </div> <!-- End form-group-->
+                
             
     
             <div class="form-group">  
@@ -60,7 +64,7 @@
            </div> <!-- End form-group-->
     
             <div class="form-group">
-              <button class="btn btn-sm btn-success" (click)="postExpense(expenseCategory.value, expense)">Add Expense</button>
+              <button class="btn btn-sm btn-success" (click)="postExpense(expense)">Add Expense</button>
             </div>  <!-- End form-group-->
       </div> <!-- End card body -->
       </div> <!-- End card  -->
