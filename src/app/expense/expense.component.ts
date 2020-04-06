@@ -25,6 +25,7 @@ export class ExpenseComponent implements OnInit {
     month: new Date().getMonth() + 1, 
     day: new Date().getDate()
   };
+  p: number = 1;
 
   expense = {
     amount: '',

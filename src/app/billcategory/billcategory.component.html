@@ -1,6 +1,5 @@
 <div class="row">
-    
-<div class="col-sm-12">
+  <div class="col-sm-12">
     <div class="card">
         <div class="card-body">
             <div class="" style="margin: 20px 0;">
@@ -22,33 +21,32 @@
                     </div> <!-- End input group -->
                   </div> <!-- End Form group -->
                 </div> <!-- End Col 3 -->
-               
               </div> <!-- End -->
-              
             </div>  <!-- End -->
-        </div>    <!-- End -->
-      <table class="table">
-            <tr>
-              <td>#Serial</td>
-              <td>Amount</td>
-              <td>Bill Type</td>
-              <td>Date</td>
-              <td>Creatime Time</td>
-              <td>Note</td>
-            </tr>
-            <tr *ngFor="let object of expenses; let i = index;">
-              <td> {{ i + 1 }} </td>
-              <td> {{ object.expense.amount }} </td>
-              <td> {{ object.expense.category  }} </td>
-              <td> {{ object.expense.userdate | date:'MMM d, y, EE' }} </td>
-              <td> {{ object.expense.datetime | date:'MMM d, y, EE, h:mm:ss a' }} </td>
-              <td> {{ object.expense.note  }} </td>
-            </tr>
-        </table>
-
-        <div class="p-2 mt-2">
-          Total Expense: <span class="h5">{{ totalExpense }} </span> <span>BDT</span>
-         </div> <!-- End -->
+            <table class="table">
+              <tr>
+                <td>#Serial</td>
+                <td>Amount</td>
+                <td>Bill Type</td>
+                <td>Date</td>
+                <td>Creatime Time</td>
+                <td>Note</td>
+              </tr>
+              <tr *ngFor="let object of expenses; let i = index;">
+                <td> {{ i + 1 }} </td>
+                <td> {{ object.expense.amount }} </td>
+                <td> {{ object.expense.category  }} </td>
+                <td> {{ object.expense.userdate | date:'MMM d, y, EE' }} </td>
+                <td> {{ object.expense.datetime | date:'MMM d, y, EE, h:mm:ss a' }} </td>
+                <td> {{ object.expense.note  }} </td>
+              </tr>
+          </table>
+  
+          <div class="p-2 mt-2">
+            Total Expense: <span class="h5">{{ totalExpense }} </span> <span>BDT</span>
+           </div> <!-- End -->
+        </div>    <!-- End card body -->
+        
     </div> <!-- End card  -->
   </div>  <!-- End col -->
 </div>  <!-- End row -->
