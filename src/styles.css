@@ -10245,3 +10245,17 @@ button.calendar, button.calendar:active {
 .nav li span {
   margin: 10px 0 0 0;
 }
+
+
+/* ngx Pagination  */
+
+.pagination /deep/ .ngx-pagination .current {
+  background: red;
+}
+.ngx-pagination {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.ngx-pagination .current {
+  background: #28a745 !important;
+}

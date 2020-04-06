@@ -28,7 +28,7 @@ export class ExpenseComponent implements OnInit {
   single: any[];
   multi: any[];
 
-  view: any[] = [700, 400];
+  view: any[] = [350, 200];
 
   // options
   showXAxis = true;
@@ -36,12 +36,12 @@ export class ExpenseComponent implements OnInit {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
+  xAxisLabel = 'Expenditure Category';
   showYAxisLabel = true;
-  yAxisLabel = 'Population';
+  yAxisLabel = 'Expenditure';
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ['#ffc107', '#28a745', '#28a745', '#AAAAAA']
   };
 
 
