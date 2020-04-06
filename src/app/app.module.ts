@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -33,7 +34,8 @@ import { BillCategoryComponent } from './billcategory/billcategory.component';
     AngularFireModule.initializeApp(environment.firebase), 
     FormsModule,
     NgbModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
