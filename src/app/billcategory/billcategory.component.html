@@ -8,10 +8,11 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <div class="input-group">
-                      <input class="form-control" placeholder="yyyy/mm/dd"
+                      <input type="hidden" placeholder="yyyy/mm/dd"
                              name="selected_day" [(ngModel)]="selected_day" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()">
                       <div class="input-group-append">
-                        <button class="btn btn-outline-secondary disabled calendar" (click)="d2.toggle()">
+                        {{  selected_day.year + '-' + selected_day.month + '-' + selected_day.day | date: 'dd, MMMM y' }}
+                        <button class="btn disabled calendar" (click)="d2.toggle()">
                           </button>
                       </div>  <!-- End input group append -->
                 

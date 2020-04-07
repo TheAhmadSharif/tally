@@ -4,7 +4,6 @@ import { single } from '../data';
 
 
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 import 'firebase/firestore';
 
 interface Expense {
@@ -26,7 +25,6 @@ interface Expense {
 export class ExpenseComponent implements OnInit {
 
   single: any[];
-  multi: any[];
 
   view: any[] = [350, 200];
 
@@ -56,6 +54,7 @@ export class ExpenseComponent implements OnInit {
     day: new Date().getDate()
   };
   p: number = 1;
+  placement = 'bottom';
 
   expense:Expense = {
     amount: '',
@@ -71,7 +70,7 @@ export class ExpenseComponent implements OnInit {
     private firestore: AngularFirestore,
     private router: Router
     ) {
-      Object.assign(this, { single })
+      Object.assign(this, {single})
   }
 
   onSelect(event) {
