@@ -88,7 +88,7 @@
                                name="selected_day" [(ngModel)]="selected_day" ngbDatepicker #d2="ngbDatepicker" [placement]="placement" [positionTarget]="buttonEl">
                         <div class="date-block">
                           <span>{{  selected_day.year + '-' + selected_day.month + '-' + selected_day.day | date: 'dd, MMMM y' }}</span>
-                          <span #buttonEl class="btn cp calendar" (click)="d2.toggle()">
+                          <span #buttonEl class="btn disabled cp calendar" (click)="d2.toggle()">
                             </span>
                         </div>  <!-- End input group append -->
                   
@@ -123,7 +123,7 @@
                 Total Expense: <span class="h5">{{ totalExpense }}/ </span> <span>TK</span>
                </div> <!-- End -->
 
-               <div>
+               <div class="d-flex justify-content-end">
                 <pagination-controls (pageChange)="p = $event"></pagination-controls>
                </div>  
            

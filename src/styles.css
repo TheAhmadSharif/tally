@@ -10269,7 +10269,7 @@ a.text-dark:hover, a.text-dark:focus {
   padding: 10px 0;
 }
 .date-block {
-  line-height: 0;
+  line-height: 1.5em;
 }
 .date-block button {
   margin: 0;

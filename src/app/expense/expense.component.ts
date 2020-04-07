@@ -133,7 +133,7 @@ getTotalExpense() {
     var d = new Date().getTime().toString(); 
     var userdate = expense.date.month + '/' + expense.date.day + '/' + expense.date.year;
     console.log(expense);
-     throw new Error("message");
+    // throw new Error("message");
     if(expense.amount > 0 && expense.category.length > 1) {
       this.firestore.collection('Tally').doc(d).set({
           expense: {
