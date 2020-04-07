@@ -1,6 +1,5 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { single } from '../data';
 
 
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -24,7 +23,20 @@ interface Expense {
 
 export class ExpenseComponent implements OnInit {
 
-  single: any[];
+  single: any[] = [
+    {
+      "name": "Utility",
+      "value": 1400,
+    },
+    {
+      "name": "Foods",
+      "value": 3500
+    },
+    {
+      "name": "Salary",
+      "value": 15000
+    }
+  ];
 
   view: any[] = [350, 200];
 
@@ -42,7 +54,7 @@ export class ExpenseComponent implements OnInit {
     domain: ['#ffc107', '#28a745', '#28a745', '#AAAAAA']
   };
 
-
+  chartdata:any;
   expenses:any;
   totalExpense:any;
   notification:any;
@@ -70,7 +82,7 @@ export class ExpenseComponent implements OnInit {
     private firestore: AngularFirestore,
     private router: Router
     ) {
-      Object.assign(this, {single})
+      Object.assign(this.single)
   }
 
   onSelect(event) {
@@ -79,10 +91,10 @@ export class ExpenseComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTotalExpense();
-    this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime').limitToLast(10)).valueChanges().subscribe(object=> {
+    this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime')).valueChanges().subscribe(object=> {
       this.expenses = object;
+      
    });
-  
 }
 getCategory(category:string) {
     this.expense.category = category;
@@ -106,12 +118,14 @@ getDayData(date:any) {
 
 
   this.firestore.collection('Tally', ref => ref.where('expense.userdate', '==', givendate)).valueChanges().subscribe(object=> {
-       this.expenses = object;
-       this.expenses.forEach(element => {
-        this.totalExpense = element.expense.amount + this.totalExpense;
-       });
-
+        this.expenses = object; 
+        this.expenses.forEach(element => {
+      
+          this.totalExpense = parseInt(element.expense.amount) + this.totalExpense;
+        });
     });
+   
+    
 
 }
 
@@ -133,7 +147,6 @@ getTotalExpense() {
     var d = new Date().getTime().toString(); 
     var userdate = expense.date.month + '/' + expense.date.day + '/' + expense.date.year;
     console.log(expense);
-    // throw new Error("message");
     if(expense.amount > 0 && expense.category.length > 1) {
       this.firestore.collection('Tally').doc(d).set({
           expense: {
