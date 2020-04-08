@@ -54,7 +54,7 @@ export class ExpenseComponent implements OnInit {
 
   chartdata:any;
   expenses:any;
-  totalExpense:any;
+  totalExpense:any = 0;
   notification:any;
   subcategory:string;
   sub_others:boolean = false;
@@ -87,38 +87,22 @@ export class ExpenseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.totalExpense = 0;
     this.getTotalExpense();
     this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime')).valueChanges().subscribe(object=> {
       this.expenses = object;
+      this.expenses.forEach(element => {
+        this.totalExpense = element.expense.amount + parseInt(this.totalExpense);
+       });
    }, error => {
 
    }, 
    () => {
-      this.expense;
 
    });
-
-
-   this.firestore.collection('Tally_ExpenseCategory').valueChanges().pipe(tap(a => {
-     console.log(a, 'a')
-   }));
-
-
    
 }
-getCategory(category:string) {
-    this.expense.category = category;
-}
-getSubCategory(subcategory:string) {
-  console.log(subcategory, 'subcategory');
-  this.expense.subcategory = subcategory;
-  if(subcategory=== 'Others'){
-      this.sub_others = true;
-  }
-  else {
-    this.sub_others = false;
-  }
-}
+
 
 getDayData(date:any) {
 
@@ -147,7 +131,7 @@ getDayData(date:any) {
 
 getDateRange(a:any, b:any) {
 
-  this.firestore.collection('Tally', ref => ref.where('expense.datetime', '>', 0).where('expense.datetime', '<=',1585835449764)).valueChanges().subscribe(object=> {
+  this.firestore.collection('Tally', ref => ref.where('expense.userdate_ms', '>', 0).where('expense.userdate_ms', '<=', 1586282400000)).valueChanges().subscribe(object=> {
     console.log(object, 'object');
      this.expenses = object;
      this.expenses.forEach(element => {
@@ -177,6 +161,7 @@ getTotalExpense() {
     var datetime = new Date().getTime()
     var d = datetime.toString(); 
     var userdate = expense.date.month + '/' + expense.date.day + '/' + expense.date.year;
+    var userdate_ms = new Date(userdate).getTime();
     console.log(expense);
     if(expense.amount > 0 && expense.category.length > 1) {
       this.firestore.collection('Tally').doc(d).set({
@@ -188,19 +173,21 @@ getTotalExpense() {
             subcategory_others: expense.subcategory_others,
             deposit_type: "savings",
             datetime: datetime,
-            userdate: userdate
+            userdate: userdate,
+            userdate_ms: userdate_ms,
           }
 
       });
-      this.getTotalExpense()
 
       var expenseAmount = parseInt(expense.amount) + parseInt(this.totalExpense); 
       this.firestore.collection('TallyExpense').doc('TotalExpense').set({
         totalExpense: {
             amount: expenseAmount,
             datetime: d,
+            last_amount: parseInt(expense.amount)
           }
       });
+
 
       this.expense.amount = null;
       this.expense.note = null;
@@ -211,6 +198,18 @@ getTotalExpense() {
         this.notification = 'Please put the financial information correctly.'
     }
   }
-  
+getCategory(category:string) {
+    this.expense.category = category;
+}
+getSubCategory(subcategory:string) {
+  console.log(subcategory, 'subcategory');
+  this.expense.subcategory = subcategory;
+  if(subcategory=== 'Others'){
+      this.sub_others = true;
+  }
+  else {
+    this.sub_others = false;
+  }
+}
 
 }
