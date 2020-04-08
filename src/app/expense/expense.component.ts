@@ -96,9 +96,6 @@ export class ExpenseComponent implements OnInit {
        });
    }, error => {
 
-   }, 
-   () => {
-
    });
    this.getTotalExpense();
    
@@ -167,6 +164,7 @@ getTotalExpense() {
     if(expense.amount > 0 && expense.category.length > 1) {
       this.firestore.collection('Tally').doc(d).set({
           expense: {
+            id: datetime,
             amount: expense.amount,
             note: expense.note,
             category: expense.category,

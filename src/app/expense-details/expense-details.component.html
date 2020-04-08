@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+          <div class="card-body">
+              
+              <div *ngIf="object">
+                <table class="table">
+                
+
+                    <tr>
+                        <td>Amount</td>
+                        <td> {{ object.expense.amount }} TK </td>
+                    </tr>
+    
+    
+                    <tr>
+                        <td>Bill Type</td>
+                        <td> {{ object.expense.category }}  </td>
+                    </tr>
+    
+    
+                    <tr>
+                        <td>Date</td>
+                        <td> {{ object.expense.amount }} </td>
+                    </tr>
+    
+    
+                    <tr>
+                        <td>Creatime Time</td>
+                        <td> {{ object.expense.amount }}  </td>
+                    </tr>
+    
+                    <tr>
+                        <td>Note</td>
+                        <td> {{ object.expense.note }}  </td>
+                    </tr>
+                    
+                  </table>
+              </div> <!-- End  -->
+          </div>    <!-- End card body -->
+          
+      </div> <!-- End card  -->
+    </div>  <!-- End col -->
+  </div>  <!-- End row -->

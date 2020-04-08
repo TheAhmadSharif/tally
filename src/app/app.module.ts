@@ -18,13 +18,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { environment } from '../environments/environment';
 import { BillCategoryComponent } from './billcategory/billcategory.component';
+import { ExpenseDetailsComponent } from './expense-details/expense-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ExpenseComponent,
     DepositComponent,
-    BillCategoryComponent
+    BillCategoryComponent,
+    ExpenseDetailsComponent
   ],
   imports: [
     BrowserModule,
