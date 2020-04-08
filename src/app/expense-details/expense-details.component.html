@@ -4,9 +4,7 @@
           <div class="card-body">
               
               <div *ngIf="object">
-                <table class="table">
-                
-
+                <table class="table table-bordered">
                     <tr>
                         <td>Amount</td>
                         <td> {{ object.expense.amount }} TK </td>
@@ -14,27 +12,26 @@
     
     
                     <tr>
-                        <td>Bill Type</td>
+                        <td>Bill Category</td>
                         <td> {{ object.expense.category }}  </td>
                     </tr>
     
     
                     <tr>
                         <td>Date</td>
-                        <td> {{ object.expense.amount }} </td>
+                        <td> {{ object.expense.userdate | date:'MMM d, y, EE' }} </td>
                     </tr>
     
     
                     <tr>
                         <td>Creatime Time</td>
-                        <td> {{ object.expense.amount }}  </td>
+                        <td> {{ object.expense.datetime | date:'MMM d, y, EE, h:mm:ss a' }} </td>
                     </tr>
     
                     <tr>
                         <td>Note</td>
                         <td> {{ object.expense.note }}  </td>
                     </tr>
-                    
                   </table>
               </div> <!-- End  -->
           </div>    <!-- End card body -->
