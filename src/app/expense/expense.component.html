@@ -79,10 +79,11 @@
     <div class="col-sm-8">
       <div class="card" style="margin-bottom: 30px">
           <div class="card-body">
-              <div class="" style="margin: 10px 0;">
+              <div class="" style="margin: 0;">
                 <div class="row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
+                  <div class="col-sm-6 col-12">
+                    <div class="d-flex">
+                        <div class="form-group">
                       <div class="input-group">
                         <input type="hidden" placeholder="yyyy/mm/dd"
                                name="selected_day" [(ngModel)]="selected_day" ngbDatepicker #d2="ngbDatepicker" [placement]="placement" [positionTarget]="buttonEl">
@@ -91,17 +92,34 @@
                             
                           <span #buttonEl class="btn disabled cp calendar" (click)="d2.toggle()">
                             </span>
-                           
-                        </div>  <!-- End input group append -->
-                  
-                        <div class="d-flex" style="margin-left: 20px;">
-                          
-                          <span class="btn btn-sm btn-outline-success" (click)="getDayData(selected_day)">Get Data</span>
-                          <span class="btn btn-sm btn-outline-success" (click)="getDateRange('158963','1586249741065')">Get Data by Range</span>
-                        </div> <!-- End Form group -->
+                        </div>  <!-- End date-block -->
                       </div> <!-- End input group -->
                     </div> <!-- End Form group -->
-                  </div> <!-- End Col 3 -->
+
+                    <div class="d-flex arrow-block" style="margin: 0;">
+                                <div>
+                                  <span class="material-icons cp arrow" (click)="getPrevDate()">
+                                    keyboard_arrow_left
+                                    </span>
+
+                                    <span class="material-icons cp arrow" (click)="getNextDate()">
+                                     keyboard_arrow_right
+                                    </span>
+                                </div>
+                                <div>
+                                  <span class="btn btn-sm btn-outline-success" (click)="getDayData(selected_day)">Get Data</span>
+                                </div>
+                                
+                    </div> <!-- End div d-flex -->
+                      
+                    </div>   <!-- End d-flex -->
+                  </div> <!-- End Col 6 -->
+
+                  <div class="col-sm-6 col-12">
+                    <div class="d-flex justify-content-end">
+                        <span class="btn btn-sm btn-outline-success" (click)="getDateRange('158963','1586249741065')">Get Data by Range</span>
+                    </div>  <!-- End d-flex -->
+                  </div> <!-- End Col 6 -->
                 </div> <!-- End row -->
               </div>  <!-- End -->
 

@@ -87,11 +87,7 @@ export class ExpenseComponent implements OnInit {
   }
 
   ngOnInit(): void {
- 
-
-
     this.totalExpense = 0;
-    
     this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime')).valueChanges().subscribe(object=> {
       this.expenses = object;
       this.expenses.forEach(element => {
@@ -123,8 +119,14 @@ getDayData(date:any) {
     error => {
 
     });
-   
+}
 
+getPrevDate() {
+
+}
+
+getNextDate() {
+  
 }
 
 getDateRange(a:any, b:any) {
@@ -141,6 +143,7 @@ getDateRange(a:any, b:any) {
 }
 
 
+
 getTotalExpense() {
 
     this.firestore.collection('TallyExpense').doc('TotalExpense').get().subscribe(object => {
@@ -153,7 +156,7 @@ getTotalExpense() {
 
 }
 
-  postExpense(expense:any) {
+postExpense(expense:any) {
     this.notification = null;
 
     var datetime = new Date().getTime();
@@ -179,11 +182,7 @@ getTotalExpense() {
       });
 
       var expenseAmount = parseInt(expense.amount) + parseInt(this.totalExpense); 
-
       var datetime_ms = new Date(datetime);
-      console.log(datetime, datetime_ms, 'date');
-
-
       this.firestore.collection('TallyExpense').doc('TotalExpense').set({
         totalExpense: {
             amount: expenseAmount,
