@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { catchError, first, last, map, reduce, find, skipWhile, tap } from 'rxjs/operators';
 
 
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -11,7 +12,6 @@ interface Expense {
   category: string,
   subcategory: string,
   subcategory_others: string,
-  utility_options: string[],
   note: string
 }
 
@@ -39,8 +39,6 @@ export class ExpenseComponent implements OnInit {
   ];
 
   view: any[] = [350, 200];
-
-  // options
   showXAxis = true;
   showYAxis = true;
   gradient = false;
@@ -51,7 +49,7 @@ export class ExpenseComponent implements OnInit {
   yAxisLabel = 'Expenditure';
 
   colorScheme = {
-    domain: ['#ffc107', '#28a745', '#28a745', '#AAAAAA']
+    domain: ['#ffc107', '#28a745', '#8BC34A']
   };
 
   chartdata:any;
@@ -74,7 +72,6 @@ export class ExpenseComponent implements OnInit {
     category: '',
     subcategory: '',
     subcategory_others: '',
-    utility_options: ['Electric Bill', 'Internet Bill', 'Market Maintainance Bill', 'Others'],
     note: '',
   }
   
@@ -93,8 +90,21 @@ export class ExpenseComponent implements OnInit {
     this.getTotalExpense();
     this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime')).valueChanges().subscribe(object=> {
       this.expenses = object;
-      
+   }, error => {
+
+   }, 
+   () => {
+      this.expense;
+
    });
+
+
+   this.firestore.collection('Tally_ExpenseCategory').valueChanges().pipe(tap(a => {
+     console.log(a, 'a')
+   }));
+
+
+   
 }
 getCategory(category:string) {
     this.expense.category = category;
@@ -120,14 +130,34 @@ getDayData(date:any) {
   this.firestore.collection('Tally', ref => ref.where('expense.userdate', '==', givendate)).valueChanges().subscribe(object=> {
         this.expenses = object; 
         this.expenses.forEach(element => {
-      
           this.totalExpense = parseInt(element.expense.amount) + this.totalExpense;
+          console.log(element.expense.amount, 'amount140');
         });
+        
+    },
+    error => {
+
+    }, 
+    () => {
+         
     });
    
-    
 
 }
+
+getDateRange(a:any, b:any) {
+
+  this.firestore.collection('Tally', ref => ref.where('expense.datetime', '>', 0).where('expense.datetime', '<=',1585835449764)).valueChanges().subscribe(object=> {
+    console.log(object, 'object');
+     this.expenses = object;
+     this.expenses.forEach(element => {
+      this.totalExpense = element.expense.amount + this.totalExpense;
+     });
+
+  });
+
+}
+
 
 getTotalExpense() {
 
@@ -144,7 +174,8 @@ getTotalExpense() {
   postExpense(expense:any) {
     this.notification = null;
 
-    var d = new Date().getTime().toString(); 
+    var datetime = new Date().getTime()
+    var d = datetime.toString(); 
     var userdate = expense.date.month + '/' + expense.date.day + '/' + expense.date.year;
     console.log(expense);
     if(expense.amount > 0 && expense.category.length > 1) {
@@ -156,7 +187,7 @@ getTotalExpense() {
             subcategory: expense.subcategory,
             subcategory_others: expense.subcategory_others,
             deposit_type: "savings",
-            datetime: d,
+            datetime: datetime,
             userdate: userdate
           }
 

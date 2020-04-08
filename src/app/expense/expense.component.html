@@ -88,13 +88,16 @@
                                name="selected_day" [(ngModel)]="selected_day" ngbDatepicker #d2="ngbDatepicker" [placement]="placement" [positionTarget]="buttonEl">
                         <div class="date-block">
                           <span>{{  selected_day.year + '-' + selected_day.month + '-' + selected_day.day | date: 'dd, MMMM y' }}</span>
+                            
                           <span #buttonEl class="btn disabled cp calendar" (click)="d2.toggle()">
                             </span>
+                           
                         </div>  <!-- End input group append -->
                   
-                        <div style="margin-left: 20px;">
+                        <div class="d-flex" style="margin-left: 20px;">
                           
                           <span class="btn btn-sm btn-outline-success" (click)="getDayData(selected_day)">Get Data</span>
+                          <span class="btn btn-sm btn-outline-success" (click)="getDateRange('158963','1586249741065')">Get Data by Range</span>
                         </div> <!-- End Form group -->
                       </div> <!-- End input group -->
                     </div> <!-- End Form group -->
