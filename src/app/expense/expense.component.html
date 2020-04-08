@@ -98,11 +98,11 @@
 
                     <div class="d-flex arrow-block" style="margin: 0;">
                                 <div>
-                                  <span class="material-icons cp arrow" (click)="getPrevDate()">
+                                  <span class="material-icons cp arrow" (click)="getPrevDate(selected_day)">
                                     keyboard_arrow_left
                                     </span>
 
-                                    <span class="material-icons cp arrow" (click)="getNextDate()">
+                                    <span class="material-icons cp arrow" (click)="getNextDate(selected_day)">
                                      keyboard_arrow_right
                                     </span>
                                 </div>
@@ -134,7 +134,7 @@
   
                 <tr *ngFor="let object of expenses | paginate: { itemsPerPage: 2, currentPage: p }; let i = index;">
                   <td> {{ i + 1 }} </td>
-                  <td> <a routerLink="{{ object.expense.category.split(' ')[0]  + '/' + object.expense.datetime }}">{{ object.expense.amount }}</a> </td>
+                  <td> <a routerLink="{{ object.expense.category.split(' ')[0]  + '/' + object.expense.datetime }}">{{ object.expense.amount }} TK</a> </td>
                   <td> <a routerLink="category/{{ object.expense.category.split(' ')[0] }}">{{ object.expense.category  }}</a> </td>
                   <td> {{ object.expense.userdate | date:'MMM d, y, EE' }} </td>
                   <td> {{ object.expense.note  }} </td>

@@ -105,14 +105,13 @@ getDayData(date:any) {
 
   this.totalExpense = 0;
 
-  var givendate = date.month + '/' + date.day + '/' + date.year; 
+  var givendate = date.year + '/' + date.month + '/' + date.day;  
 
 
   this.firestore.collection('Tally', ref => ref.where('expense.userdate', '==', givendate)).valueChanges().subscribe(object=> {
         this.expenses = object; 
         this.expenses.forEach(element => {
           this.totalExpense = parseInt(element.expense.amount) + this.totalExpense;
-          console.log(element.expense.amount, 'amount140');
         });
         
     },
@@ -121,12 +120,13 @@ getDayData(date:any) {
     });
 }
 
-getPrevDate() {
-
+getPrevDate(a:any) {
+  console.log(a, 'getPrevDate');  
 }
 
-getNextDate() {
-  
+getNextDate(a:any) {
+  console.log(a, 'a');  
+
 }
 
 getDateRange(a:any, b:any) {
@@ -161,7 +161,7 @@ postExpense(expense:any) {
 
     var datetime = new Date().getTime();
     var d = datetime.toString(); 
-    var userdate = expense.date.month + '/' + expense.date.day + '/' + expense.date.year;
+    var userdate = expense.date.year + '/' + expense.date.month + '/' + expense.date.day;
     var userdate_ms = new Date(userdate).getTime();
     console.log(expense);
     if(expense.amount > 0 && expense.category.length > 1) {
