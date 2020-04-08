@@ -104,7 +104,6 @@ export class ExpenseComponent implements OnInit {
 getDayData(date:any) {
 
   this.totalExpense = 0;
-
   var givendate = date.year + '/' + date.month + '/' + date.day;  
 
 

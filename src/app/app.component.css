@@ -1,0 +1,21 @@
+.sidebar {
+    background: #FFF;
+    max-width: 220px;
+    z-index: 14;
+    height: 100vh;
+    position: fixed;
+    height: 100%;
+    border-right: 1px solid #eee;
+}
+
+.sb-content {
+    z-index: 10;
+}
+
+.logo-block {
+    padding: 10px 0;
+}
+
+.prodoct-insertion {
+    margin-left: 220px;
+}

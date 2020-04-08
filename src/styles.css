@@ -4,6 +4,74 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+@font-face {
+  font-family: 'jostLight';
+  src: URL('assets/fonts/Jost-400-Book.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url('assets/fonts/material-icon/MaterialIcons-Regular.eot'); /* For IE6-8 */
+  src: local('assets/fonts/material-icon/Material Icons'),
+       local('assets/fonts/material-icon/MaterialIcons-Regular'),
+       url('assets/fonts/material-icon/MaterialIcons-Regular.woff2') format('woff2'),
+       url('assets/fonts/material-icon/MaterialIcons-Regular.woff') format('woff'),
+       url('assets/fonts/material-icon/MaterialIcons-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Material Icons Outlined';
+  font-style: normal;
+  font-weight: 400;
+  src: url('assets/fonts/material-icon/MaterialIcons-Outline.woff2') format('woff2');
+  
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  vertical-align: middle;
+  color: #666;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.material-icons-outlined {
+  font-family: 'Material Icons Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  vertical-align: middle;
+  color: #666;
+}
+
 
 :root {
   --blue: #007bff;
@@ -10212,8 +10280,24 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 
+ul,ol,li {
+  list-style: none;
+  padding: 0;
+}
 
+.dashboard-link li {
+  border-bottom: 1px solid #d2d2d2;
+  padding: 0.55rem 0;
+  margin: 10px;
+}
+.dashboard-link li  a {
+    color: #333;
+  }
 
+  .sidebar a, a {
+  cursor: pointer;
+  font-size: 14px;
+}
 
 .deposit-bg {
   background: rgba(12, 242, 143, .2);
@@ -10270,4 +10354,11 @@ a.text-dark:hover, a.text-dark:focus {
 
 .arrow-block .arrow {
   margin-top: 5px 10px;
+}
+
+
+.dashboard {
+    margin-left: 160px;
+    width: 100%;
+    transition: all .8s ease;
 }

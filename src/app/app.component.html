@@ -1,28 +1,53 @@
-<div class="container-fluid" style="margin-bottom: 30px;">
-  <div class="row">
-    <div class="col-sm-12" style="margin: 20px 0;">
-     <div class="card">
-       <div class="card-body">
-        <a routerLink="/"><h6>Office Financial Management Tool</h6></a>
-        <div class="divider"></div>
+<div class="container-fluid h-100" style="width: 100%; max-width: 100%;">
+        <div class="row h-100">
+            <div class="sidebar">
+               <div class="sb-content">
+                <div class="d-flex justify-content-center">
+                    <div class="logo-block">
+                        
+                    </div> <!-- End logo Block -->
+                </div> <!-- End -->
+    
+                <ul class="dashboard-link">
+                   
+    
+                    <li><i class="material-icons md-18">reorder</i><a routerLink="/dashboard/user" routerLinkActive="active">
+                        
+                        Dashboard</a></li>
 
-        <nav class="nav-block">
-          <ul class="nav">
-            <li>
-               <a routerLink="/" routerLinkActive="active">Home</a>
-            </li>
-          </ul> 
-       </nav>
+    
+                    <li><i class="material-icons md-18">playlist_add</i><a routerLink="add-product" routerLinkActive="active">
+                        
+                        Product List</a></li>
 
-       </div> <!-- End card body -->
-     </div> <!-- End card -->
-    </div> <!-- End -->
-  </div> <!-- End row -->
-  
-  <div class="row">
-    <div class="col-sm-12">
-      <router-outlet></router-outlet>
 
-    </div> <!-- End -->
-  </div> <!-- End row -->
-</div> <!-- End container -->
+                        <li><i class="material-icons md-18">sort</i><a routerLink="add-category" routerLinkActive="active">
+                        
+                            Product Category</a></li>
+
+                        
+    
+                    <li><i class="material-icons md-18">apps</i>
+                        <a routerLink="/" routerLinkActive="active"> Online Shop</a></li>
+    
+                   
+                    
+                  </ul>
+               </div> <!-- End sb content -->
+           </div> <!-- End sidebar -->
+           <div class="dashboard">
+                <div class="col-sm-12 h-100">
+                        
+                        <div class="component-div" style="margin-top: 20px;">
+                                <router-outlet></router-outlet>
+                        </div> <!-- End -->
+            
+                </div>  <!-- End col 12 -->
+
+                <footer class="p-4">
+                    &copy; 2020. All rights reserved.
+                </footer>
+            </div> <!-- End Dashboard -->
+           
+        </div> <!-- End row -->
+    </div> <!-- End container -->
