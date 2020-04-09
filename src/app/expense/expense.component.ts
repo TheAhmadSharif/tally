@@ -77,6 +77,8 @@ export class ExpenseComponent implements OnInit {
       day: new Date().getDate() + 7
     }
   }
+  isCollapsed:boolean = true;
+
 
   expense:Expense = {
     amount: '',
