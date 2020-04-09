@@ -178,6 +178,7 @@ getByRange(range:any) {
 
   
 }
+
 getTotalExpense() {
 
     this.firestore.collection('TallyExpense').doc('TotalExpense').get().subscribe(object => {

@@ -26,26 +26,75 @@
     <div class="card">
         <div class="card-body">
             <div class="" style="margin: 20px 0;">
-
               <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
+                <div class="col-sm-6 col-12">
+                  <div class="d-flex">
+                      <div class="form-group">
                     <div class="input-group">
-                      <input type="hidden" placeholder="yyyy/mm/dd"
-                             name="selected_day" [(ngModel)]="selected_day" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()">
-                      <div class="input-group-append">
-                        {{  selected_day.year + '-' + selected_day.month + '-' + selected_day.day | date: 'dd, MMMM y' }}
-                        <button class="btn disabled calendar" (click)="d2.toggle()">
-                          </button>
-                      </div>  <!-- End input group append -->
-                
-                      <div style="margin-left: 20px;">
-                        <span class="btn btn-success" (click)="getDayData(selected_day)">Get Data</span>
-                      </div> <!-- End Form group -->
+                      <input type="hidden"
+                             name="selected_day" [(ngModel)]="selected_day" ngbDatepicker #d2="ngbDatepicker" [placement]="placement" [positionTarget]="buttonEl">
+                      <div class="date-block">
+                        <span>{{  selected_day.year + '-' + selected_day.month + '-' + selected_day.day | date: 'dd, MMM y' }}</span>
+                          
+                        <span #buttonEl class="btn disabled cp calendar" (click)="d2.toggle()"></span>
+                      </div>  <!-- End date-block -->
                     </div> <!-- End input group -->
                   </div> <!-- End Form group -->
-                </div> <!-- End Col 3 -->
-              </div> <!-- End -->
+
+                  <div class="d-flex arrow-block" style="margin: 0;">
+                              <div>
+                                <span class="material-icons cp arrow" (click)="getPrevDate(selected_day)">
+                                  keyboard_arrow_left
+                                  </span>
+
+                                  <span class="material-icons cp arrow" (click)="getNextDate(selected_day)">
+                                   keyboard_arrow_right
+                                  </span>
+                              </div> <!-- End div  -->
+                              <div>
+                                <span class="btn btn-sm btn-outline-success" (click)="getByDay(selected_day)">Get Data</span>
+                              </div> <!-- End div  -->
+                  </div> <!-- End div d-flex -->
+                  </div>   <!-- End d-flex -->
+                </div> <!-- End Col 6 -->
+
+                <div class="col-sm-6 col-12">
+                    <div class="d-flex flex-column align-items-end">
+                          <div class="cp" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+                          Get Data By Range
+                          <span class="material-icons">keyboard_arrow_down</span>
+                          </div>
+                        <div id="collapseExample" [ngbCollapse]="isCollapsed">
+                          <div class="d-flex flex-column align-items-end date-range">
+                            <div class="range">
+                              <input type="hidden"
+                              name="range.prevdate" [(ngModel)]="range.prevdate" ngbDatepicker #prevdate="ngbDatepicker" [placement]="placement">
+                              <div class="date-block">
+                                <span>{{  range.prevdate.year + '-' + range.prevdate.month + '-' + range.prevdate.day | date: 'dd, MMM y' }}</span>
+                                <span class="btn disabled cp calendar" (click)="prevdate.toggle()"></span>
+                              </div>  <!-- End date-block -->
+                            </div> <!-- End div -->
+      
+                            <div class="range">
+                              <input type="hidden"
+                              name="range.nextdate" [(ngModel)]="range.nextdate" ngbDatepicker #nextdate="ngbDatepicker" [placement]="placement">
+                              <div class="date-block">
+                                <span>{{  range.nextdate.year + '-' + range.nextdate.month + '-' + range.nextdate.day | date: 'dd, MMM y' }}</span>
+                                  
+                                <span class="btn disabled cp calendar" (click)="nextdate.toggle()"></span>
+                              </div>  <!-- End date-block -->
+                            </div> <!-- End div -->
+      
+                           
+      
+                          <div class="date-block my-2">
+                              <span class="btn btn-sm btn-outline-success" (click)="getByRange(range)">Get Data by Range</span>
+                          </div>  <!-- End d-flex -->
+                        </div> <!-- End Col 6 -->
+                        </div>  <!-- End collapse -->
+                    </div>  <!-- End d-flex -->
+              </div> <!-- End row -->
+              </div>  <!-- End row -->
             </div>  <!-- End -->
             <table class="table">
               <tr>
