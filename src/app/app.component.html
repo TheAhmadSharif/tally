@@ -11,28 +11,38 @@
                 <ul class="dashboard-link">
                    
     
-                    <li><i class="material-icons md-18">reorder</i><a routerLink="/" routerLinkActive="active">Home</a></li>
+                    <li>
+                        <i class="material-icons md-18">reorder</i>
+                        <a routerLink="/" routerLinkActive="active">Home</a>
+                    </li>
 
 
-                        <li><i class="material-icons md-18">money_off</i><a routerLink="/expense" routerLinkActive="active">
-                        
-                            Expense</a></li>
+                    <li>
+                        <i class="material-icons md-18">money_off</i>
+                        <a routerLink="/expense" routerLinkActive="active">Expense</a>
+                    </li>
     
-                    <li><i class="material-icons md-18">attach_money</i>
-                        <a routerLink="/deposit" routerLinkActive="active"> Deposit </a></li>
+                    <li>
+                        <i class="material-icons md-18">attach_money</i>
+                        <a routerLink="/deposit" routerLinkActive="active"> Deposit </a>
+                    </li>
+
+
+                    <li>
+                        <i class="material-icons md-18">dialpad</i>
+                        <a routerLink="/deposit" routerLinkActive="active"> Calculator </a>
+                    </li>
     
                    
                     
                   </ul>
                </div> <!-- End sb content -->
            </div> <!-- End sidebar -->
-           <div class="dashboard">
-                <div class="col-sm-12 h-100">
-                        
-                        <div class="component-div" style="margin-top: 20px;">
+           <div class="dashboard h-80">
+                <div class="col-sm-12">
+                        <div class="h-80" style="margin-top: 20px;">
                                 <router-outlet></router-outlet>
                         </div> <!-- End -->
-            
                 </div>  <!-- End col 12 -->
 
                 <footer class="p-4">

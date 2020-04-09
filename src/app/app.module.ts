@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 import { BillCategoryComponent } from './billcategory/billcategory.component';
 import { ExpenseDetailsComponent } from './expense-details/expense-details.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ExpenseDetailsComponent } from './expense-details/expense-details.compo
     ExpenseComponent,
     DepositComponent,
     BillCategoryComponent,
-    ExpenseDetailsComponent
+    ExpenseDetailsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

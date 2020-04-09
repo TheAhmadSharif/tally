@@ -10351,7 +10351,6 @@ ul,ol,li {
 .cp {
   cursor: pointer !important;
 }
-
 .arrow-block .arrow {
   margin-top: 5px 10px;
 }
@@ -10364,4 +10363,8 @@ ul,ol,li {
   margin-bottom: 5px;
   padding: 5px 0;
   border-bottom: 1px solid #eee;
+}
+.h-80 {
+  min-height: 80% !important;
+  min-height: 80vh !important;
 }
