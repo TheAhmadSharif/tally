@@ -119,12 +119,30 @@ getDayData(date:any) {
     });
 }
 
-getPrevDate(a:any) {
-  console.log(a, 'getPrevDate');  
+getPrevDate(date:any) {
+  var day = new Date(date.year + '-' + date.month + '-' + date.day);
+  var nextDay = new Date(day);
+  var nd = nextDay.setDate(day.getDate() - 1); 
+  var d1 = new Date(nd);
+  this.selected_day = {
+    year: d1.getFullYear(),
+    month: d1.getMonth() + 1,
+    day: d1.getDate()
+  };
 }
 
-getNextDate(a:any) {
-  console.log(a, 'a');  
+getNextDate(date:any) {
+  var day = new Date(date.year + '-' + date.month + '-' + date.day);
+  var nextDay = new Date(day);
+  var nd = nextDay.setDate(day.getDate() + 1); 
+
+  var d1 = new Date(nd);
+ 
+  this.selected_day = {
+    year: d1.getFullYear(),
+    month: d1.getMonth() + 1,
+    day: d1.getDate()
+  };
 
 }
 
@@ -160,45 +178,40 @@ postExpense(expense:any) {
 
     var datetime = new Date().getTime();
     var d = datetime.toString(); 
-    var userdate = expense.date.year + '/' + expense.date.month + '/' + expense.date.day;
+    var userdate = expense.date.year + '-' + expense.date.month + '-' + expense.date.day;
     var userdate_ms = new Date(userdate).getTime();
-    console.log(expense);
     if(expense.amount > 0 && expense.category.length > 1) {
       this.firestore.collection('Tally').doc(d).set({
           expense: {
             id: datetime,
             amount: expense.amount,
-            note: expense.note,
             category: expense.category,
             subcategory: expense.subcategory,
             subcategory_others: expense.subcategory_others,
-            deposit_type: "savings",
+            transaction_type: "expense",
             datetime: datetime,
             userdate: userdate,
             userdate_ms: userdate_ms,
+            note: expense.note,
           }
 
       });
 
       var expenseAmount = parseInt(expense.amount) + parseInt(this.totalExpense); 
-      var datetime_ms = new Date(datetime);
+      var datetime_hr = new Date(datetime).toUTCString();
       this.firestore.collection('TallyExpense').doc('TotalExpense').set({
         totalExpense: {
             amount: expenseAmount,
             datetime: d,
-            datetime_ms: datetime_ms,
+            datetime_hr: datetime_hr,
             last_amount: parseInt(expense.amount),
             last_total: parseInt(this.totalExpense)
           }
       }).then(result => {
         this.getTotalExpense();
       });
-
-
       this.expense.amount = null;
       this.expense.note = null;
-      
-
     }
     else {
         this.notification = 'Please put the financial information correctly.'

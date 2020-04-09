@@ -88,7 +88,7 @@
                         <input type="hidden" placeholder="yyyy/mm/dd"
                                name="selected_day" [(ngModel)]="selected_day" ngbDatepicker #d2="ngbDatepicker" [placement]="placement" [positionTarget]="buttonEl">
                         <div class="date-block">
-                          <span>{{  selected_day.year + '-' + selected_day.month + '-' + selected_day.day | date: 'dd, MMMM y' }}</span>
+                          <span>{{  selected_day.year + '-' + selected_day.month + '-' + selected_day.day | date: 'dd, MMM y' }}</span>
                             
                           <span #buttonEl class="btn disabled cp calendar" (click)="d2.toggle()">
                             </span>
