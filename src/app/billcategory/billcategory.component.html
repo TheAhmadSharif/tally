@@ -1,3 +1,26 @@
+<div class="row mb-2">
+  <div class="col-sm-12 col-12">
+      <div class="card">
+          <ul class="nav">
+              <li class="nav-item">
+                <a class="nav-link active" routerLink="/category/Utility">Utility</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" routerLink="/category/Foods">Foods</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link active" routerLink="/category/Others">Others</a>
+              </li>
+
+              <li class="nav-item">
+                  <a class="nav-link active" routerLink="/category/Salary">Salary</a>
+              </li>
+             
+          </ul>
+      </div> <!-- End card -->
+  </div> <!-- End col -->
+</div> <!-- End row -->
+
 <div class="row">
   <div class="col-sm-12">
     <div class="card">
@@ -35,7 +58,7 @@
               </tr>
               <tr *ngFor="let object of expenses; let i = index;">
                 <td> {{ i + 1 }} </td>
-                <td> {{ object.expense.amount }} TK </td>
+                <td> <a routerLink="/{{ object.expense.category.split(' ')[0]  + '/' + object.expense.datetime }}">{{ object.expense.amount }} </a>  TK </td>
                 <td> {{ object.expense.category  }} </td>
                 <td> {{ object.expense.userdate | date:'MMM d, y, EE' }} </td>
                 <td> {{ object.expense.datetime | date:'MMM d, y, EE, h:mm:ss a' }} </td>
