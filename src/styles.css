@@ -10355,10 +10355,8 @@ ul,ol,li {
 .arrow-block .arrow {
   margin-top: 5px 10px;
 }
-
-
 .dashboard {
-    margin-left: 160px;
+    margin-left: 110px;
     width: 100%;
     transition: all .8s ease;
 }

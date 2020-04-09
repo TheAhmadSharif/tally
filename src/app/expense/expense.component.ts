@@ -117,7 +117,7 @@ export class ExpenseComponent implements OnInit {
 
 getByDay(date:any) {
   this.totalExpense = 0;
-  var givendate = date.year + '/' + date.month + '/' + date.day;  
+  var givendate = date.year + '-' + date.month + '-' + date.day;  
   this.firestore.collection('Tally', ref => ref.where('expense.userdate', '==', givendate)).valueChanges().subscribe(object=> {
         this.expenses = object; 
         this.expenses.forEach(element => {
