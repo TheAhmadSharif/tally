@@ -65,6 +65,18 @@ export class ExpenseComponent implements OnInit {
   };
   p: number = 1;
   placement = 'bottom';
+  range:any = {
+    prevdate: {
+      year: new Date().getFullYear(), 
+      month: new Date().getMonth() + 1, 
+      day: new Date().getDate()
+    },
+    nextdate: {
+      year: new Date().getFullYear(), 
+      month: new Date().getMonth() + 1, 
+      day: new Date().getDate() + 7
+    }
+  }
 
   expense:Expense = {
     amount: '',
@@ -101,18 +113,14 @@ export class ExpenseComponent implements OnInit {
 }
 
 
-getDayData(date:any) {
-
+getByDay(date:any) {
   this.totalExpense = 0;
   var givendate = date.year + '/' + date.month + '/' + date.day;  
-
-
   this.firestore.collection('Tally', ref => ref.where('expense.userdate', '==', givendate)).valueChanges().subscribe(object=> {
         this.expenses = object; 
         this.expenses.forEach(element => {
           this.totalExpense = parseInt(element.expense.amount) + this.totalExpense;
         });
-        
     },
     error => {
 
@@ -146,10 +154,11 @@ getNextDate(date:any) {
 
 }
 
-getDateRange(a:any, b:any) {
+getByRange(range:any) {
+
+  console.log(range, 'range')
 
   this.firestore.collection('Tally', ref => ref.where('expense.userdate_ms', '>', 0).where('expense.userdate_ms', '<=', 1586282400000)).valueChanges().subscribe(object=> {
-    console.log(object, 'object');
      this.expenses = object;
      this.expenses.forEach(element => {
       this.totalExpense = element.expense.amount + this.totalExpense;
@@ -158,9 +167,6 @@ getDateRange(a:any, b:any) {
   });
 
 }
-
-
-
 getTotalExpense() {
 
     this.firestore.collection('TallyExpense').doc('TotalExpense').get().subscribe(object => {
@@ -173,9 +179,8 @@ getTotalExpense() {
 
 }
 
-postExpense(expense:any) {
+addExpense(expense:any) {
     this.notification = null;
-
     var datetime = new Date().getTime();
     var d = datetime.toString(); 
     var userdate = expense.date.year + '-' + expense.date.month + '-' + expense.date.day;

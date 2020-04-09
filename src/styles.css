@@ -10338,7 +10338,7 @@ ul,ol,li {
     font-style: normal !important;
     color: #333 !important;
 }
-.date-block span {
+.date-block .calendar {
   padding: 10px 0;
 }
 .date-block {
@@ -10361,4 +10361,9 @@ ul,ol,li {
     margin-left: 160px;
     width: 100%;
     transition: all .8s ease;
+}
+.date-range .range {
+  margin-bottom: 5px;
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
 }
