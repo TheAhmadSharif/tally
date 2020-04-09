@@ -156,16 +156,24 @@ getNextDate(date:any) {
 
 getByRange(range:any) {
 
-  console.log(range, 'range')
+  var prevdate = range.prevdate.year + '-' + range.prevdate.month + '-' + range.prevdate.day;
+  var prevdate_ms = new Date(prevdate).getTime();
 
-  this.firestore.collection('Tally', ref => ref.where('expense.userdate_ms', '>', 0).where('expense.userdate_ms', '<=', 1586282400000)).valueChanges().subscribe(object=> {
-     this.expenses = object;
-     this.expenses.forEach(element => {
-      this.totalExpense = element.expense.amount + this.totalExpense;
-     });
+  var nextdate = range.nextdate.year + '-' + range.nextdate.month + '-' + range.nextdate.day;
+  var nextdate_ms = new Date(nextdate).getTime();
 
-  });
 
+  console.log(prevdate_ms, nextdate_ms, 'prevdate_ms', 'nextdate_ms');
+
+  if(prevdate_ms > nextdate_ms) {
+      this.firestore.collection('Tally', ref => ref.where('expense.userdate_ms', '>=', prevdate_ms).where('expense.userdate_ms', '<=', nextdate_ms)).valueChanges().subscribe(object=> {
+        console.log(object, 'object');
+        this.expenses = object;
+        this.expenses.forEach(element => {
+        this.totalExpense = element.expense.amount + this.totalExpense;
+        });
+    });
+  }
 }
 getTotalExpense() {
 
