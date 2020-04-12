@@ -14,6 +14,7 @@ declare var _:any;
 })
 export class AppComponent implements OnInit {
   total:any;
+  isCollapsed:boolean = false;
 
   constructor(private firestore: AngularFirestore) {
   }

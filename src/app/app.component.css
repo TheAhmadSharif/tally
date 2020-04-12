@@ -1,21 +1,152 @@
-.sidebar {
-    background: #FFF;
-    max-width: 220px;
-    z-index: 14;
-    height: 100vh;
-    position: fixed;
-    height: 100%;
-    border-right: 1px solid #eee;
-}
+/* Calculator */
+.calculator {
+    position: absolute;
+    z-index: 12;
+    left: 200px;
+  }
 
-.sb-content {
-    z-index: 10;
-}
 
-.logo-block {
-    padding: 10px 0;
-}
+/*  Placeholder */
+  ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #333; }
+  
+  ::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #333; }
+  
+  :-ms-input-placeholder {
+    /* IE 10+ */
+    color: #333; }
+  
+  :-moz-placeholder {
+    /* Firefox 18- */
+    color: #333; }
+  
+  /*  End Placeholder */
+  * {
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    transition: all 0.1s linear; }
+  
+  .calculator-block {
+    border: 1px solid #E4E4E4;
+    padding: 20px;
+    box-shadow: -1px 4px 5px #999; }
+  
 
-.prodoct-insertion {
-    margin-left: 220px;
+  input {
+    height: 26px;
+    padding: 5px 10px;
+    border: 1px solid #9E9E9E; }
+  
+  input:focus {
+    border-color: #333;
+    outline: 0; }
+  
+  #displayResult, #getInputValue, .number-list {
+    width: 190px; }
+  
+  #displayResult, #getInputValue {
+    font-family: monospace; }
+  
+  #displayResult {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #888;
+    padding: 5px;
+    float: left;
+    clear: both; }
+  
+  #getInputValue {
+    border-color: #666;
+    color: transparent;
+    text-shadow: 0 0 0 #333;
+    float: left; }
+  
+  #getInputValue:focus {
+    background-color: #FFF;
+    border: 1px solid #888; }
+  
+  .number-list > li {
+    display: inline-block;
+    margin-right: 0px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    color: #333;
+    font-weight: 300;
+    background-color: #FFF;
+    border: 1px solid #333;
+    padding: 5px 10px;
+    text-decoration: none;
+    width: 44px;
+    text-align: center;
+    background-image: -moz-linear-gradient(top, #d6d6d6, #d0d0d0);
+    background-image: -ms-linear-gradient(top, #d6d6d6, #d0d0d0);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=#d6d6d6,EndColorStr=#d0d0d0);
+    background-image: -o-linear-gradient(top, #d6d6d6, #d0d0d0);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#d6d6d6), to(#d0d0d0));
+    background-image: -webkit-linear-gradient(top, #d6d6d6, #d0d0d0);
+    background-color: #d6d6d6;
+    background-image: linear-gradient(top, #d6d6d6, #d0d0d0);
+    border: 1px solid #c6c6c6;
+    color: #444; }
+    .number-list > li:hover {
+      background-color: #333;
+      color: #000; }
+    .number-list > li .number-list > li:last-child {
+      margin-right: 0; }
+  
+  .number-list > li.bg-black {
+    background-color: #666 !important;
+    background-image: none;
+    border-color: #666 !important;
+    color: #FFF !important; }
+    .number-list > li.bg-black:hover {
+      background-color: #333 !important;
+      color: #FFF !important;
+      border-color: #333 !important; }
+  
+  .number-list .bg-gray1 {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: #FFF; }
+  .number-list .bg-gray2 {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: #FFF; }
+  
+  .number-list > li.decimal-obj {
+    background-color: #FFF;
+    background-image: none; }
+  
+
+  
+  .btn-clear {
+    border-radius: 2px;
+    background: #666;
+    color: #FFF;
+    margin-bottom: 20px; }
+  
+  .btn-clear:hover, .btn-clear:active, .btn-clear:focus {
+    background: #000;
+    color: #FFF; }
+  
+  #clearButton {
+    display: none; }
+  
+  #errorMsg {
+    font-family: monospace;
+    color: #333;
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+    height: 40px; }
+  
+  table tr:first-child {
+    background: #E6E6E6; }
+
+.number-list .removeContent {
+    font-size: 12px;
+    font-weight: 600;
 }
