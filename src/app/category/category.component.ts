@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
 
 @Component({
-  selector: 'app-billcategory',
+  selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css']
 })

@@ -27,33 +27,35 @@
           <div class="card-body">
               
               <div *ngIf="object">
+
+                {{ routeParameter.category }}
                 <table class="table table-bordered">
                     <tr>
                         <td>Amount</td>
-                        <td> {{ object.expense.amount }} TK </td>
+                        <td> {{ object[routeParameter.category].amount }} TK </td>
                     </tr>
     
     
                     <tr>
                         <td>Bill Category</td>
-                        <td> {{ object.expense.category }}  </td>
+                        <td> {{ object[routeParameter.category].category }}  </td>
                     </tr>
     
     
                     <tr>
                         <td>Date</td>
-                        <td> {{ object.expense.userdate | date:'MMM d, y, EE' }} </td>
+                        <td> {{ object[routeParameter.category].userdate | date:'MMM d, y, EE' }} </td>
                     </tr>
     
     
                     <tr>
                         <td>Creatime Time</td>
-                        <td> {{ object.expense.datetime | date:'MMM d, y, EE, h:mm:ss a' }} </td>
+                        <td> {{ object[routeParameter.category].datetime | date:'MMM d, y, EE, h:mm:ss a' }} </td>
                     </tr>
     
                     <tr>
                         <td>Note</td>
-                        <td> {{ object.expense.note }}  </td>
+                        <td> {{ object[routeParameter.category].note }}  </td>
                     </tr>
                   </table>
               </div> <!-- End  -->

@@ -18,7 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { environment } from '../environments/environment';
 import { CategoryComponent } from './category/category.component';
-import { ExpenseDetailsComponent } from './expense-details/expense-details.component';
+import { DetailsComponent } from './details/details.component';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
@@ -27,7 +27,7 @@ import { HomeComponent } from './home/home.component';
     ExpenseComponent,
     DepositComponent,
     CategoryComponent,
-    ExpenseDetailsComponent,
+    DetailsComponent,
     HomeComponent
   ],
   imports: [
