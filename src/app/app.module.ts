@@ -17,7 +17,7 @@ import { DepositComponent } from './deposit/deposit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { environment } from '../environments/environment';
-import { BillCategoryComponent } from './billcategory/billcategory.component';
+import { CategoryComponent } from './category/category.component';
 import { ExpenseDetailsComponent } from './expense-details/expense-details.component';
 import { HomeComponent } from './home/home.component';
 
@@ -26,7 +26,7 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     ExpenseComponent,
     DepositComponent,
-    BillCategoryComponent,
+    CategoryComponent,
     ExpenseDetailsComponent,
     HomeComponent
   ],

@@ -7,10 +7,10 @@ import 'firebase/firestore';
 
 @Component({
   selector: 'app-billcategory',
-  templateUrl: './billcategory.component.html',
-  styleUrls: ['./billcategory.component.css']
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.css']
 })
-export class BillCategoryComponent implements OnInit {
+export class CategoryComponent implements OnInit {
   parameter:string;
   totalExpense:number = 0;
   expenses:any;
@@ -47,13 +47,10 @@ export class BillCategoryComponent implements OnInit {
       this.expenses.forEach(element => {
        this.totalExpense = element.expense.amount + this.totalExpense;
       });
-
    });
+}
 
-  }
-
-
-  getByDay(date:any) {
+getByDay(date:any) {
     this.totalExpense = 0;
     var givendate = date.year + '-' + date.month + '-' + date.day;  
     this.firestore.collection('Tally', ref => ref.where('expense.category', '==', this.parameter).where('expense.userdate', '==',givendate)).valueChanges().subscribe(object=> {
