@@ -3,6 +3,9 @@
     position: absolute;
     z-index: 12;
     left: 200px;
+    text-align: center;
+    display: table;
+    margin: auto;
   }
 
 
@@ -31,8 +34,10 @@
   
   .calculator-block {
     border: 1px solid #E4E4E4;
-    padding: 20px;
-    box-shadow: -1px 4px 5px #999; }
+    padding: 0 10px;
+    box-shadow: -1px 4px 5px #999; 
+    font-family: monospace; 
+}
   
 
   input {
@@ -44,19 +49,15 @@
     border-color: #333;
     outline: 0; }
   
-  #displayResult, #getInputValue, .number-list {
-    width: 190px; }
-  
-  #displayResult, #getInputValue {
-    font-family: monospace; }
-  
-  #displayResult {
+#getInputValue, .number-list, .output-screen {
+    width: 190px; 
+}
+.output-screen {
     margin-top: 10px;
     margin-bottom: 10px;
     border: 1px solid #888;
     padding: 5px;
-    float: left;
-    clear: both; }
+}
   
   #getInputValue {
     border-color: #666;
@@ -76,21 +77,13 @@
     color: #333;
     font-weight: 300;
     background-color: #FFF;
-    border: 1px solid #333;
     padding: 5px 10px;
     text-decoration: none;
     width: 44px;
     text-align: center;
-    background-image: -moz-linear-gradient(top, #d6d6d6, #d0d0d0);
-    background-image: -ms-linear-gradient(top, #d6d6d6, #d0d0d0);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=#d6d6d6,EndColorStr=#d0d0d0);
-    background-image: -o-linear-gradient(top, #d6d6d6, #d0d0d0);
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#d6d6d6), to(#d0d0d0));
-    background-image: -webkit-linear-gradient(top, #d6d6d6, #d0d0d0);
-    background-color: #d6d6d6;
-    background-image: linear-gradient(top, #d6d6d6, #d0d0d0);
     border: 1px solid #c6c6c6;
-    color: #444; }
+    color: #444; 
+}
     .number-list > li:hover {
       background-color: #333;
       color: #000; }

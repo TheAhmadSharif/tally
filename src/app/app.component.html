@@ -39,12 +39,17 @@
                </div> <!-- End sb content -->
 
 
-               <div class="calculator">
-                <div id="calculator" [ngbCollapse]="isCollapsed">
+          
+                <div class="calculator" id="calculator" [ngbCollapse]="isCollapsed">
                     <div class="card">
                         <div class="calculator-block">
+                            <div class="d-flex justify-content-end py-2">
+                                <button type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                            </div>  <!-- End div -->
                             <input type="text" id="getInputValue" placeholder="0">
-                            <span id="displayResult">Result</span>
+                            <span class="d-flex justify-content-start output-screen">Result</span>
                                 <ul class="number-list">
                                     <li onClick="goInitialState()" class="removeContent">CLR</li>
                                     <li onClick="removeElement()" class="removeContent">DEL</li>
@@ -68,9 +73,8 @@
                                     <li onClick="getResult()" class="bg-black">=</li>
                                 </ul>
                         </div> <!-- End Calculator Block -->
-                    </div>
-                  </div>
-               </div>
+                    </div> <!-- End card -->
+                </div> <!-- End calculator -->
            </div> <!-- End sidebar -->
            <div class="dashboard h-80">
                 <div class="col-sm-12">
