@@ -14,7 +14,7 @@ declare var _:any;
 })
 export class AppComponent implements OnInit {
   total:any;
-  isCollapsed:boolean = false;
+  isCollapsed:boolean = true;
 
   constructor(private firestore: AngularFirestore) {
   }
@@ -26,6 +26,10 @@ export class AppComponent implements OnInit {
 
   getTotalExpense (event) {
     console.log(event);
+  }
+  closeCalculator() {
+    this.isCollapsed = true;
+    console.log('hi');
   }
 
 }
