@@ -30,8 +30,14 @@
 
                     <li>
                         <i class="material-icons md-18">dialpad</i>
-                        <a routerLink="/deposit" routerLinkActive="active" (click)="isCollapsed = !isCollapsed"
-                        [attr.aria-expanded]="!isCollapsed" aria-controls="calculator"> Calculator </a>
+                        <span class="cp" (click)="isCollapsed = !isCollapsed"
+                        [attr.aria-expanded]="!isCollapsed" aria-controls="calculator"> Calculator </span>
+                    </li>
+
+                    <li>
+                        <i class="material-icons md-18">dialpad</i>
+                        <span class="cp" (click)="isCollapsed = !isCollapsed"
+                        [attr.aria-expanded]="!isCollapsed" aria-controls="calculator"> Report </span>
                     </li>
     
                     

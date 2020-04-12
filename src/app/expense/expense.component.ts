@@ -2,7 +2,6 @@ import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 
-
 import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
 
@@ -96,9 +95,6 @@ export class ExpenseComponent implements OnInit {
       Object.assign(this.single)
   }
 
-  onSelect(event) {
-    console.log(event);
-  }
 
   ngOnInit(): void {
     this.totalExpense = 0;
