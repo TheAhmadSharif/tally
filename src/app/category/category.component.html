@@ -96,27 +96,31 @@
               </div> <!-- End row -->
               </div>  <!-- End row -->
             </div>  <!-- End -->
-            <table class="table">
-              <tr>
-                <td>#Serial</td>
-                <td>Amount</td>
-                <td>Bill Type</td>
-                <td>Date</td>
-                <td>Creatime Time</td>
-                <td>Note</td>
-              </tr>
-              <tr *ngFor="let object of expenses; let i = index;">
-                <td> {{ i + 1 }} </td>
-                <td> <a routerLink="/{{ object.expense.category.split(' ')[0]  + '/' + object.expense.datetime }}">{{ object.expense.amount }} </a>  TK </td>
-                <td> {{ object.expense.category  }} </td>
-                <td> {{ object.expense.userdate | date:'MMM d, y, EE' }} </td>
-                <td> {{ object.expense.datetime | date:'MMM d, y, EE, h:mm:ss a' }} </td>
-                <td> {{ object.expense.note  }} </td>
-              </tr>
-          </table>
-  
+            
+            <div *ngIf="objects">
+              <table class="table">
+                <tr>
+                  <td>#Serial</td>
+                  <td>Amount</td>
+                  <td>Bill Type</td>
+                  <td>Date</td>
+                  <td>Creatime Time</td>
+                  <td>Note</td>
+                </tr>
+                <tr *ngFor="let object of objects; let i = index;">
+                  <td> {{ i + 1 }}</td>
+
+                  <td> <a routerLink="/{{ routeParameter.category + '/'+ object[routeParameter.category]['category'].split(' ')[0]  + '/' + object[routeParameter.category]['datetime'] }}">{{ object[routeParameter.category]['amount'] }} </a>  TK </td>
+
+                  <td> {{ object[routeParameter.category]['category']  }} </td>
+                  <td> {{ object[routeParameter.category]['userdate'] | date:'MMM d, y, EE' }} </td>
+                  <td> {{ object[routeParameter.category]['datetime'] | date:'MMM d, y, EE, h:mm:ss a' }} </td>
+                  <td> {{ object[routeParameter.category]['note']  }} </td>
+                </tr>
+              </table>
+            </div>    <!-- End ngIf -->
           <div class="p-2 mt-2">
-            Total Expense: <span class="h5">{{ totalExpense }}/ </span> <span>TK</span>
+            Total Expense: <span class="h5">{{ totalAmount }}/ </span> <span>TK</span>
            </div> <!-- End -->
         </div>    <!-- End card body -->
         

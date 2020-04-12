@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'expense', component: ExpenseComponent},
   { path: 'deposit', component: DepositComponent},
-  { path: 'category/:type', component: CategoryComponent},
+  { path: ':category/:categoryname', component: CategoryComponent},
   { path: ':type/:object', component: ExpenseDetailsComponent},
 ];
 
