@@ -3,9 +3,6 @@
     position: absolute;
     z-index: 12;
     left: 200px;
-    text-align: center;
-    display: table;
-    margin: auto;
   }
 
 
@@ -27,19 +24,7 @@
     color: #333; }
   
   /*  End Placeholder */
-  * {
-    -webkit-transition: all 0.1s linear;
-    -moz-transition: all 0.1s linear;
-    transition: all 0.1s linear; }
-  
-  .calculator-block {
-    border: 1px solid #E4E4E4;
-    padding: 0 10px;
-    box-shadow: -1px 4px 5px #999; 
-    font-family: monospace; 
-}
-  
-
+ 
   input {
     height: 26px;
     padding: 5px 10px;
@@ -71,57 +56,26 @@
   
   .number-list > li {
     display: inline-block;
-    margin: 2px 2px;
+    margin: 1px;
     cursor: pointer;
-    padding: 6px 4px;
+    padding: 6px 0;
     text-decoration: none;
-    width: 43px;
+    width: 44px;
     text-align: center;
     border: 1px solid #c6c6c6;
     color: #444;
 }
-    .number-list > li:hover {
-      color: #000; }
-    .number-list > li .number-list > li:last-child {
-      margin-right: 0; }
   
   .number-list > li.bg-black {
     background-color: #666 !important;
     background-image: none;
     border-color: #666 !important;
     color: #FFF !important; }
-    .number-list > li.bg-black:hover {
-      background-color: #333 !important;
-      color: #FFF !important;
-      border-color: #333 !important; }
-  
-  .number-list .bg-gray1 {
-    background-color: rgba(0, 0, 0, 0.4) !important;
-    border: 1px solid rgba(0, 0, 0, 0.1) !important;
-    color: #FFF; }
-  .number-list .bg-gray2 {
-    background-color: rgba(0, 0, 0, 0.3) !important;
-    border: 1px solid rgba(0, 0, 0, 0.1) !important;
-    color: #FFF; }
+
   
   .number-list > li.decimal-obj {
     background-color: #FFF;
     background-image: none; }
-  
-
-  
-  .btn-clear {
-    border-radius: 2px;
-    background: #666;
-    color: #FFF;
-    margin-bottom: 20px; }
-  
-  .btn-clear:hover, .btn-clear:active, .btn-clear:focus {
-    background: #000;
-    color: #FFF; }
-  
-  #clearButton {
-    display: none; }
   
   #errorMsg {
     font-family: monospace;
@@ -130,9 +84,6 @@
     display: block;
     margin-top: 20px;
     height: 40px; }
-  
-  table tr:first-child {
-    background: #E6E6E6; }
 
 .number-list .removeContent {
     font-size: 12px;

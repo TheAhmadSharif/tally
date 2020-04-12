@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     console.log(event);
   }
   closeCalculator() {
-    this.isCollapsed = true;
+    this.isCollapsed =! this.isCollapsed;
     console.log('hi');
   }
 

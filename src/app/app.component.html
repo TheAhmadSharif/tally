@@ -40,40 +40,36 @@
 
 
           
-                <div class="calculator" id="calculator" [ngbCollapse]="isCollapsed">
-                    <div class="card">
-                        <div class="calculator-block">
-                            <div class="d-flex justify-content-end py-2">
-                                <button type="button" class="close" aria-label="Close" (click)="closeCalculator()">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                            </div>  <!-- End div -->
-                            <input type="text" id="getInputValue" placeholder="0">
-                            <span class="d-flex justify-content-start output-screen">Result</span>
-                                <ul class="number-list">
-                                    <li onClick="goInitialState()" class="removeContent">CLR</li>
-                                    <li onClick="removeElement()" class="removeContent">DEL</li>
-                                    <li onClick="addToDisplay('%')">%</li>
-                                    <li onClick="addToDisplay('/')">&divide;</li>
-                                    <li onClick="addToDisplay('9')" class="decimal-obj">9</li>
-                                    <li onClick="addToDisplay('8')" class="decimal-obj">8</li>
-                                    <li onClick="addToDisplay('7')" class="decimal-obj">7</li>
-                                    <li onClick="addToDisplay('*')">x</li>
-                                    <li onClick="addToDisplay('6')" class="decimal-obj">6</li>
-                                    <li onClick="addToDisplay('5')" class="decimal-obj">5</li>
-                                    <li onClick="addToDisplay('4')" class="decimal-obj">4</li>
-                                    <li onClick="addToDisplay('-')" class="">&minus;</li>
-                                    <li onClick="addToDisplay('3')" class="decimal-obj">3</li>
-                                    <li onClick="addToDisplay('2')" class="decimal-obj">2</li>
-                                    <li onClick="addToDisplay('1')" class="decimal-obj">1</li>
-                                    <li onClick="addToDisplay('+')" class="">+</li>
-                                    <li onClick="addToDisplay('.')" class="decimal-obj">&sdot;</li>
-                                    <li onClick="addToDisplay('0')" class="decimal-obj">0</li>
-                                    <li onClick="addToDisplay('00')" class="decimal-obj">00</li>
-                                    <li onClick="getResult()" class="bg-black">=</li>
-                                </ul>
-                        </div> <!-- End Calculator Block -->
-                    </div> <!-- End card -->
+                <div class="calculator card calculator-block" id="calculator" [ngbCollapse]="isCollapsed">
+                    <div class="d-flex justify-content-end py-2">
+                        <button type="button" class="close" aria-label="Close" (click)="closeCalculator()" aria-controls="calculator">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                    </div>  <!-- End div -->
+                    <input type="text" id="getInputValue" placeholder="0">
+                    <span class="d-flex justify-content-start output-screen">Result</span>
+                        <ul class="number-list">
+                            <li onClick="goInitialState()" class="removeContent">CLR</li>
+                            <li onClick="removeElement()" class="removeContent">DEL</li>
+                            <li onClick="addToDisplay('%')">%</li>
+                            <li onClick="addToDisplay('/')">&divide;</li>
+                            <li onClick="addToDisplay('9')" class="decimal-obj">9</li>
+                            <li onClick="addToDisplay('8')" class="decimal-obj">8</li>
+                            <li onClick="addToDisplay('7')" class="decimal-obj">7</li>
+                            <li onClick="addToDisplay('*')">x</li>
+                            <li onClick="addToDisplay('6')" class="decimal-obj">6</li>
+                            <li onClick="addToDisplay('5')" class="decimal-obj">5</li>
+                            <li onClick="addToDisplay('4')" class="decimal-obj">4</li>
+                            <li onClick="addToDisplay('-')" class="">&minus;</li>
+                            <li onClick="addToDisplay('3')" class="decimal-obj">3</li>
+                            <li onClick="addToDisplay('2')" class="decimal-obj">2</li>
+                            <li onClick="addToDisplay('1')" class="decimal-obj">1</li>
+                            <li onClick="addToDisplay('+')" class="">+</li>
+                            <li onClick="addToDisplay('.')" class="decimal-obj">&sdot;</li>
+                            <li onClick="addToDisplay('0')" class="decimal-obj">0</li>
+                            <li onClick="addToDisplay('00')" class="decimal-obj">00</li>
+                            <li onClick="getResult()" class="bg-black">=</li>
+                        </ul>
                 </div> <!-- End calculator -->
            </div> <!-- End sidebar -->
            <div class="dashboard h-80">
