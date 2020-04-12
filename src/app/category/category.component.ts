@@ -57,9 +57,11 @@ ngOnInit(): void {
 }
 
 getByDay(date:any) {
+    var category = `${this.routeParameter.category}.category`;
+    var userdate  = `${this.routeParameter.category}.userdate`;
     this.totalAmount = 0;
     var givendate = date.year + '-' + date.month + '-' + date.day;  
-    this.firestore.collection('Tally', ref => ref.where('expense.category', '==', this.routeParameter.categoryname).where('expense.userdate', '==',givendate)).valueChanges().subscribe(object=> {
+    this.firestore.collection('Tally', ref => ref.where(category, '==', this.routeParameter.categoryname).where(userdate, '==',givendate)).valueChanges().subscribe(object=> {
           this.objects = object; 
           this.objects.forEach(element => {
             this.totalAmount = `parseInt(element.${this.routeParameter.category}.amount) + ${this.totalAmount}`;
@@ -98,6 +100,8 @@ getNextDate(date:any) {
 }
   
 getByRange(range:any) {
+    var category = `${this.routeParameter.category}.category`;
+    var userdate_ms = `${this.routeParameter.category}.userdate_ms`;
     var prevdate = range.prevdate.year + '-' + range.prevdate.month + '-' + range.prevdate.day;
     var prevdate_ms = new Date(prevdate).getTime();
     var nextdate = range.nextdate.year + '-' + range.nextdate.month + '-' + range.nextdate.day;
@@ -105,10 +109,10 @@ getByRange(range:any) {
 
       if(prevdate_ms < nextdate_ms) {
           this.totalAmount = 0;
-          this.firestore.collection('Tally', ref => ref.where('expense.category', '==', this.routeParameter.categoryname).where('expense.userdate_ms', '>=', prevdate_ms).where('expense.userdate_ms', '<=', nextdate_ms)).valueChanges().subscribe(object=> {
+          this.firestore.collection('Tally', ref => ref.where(category, '==', this.routeParameter.categoryname).where(userdate_ms, '>=', prevdate_ms).where(userdate_ms, '<=', nextdate_ms)).valueChanges().subscribe(object=> {
             this.objects = object;
             this.objects.forEach(element => {
-            this.totalAmount = element.expense.amount + this.totalAmount;
+            this.totalAmount = element[this.routeParameter.category]['amount'] + this.totalAmount;
             });
         });
       }
