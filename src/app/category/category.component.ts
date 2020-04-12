@@ -64,7 +64,7 @@ getByDay(date:any) {
     this.firestore.collection('Tally', ref => ref.where(category, '==', this.routeParameter.categoryname).where(userdate, '==',givendate)).valueChanges().subscribe(object=> {
           this.objects = object; 
           this.objects.forEach(element => {
-            this.totalAmount = `parseInt(element.${this.routeParameter.category}.amount) + ${this.totalAmount}`;
+            this.totalAmount = element[this.routeParameter.category]['amount'] + this.totalAmount;
           });
       },
       error => {
