@@ -5,7 +5,6 @@
     left: 200px;
   }
 
-
 /*  Placeholder */
   ::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
@@ -24,17 +23,8 @@
     color: #333; }
   
   /*  End Placeholder */
- 
-  input {
-    height: 26px;
-    padding: 5px 10px;
-    border: 1px solid #9E9E9E; }
-  
-  input:focus {
-    border-color: #333;
-    outline: 0; }
-  
-#getInputValue, .number-list, .output-screen {
+
+.number-list, .output-screen {
     width: 190px; 
 }
 .output-screen {
@@ -43,17 +33,15 @@
     border: 1px solid #888;
     padding: 5px;
 }
-  
-  #getInputValue {
-    border-color: #666;
-    color: transparent;
-    text-shadow: 0 0 0 #333;
-    float: left; }
-  
-  #getInputValue:focus {
-    background-color: #FFF;
-    border: 1px solid #888; }
-  
+
+.calculator input {
+  width: 190px;
+  color: transparent;
+  height: 26px;
+  padding: 5px 10px;
+  border: 1px solid #9E9E9E;
+}
+
   .number-list > li {
     display: inline-block;
     margin: 1px;
