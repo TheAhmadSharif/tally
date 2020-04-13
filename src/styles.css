@@ -10374,7 +10374,6 @@ ul,ol,li {
   background: #FFF;
   max-width: 220px;
   z-index: 14;
-  height: 100vh;
   position: fixed;
   height: 100%;
   border-right: 1px solid #eee;
@@ -10384,3 +10383,30 @@ ul,ol,li {
   z-index: 10;
 }
 
+/* Media Query for responsive */
+.navigation-switch {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 16;
+  width: 40px;
+  height: 40px;
+  background: #FFF;
+  padding: 5px;
+  cursor: pointer;
+}
+@media only screen and (max-width: 600px) {
+  .sidebar {
+    display: none;
+  }
+  .dashboard {
+    margin-left: 0;
+  }
+  .navigation-switch {
+    display: inline-block;
+  }
+}
+.sidebar.active {
+  display: inline;
+}

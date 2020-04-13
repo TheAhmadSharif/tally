@@ -1,6 +1,13 @@
+<div class="navigation-switch">
+    <span class="material-icons" (click)="navSwitch()">
+        reorder
+        </span>
+</div> <!-- End navigation switch -->
 <div class="container-fluid h-100" style="width: 100%; max-width: 100%;">
         <div class="row h-100">
-            <div class="sidebar">
+            
+
+            <div class="sidebar" [ngClass]="{'active' : switch=='on'}">
                <div class="sb-content">
                 <div class="d-flex justify-content-center">
                     <div class="logo-block">
@@ -35,9 +42,9 @@
                     </li>
 
                     <li>
-                        <i class="material-icons md-18">dialpad</i>
-                        <span class="cp" (click)="isCollapsed = !isCollapsed"
-                        [attr.aria-expanded]="!isCollapsed" aria-controls="calculator"> Report </span>
+                        <i class="material-icons md-18">dialpad</i> 
+                        <a routerLink="/" routerLinkActive="active"> Report </a>
+                       
                     </li>
     
                     
