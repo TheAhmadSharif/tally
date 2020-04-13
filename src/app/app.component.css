@@ -29,10 +29,12 @@
     width: 190px; 
 }
 .output-screen {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #888;
-    padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #888;
+  padding: 0 10px;
+  font-size: 14px;
+  color: #666;
 }
 
 .calculator input {
@@ -76,4 +78,9 @@
 .number-list .removeContent {
     font-size: 12px;
     font-weight: 600;
+}
+.inputbox:focus, .inputbox:active {
+  border: 1px solid green !important;
+  box-shadow: none;
+  outline: 0;
 }
