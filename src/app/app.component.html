@@ -1,25 +1,15 @@
 <div class="navigation-switch">
-    <span class="material-icons" (click)="navSwitch()">
-        reorder
+    <span class="material-icons-outlined" (click)="navSwitch()">
+        more_horiz
         </span>
 </div> <!-- End navigation switch -->
 <div class="container-fluid h-100" style="width: 100%; max-width: 100%;">
         <div class="row h-100">
-            
 
-            <div class="sidebar" [ngClass]="{'active' : switch=='on'}">
-               <div class="sb-content">
-                <div class="d-flex justify-content-center">
-                    <div class="logo-block">
-                        
-                    </div> <!-- End logo Block -->
-                </div> <!-- End -->
-    
-                <ul class="dashboard-link">
-                   
-    
+            <div class="sidebar" [ngClass]="{'active' : switch==true}">
+                <ul class="dashboard-link" style="margin-top: 40px">
                     <li>
-                        <i class="material-icons md-18">reorder</i>
+                        <i class="material-icons md-18">dialpad</i>
                         <a routerLink="/" routerLinkActive="active">Home</a>
                     </li>
 
@@ -36,23 +26,19 @@
 
 
                     <li>
-                        <i class="material-icons md-18">dialpad</i>
+                        <i class="material-icons-outlined md-18">drag_indicator</i>
                         <span class="cp" (click)="isCollapsed = !isCollapsed"
                         [attr.aria-expanded]="!isCollapsed" aria-controls="calculator"> Calculator </span>
                     </li>
 
                     <li>
-                        <i class="material-icons md-18">dialpad</i> 
+                        <i class="material-icons-outlined md-18">assessment</i> 
                         <a routerLink="/" routerLinkActive="active"> Report </a>
                        
                     </li>
     
                     
-                  </ul>
-               </div> <!-- End sb content -->
-
-
-          
+                </ul>  <!-- End dashboard linkn -->
                 <div class="calculator card calculator-block" id="calculator" [ngbCollapse]="isCollapsed">
                     <div class="d-flex justify-content-end py-2">
                         <button type="button" class="close" aria-label="Close" (click)="closeCalculator()" aria-controls="calculator">
@@ -60,7 +46,6 @@
                             </button>
                     </div>  <!-- End div -->
                    
-
 
                    <div>
                         <input type="text" placeholder="0" name="calculateBox" [(ngModel)]="calculateBox" #equation autofocus>

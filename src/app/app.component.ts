@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   isCollapsed:boolean = true;
   calculateBox:any = 0;
   output:any = 'Result';
-  switch:any = 'off';
+  switch:boolean = false;
 
   constructor(private firestore: AngularFirestore, private elementRef: ElementRef) {
   }
@@ -27,13 +27,12 @@ export class AppComponent implements OnInit {
    // console.log(_.random(1, 100)); //lodash function
   }
   ngAfterViewInit() {
-    // Otherwise Angular throws error: Expression has changed after it was checked.
     window.setTimeout(() => {
         this.elementRef.nativeElement.focus();
     });
   }
   navSwitch(){
-    this.switch = 'on';
+    this.switch=!this.switch;
   }
 
   getTotalExpense (event) {

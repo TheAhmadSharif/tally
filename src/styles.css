@@ -106,6 +106,10 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  transition: all .8s ease;
+  -webkit-transition: all .8s ease;
+  -moz-transition: all .8s ease;
+  -ms-transition: all .8s ease;
 }
 
 html {
@@ -10287,7 +10291,7 @@ ul,ol,li {
 
 .dashboard-link li {
   border-bottom: 1px solid #d2d2d2;
-  padding: 0.55rem 0;
+  padding: 0.25rem 0;
   margin: 10px;
 }
 .dashboard-link li  a {
@@ -10377,6 +10381,11 @@ ul,ol,li {
   position: fixed;
   height: 100%;
   border-right: 1px solid #eee;
+
+  transition: all .95s ease;
+  -webkit-transition: all .95s ease;
+  -moz-transition: all .95s ease;
+  -ms-transition: all .95s ease;
 }
 
 .sb-content {
@@ -10390,15 +10399,17 @@ ul,ol,li {
   top: 0;
   left: 0;
   z-index: 16;
-  width: 40px;
-  height: 40px;
   background: #FFF;
   padding: 5px;
   cursor: pointer;
+  text-align: center;
+  width: 110px;
+  background: #FFF;
+  border-bottom: 1px solid #eee;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 770px) {
   .sidebar {
-    display: none;
+    left: -300px;
   }
   .dashboard {
     margin-left: 0;
@@ -10408,5 +10419,9 @@ ul,ol,li {
   }
 }
 .sidebar.active {
-  display: inline;
+  left: 0;
+  transition: all .95s ease;
+  -webkit-transition: all .95s ease;
+  -moz-transition: all .95s ease;
+  -ms-transition: all .95s ease;
 }
