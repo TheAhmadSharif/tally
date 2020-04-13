@@ -33,7 +33,9 @@ export class AppComponent implements OnInit {
   }
   navSwitch(){
     this.switch=!this.switch;
-    this.isCollapsed = ! this.isCollapsed
+  }
+  switchCalculator() {
+    this.isCollapsed = ! this.isCollapsed;
   }
 
   getTotalExpense (event) {

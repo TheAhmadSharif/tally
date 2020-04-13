@@ -1,11 +1,17 @@
 /* Calculator */
 .calculator {
     position: fixed;
-    z-index: 12;
+    z-index: 16;
     padding: 0 10px;
-    left: 30%;
-    top: 25%;
+    background: none;
+    top: 20%;
+    left: 25%;
   }
+.calculator-block {
+    background: #FFF;
+    padding: 0 10px 1px;
+    border-radius: 5px;
+}
 
 /*  Placeholder */
   ::-webkit-input-placeholder {
