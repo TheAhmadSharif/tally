@@ -8,7 +8,7 @@
                 </button>
         </div>  <!-- End div -->
         <div>
-                <input type="text" placeholder="0" name="calculateBox" [(ngModel)]="calculateBox" #equation autofocus (keyup.enter)="getResult(equation.value)">
+                <input type="text" id="inputbox" placeholder="0" name="calculateBox" [(ngModel)]="calculateBox" #equation autofocus (keyup.enter)="getResult(equation.value)">
                 
 
                 <span class="d-flex justify-content-start output-screen">{{ output }}</span>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
 import 'lodash';
@@ -12,30 +12,36 @@ declare var _:any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
+
 export class AppComponent implements OnInit {
   total:any;
   isCollapsed:boolean = true;
-  calculateBox:any = 0;
+  calculateBox:any = '';
   output:any = 'Result';
   switch:boolean = false;
+
+  @ViewChild('equation') inputEl:ElementRef;
 
   constructor(private firestore: AngularFirestore, private elementRef: ElementRef) {
   }
 
-  ngOnInit(): void {
+ngOnInit(): void {
    // console.log(_.chunk(['a', 'b', 'c', 'd'], 2)); //lodash function
    // console.log(_.random(1, 100)); //lodash function
+
+}
+
+ngAfterViewInit(){
+    document.getElementById('inputbox').focus();
   }
-  ngAfterViewInit() {
-    window.setTimeout(() => {
-        this.elementRef.nativeElement.focus();
-    });
-  }
+ 
   navSwitch(){
     this.switch=!this.switch;
   }
   switchCalculator() {
     this.isCollapsed = ! this.isCollapsed;
+    setTimeout(() => this.inputEl.nativeElement.focus());
   }
 
   getTotalExpense (event) {
