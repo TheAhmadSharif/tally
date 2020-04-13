@@ -15,6 +15,8 @@ declare var _:any;
 export class AppComponent implements OnInit {
   total:any;
   isCollapsed:boolean = true;
+  calculateBox:any = 0;
+  output:any = 'Result';
 
   constructor(private firestore: AngularFirestore) {
   }
@@ -29,6 +31,23 @@ export class AppComponent implements OnInit {
   }
   closeCalculator() {
     this.isCollapsed =! this.isCollapsed;
+  }
+
+  goInitialState() {
+    this.calculateBox = '';
+  }
+
+  removeElement() {
+    this.calculateBox = '';
+  }
+
+  addToDisplay(item:any) {
+    this.calculateBox =  this.calculateBox + item;
+    console.log(item);
+  }
+  getResult(equation:any) {
+    this.output = eval(equation);
+    console.log(equation, '47');
   }
 
 }
