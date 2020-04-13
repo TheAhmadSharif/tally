@@ -1,9 +1,10 @@
 /* Calculator */
 .calculator {
-    position: absolute;
+    position: fixed;
     z-index: 12;
-    left: 200px;
     padding: 0 10px;
+    left: 30%;
+    top: 25%;
   }
 
 /*  Placeholder */

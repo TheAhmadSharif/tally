@@ -43,16 +43,9 @@
   direction: ltr;
   vertical-align: middle;
   color: #666;
-
-  /* Support for all WebKit browsers. */
   -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
   text-rendering: optimizeLegibility;
-
-  /* Support for Firefox. */
   -moz-osx-font-smoothing: grayscale;
-
-  /* Support for IE. */
   font-feature-settings: 'liga';
 }
 
@@ -60,7 +53,7 @@
   font-family: 'Material Icons Outlined';
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
+  font-size: 24px; 
   display: inline-block;
   line-height: 1;
   text-transform: none;
@@ -106,10 +99,10 @@
 *::before,
 *::after {
   box-sizing: border-box;
-  transition: all .8s ease;
-  -webkit-transition: all .8s ease;
-  -moz-transition: all .8s ease;
-  -ms-transition: all .8s ease;
+  transition: all .2s ease;
+  -webkit-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -ms-transition: all .2s ease;
 }
 
 html {
@@ -10410,6 +10403,9 @@ ul,ol,li {
 @media only screen and (max-width: 770px) {
   .sidebar {
     left: -300px;
+    -webkit-transition: all .95s ease;
+  -moz-transition: all .95s ease;
+  -ms-transition: all .95s ease;
   }
   .dashboard {
     margin-left: 0;
@@ -10424,4 +10420,15 @@ ul,ol,li {
   -webkit-transition: all .95s ease;
   -moz-transition: all .95s ease;
   -ms-transition: all .95s ease;
+}
+
+
+.overlay-active {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #6666666b;
+  z-index: 14;
 }

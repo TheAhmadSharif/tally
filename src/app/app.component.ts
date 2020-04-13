@@ -33,13 +33,11 @@ export class AppComponent implements OnInit {
   }
   navSwitch(){
     this.switch=!this.switch;
+    this.isCollapsed = ! this.isCollapsed
   }
 
   getTotalExpense (event) {
     console.log(event);
-  }
-  closeCalculator() {
-    this.isCollapsed =! this.isCollapsed;
   }
 
   goInitialState() {
@@ -53,8 +51,7 @@ export class AppComponent implements OnInit {
   addToDisplay(item:any) {
     var s = item;
     s = s.replace(/^0+/, "");
-
-    this.calculateBox =  item;
+    this.calculateBox =  item + this.calculateBox;
     console.log(this.calculateBox, '55');
   }
   getResult(equation:any) {
