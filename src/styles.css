@@ -10432,3 +10432,7 @@ ul,ol,li {
   background: #6666666b;
   z-index: 14;
 }
+
+.cm {
+  cursor: move !important;
+}

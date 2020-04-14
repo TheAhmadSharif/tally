@@ -1,16 +1,18 @@
-<div [ngClass]="{'overlay-active' : isCollapsed==false}"></div>  <!-- End overlay -->
+<div [ngClass]="{'overlay-active' : isCollapsed==false}" draggable="true"></div>  <!-- End overlay -->
 
-<div class="calculator" id="calculator" [ngbCollapse]="isCollapsed" [ngStyle]="{'top': styleTop}">
+<div class="calculator" id="calculator" [ngbCollapse]="isCollapsed" [ngStyle]="{'top': divStyle.top, 'left': divStyle.left}">
    <div class="calculator-block">
        <div>
-            <div class="cp" draggable="true" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
-                <span class="material-icons">drag_handle</span>
-             </div> 
-            <div class="d-flex justify-content-end py-2">
-            <button type="button" class="close" aria-label="Close" (click)="switchCalculator()" aria-controls="calculator">
-                <span aria-hidden="true">&times;</span>
+            
+            <div class="d-flex justify-content-between pb-1">
+                <div class="cm">
+                    <span class="material-icons">zoom_out_map</span>
+                 </div> 
+                <button type="button" class="close" aria-label="Close" (click)="switchCalculator()" aria-controls="calculator">
+                    <span aria-hidden="true">&times;</span>
                 </button>
-        </div>  <!-- End div -->
+            </div>  <!-- End div -->
+
         <div>
                 <div>
                     <input type="text" id="inputbox" class="inputbox" placeholder="0" name="calculateBox" [(ngModel)]="calculateBox" #equation (keyup.enter)="getResult(equation.value)">

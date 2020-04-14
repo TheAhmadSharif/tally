@@ -20,6 +20,10 @@ export class AppComponent implements OnInit {
   calculateBox:any = '';
   output:any = 'Result';
   switch:boolean = false;
+  divStyle = {
+    top: '',
+    left: ''
+  }
   styleTop:any;
 
   @ViewChild('equation') equation:ElementRef;
@@ -32,33 +36,30 @@ ngOnInit(): void {
    // console.log(_.random(1, 100)); //lodash function
    setTimeout(() => this.equation.nativeElement.focus());
 
+    var m = document.getElementById('calculator');
+    m.addEventListener('mousedown', mouseDown, false);
+    window.addEventListener('mouseup', mouseUp, false);
+
+    function mouseUp() {
+        window.removeEventListener('mousemove', moving, true);
+    }
+
+    function mouseDown(e) {
+        window.addEventListener('mousemove', moving, true);
+    }
+
+    function moving(e) {
+          m.style.top = (e.clientY - 10) + 'px';
+          m.style.left = (e.clientX - 20) + 'px';
+      };
+
 }
 
 ngAfterViewInit(){
     document.getElementById('inputbox').focus();
   }
 
- 
 
-     onDrop(e: any) {
-          //console.log(this.styleTop, e.pageX + e.pageY);
-          console.log('onDrop');
-      }
-
-      onDragOver(e) {
-           //this.styleTop = (e.pageY - 0) + 'px';
-           // console.log(this.styleTop, e.pageX + e.pageY);
-           console.log('onDragOver');
-      }
-
-      onDragLeave(e) {
-          this.styleTop = (e.pageY - 100) + 'px';
-          console.log(this.styleTop, e.pageX + e.pageY);
-          console.log('onDragLeave');
-      }
-
-
- 
   navSwitch(){
     this.switch=!this.switch;
   }
