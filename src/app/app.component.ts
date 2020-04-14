@@ -16,14 +16,11 @@ declare var _:any;
 
 export class AppComponent implements OnInit {
   total:any;
-  isCollapsed:boolean = false;
+  isCollapsed:boolean = true;
   calculateBox:any = '';
   output:any = 'Result';
   switch:boolean = false;
-  divStyle = {
-    top: '',
-    left: ''
-  }
+
   styleTop:any;
 
   @ViewChild('equation') equation:ElementRef;
