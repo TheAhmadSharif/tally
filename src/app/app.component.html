@@ -1,8 +1,11 @@
 <div [ngClass]="{'overlay-active' : isCollapsed==false}"></div>  <!-- End overlay -->
 
-<div class="calculator" id="calculator" [ngbCollapse]="isCollapsed">
+<div class="calculator" id="calculator" [ngbCollapse]="isCollapsed" [ngStyle]="{'top': styleTop}">
    <div class="calculator-block">
        <div>
+            <div class="cp" draggable="true" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+                <span class="material-icons">drag_handle</span>
+             </div> 
             <div class="d-flex justify-content-end py-2">
             <button type="button" class="close" aria-label="Close" (click)="switchCalculator()" aria-controls="calculator">
                 <span aria-hidden="true">&times;</span>

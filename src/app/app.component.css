@@ -30,12 +30,19 @@
   border: 1px solid #ccc;
   padding: 5px;
   margin: 2px;
+  cursor: pointer;
+}
+.dialpad .bg-black {
+  color: #FFF;
+  background: #6c757d;
+  border: 0;
 }
 .output-screen {
   margin: 10px 0;
   border: 1px solid #888;
   padding: 0 10px;
   font-size: 14px;
+  min-height: 24px; 
 }
 
 .calculator input {

@@ -20,8 +20,9 @@ export class AppComponent implements OnInit {
   calculateBox:any = '';
   output:any = 'Result';
   switch:boolean = false;
+  styleTop:any;
 
-  @ViewChild('equation') inputEl:ElementRef;
+  @ViewChild('equation') equation:ElementRef;
 
   constructor(private firestore: AngularFirestore, private elementRef: ElementRef) {
   }
@@ -29,13 +30,34 @@ export class AppComponent implements OnInit {
 ngOnInit(): void {
    // console.log(_.chunk(['a', 'b', 'c', 'd'], 2)); //lodash function
    // console.log(_.random(1, 100)); //lodash function
-   setTimeout(() => this.inputEl.nativeElement.focus());
+   setTimeout(() => this.equation.nativeElement.focus());
 
 }
 
 ngAfterViewInit(){
     document.getElementById('inputbox').focus();
   }
+
+ 
+
+     onDrop(e: any) {
+          //console.log(this.styleTop, e.pageX + e.pageY);
+          console.log('onDrop');
+      }
+
+      onDragOver(e) {
+           //this.styleTop = (e.pageY - 0) + 'px';
+           // console.log(this.styleTop, e.pageX + e.pageY);
+           console.log('onDragOver');
+      }
+
+      onDragLeave(e) {
+          this.styleTop = (e.pageY - 100) + 'px';
+          console.log(this.styleTop, e.pageX + e.pageY);
+          console.log('onDragLeave');
+      }
+
+
  
   navSwitch(){
     this.switch=!this.switch;
