@@ -1,18 +1,4 @@
 /* Calculator */
-.calculator {
-    position: fixed;
-    z-index: 16;
-    padding: 0 10px;
-    background: none;
-    top: 20%;
-    left: 25%;
-  }
-.calculator-block {
-    background: #FFF;
-    padding: 0 10px 1px;
-    border-radius: 5px;
-}
-
 /*  Placeholder */
   ::-webkit-input-placeholder {
     color: #333; }
@@ -22,63 +8,43 @@
     color: #333; }
   :-moz-placeholder {
     color: #333; }
-  
   /*  End Placeholder */
-
-.number-list, .output-screen {
-    width: 190px; 
+.calculator {
+    position: fixed;
+    z-index: 16;
+    background: none;
+    width: 100%;
+    height: 100%;
+  }
+.calculator-block {
+    background: #FFF;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    max-width: 200px;
+    display: table;
+    margin: 10% auto;
+}
+.dialpad li {
+  width: 40px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin: 2px;
 }
 .output-screen {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10px 0;
   border: 1px solid #888;
   padding: 0 10px;
   font-size: 14px;
-  color: #666;
 }
 
 .calculator input {
-  width: 190px;
   height: 26px;
   padding: 5px 10px;
-  border: 1px solid #9E9E9E;
-}
-
-  .number-list > li {
-    display: inline-block;
-    margin: 1px;
-    cursor: pointer;
-    padding: 6px 0;
-    text-decoration: none;
-    width: 44px;
-    text-align: center;
-    border: 1px solid #c6c6c6;
-    color: #444;
+  box-sizing: border-box;
+  width: 100% 
 }
   
-  .number-list > li.bg-black {
-    background-color: #666 !important;
-    background-image: none;
-    border-color: #666 !important;
-    color: #FFF !important; }
-
-  
-  .number-list > li.decimal-obj {
-    background-color: #FFF;
-    background-image: none; }
-  
-  #errorMsg {
-    font-family: monospace;
-    color: #333;
-    text-align: center;
-    display: block;
-    margin-top: 20px;
-    height: 40px; }
-
-.number-list .removeContent {
-    font-size: 12px;
-    font-weight: 600;
-}
 .inputbox:focus, .inputbox:active {
   border: 1px solid green !important;
   box-shadow: none;

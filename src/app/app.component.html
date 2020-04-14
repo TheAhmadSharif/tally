@@ -2,17 +2,18 @@
 
 <div class="calculator" id="calculator" [ngbCollapse]="isCollapsed">
    <div class="calculator-block">
-        <div class="d-flex justify-content-end py-2">
+       <div>
+            <div class="d-flex justify-content-end py-2">
             <button type="button" class="close" aria-label="Close" (click)="switchCalculator()" aria-controls="calculator">
                 <span aria-hidden="true">&times;</span>
                 </button>
         </div>  <!-- End div -->
         <div>
-                <input type="text" id="inputbox" class="inputbox" placeholder="0" name="calculateBox" [(ngModel)]="calculateBox" #equation autofocus (keyup.enter)="getResult(equation.value)">
-                
-
-                <span class="d-flex justify-content-start output-screen">{{ output }}</span>
-                <ul class="number-list">
+                <div>
+                    <input type="text" id="inputbox" class="inputbox" placeholder="0" name="calculateBox" [(ngModel)]="calculateBox" #equation (keyup.enter)="getResult(equation.value)">
+                    <span class="d-flex output-screen">{{ output }}</span>
+                </div>  <!-- End div -->
+                <div class="d-flex justify-content-between flex-wrap dialpad">
                     <li (click)="goInitialState()" class="removeContent">CLR</li>
                     <li (click)="removeElement()" class="removeContent">DEL</li>
                     <li (click)="addToDisplay('%')">%</li>
@@ -33,8 +34,9 @@
                     <li (click)="addToDisplay('0')" class="decimal-obj">0</li>
                     <li (click)="addToDisplay('00')" class="decimal-obj">00</li>
                     <li (click)="getResult(equation.value)" class="bg-black" (keyup.enter)="getResult(equation.value)">=</li>
-                </ul>
+                </div>  <!-- End -flex -->
         </div>  <!-- End div -->
+       </div> <!-- End div -->
     </div> <!-- End calculator block-->
 </div> <!-- End calculator -->
 

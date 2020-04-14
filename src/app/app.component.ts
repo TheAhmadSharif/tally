@@ -16,7 +16,7 @@ declare var _:any;
 
 export class AppComponent implements OnInit {
   total:any;
-  isCollapsed:boolean = true;
+  isCollapsed:boolean = false;
   calculateBox:any = '';
   output:any = 'Result';
   switch:boolean = false;
