@@ -144,9 +144,9 @@ getByRange(range:any) {
 
 getTotalDeposit() {
 
-    this.firestore.collection('TallyDeposit').doc('TotalDeposit').get().subscribe(object => {
-      this.totalDeposit = object.data().totalDeposit.amount;
-  
+    this.firestore.collection('TallySummary').doc('total_deposit').get().subscribe(object => {
+      // this.totalDeposit = object.data().deposit.amount;  
+      console.log(object.data(), '149');
     }, (error)=> {
       this.totalDeposit = 0;
       console.log(error, 'error44');
@@ -177,17 +177,26 @@ addDeposit(deposit:any) {
 
       var depositAmount = parseInt(deposit.amount) + parseInt(this.totalDeposit); 
       var datetime_hr = new Date(datetime).toUTCString();
-      this.firestore.collection('TallyDeposit').doc('TotalDeposit').set({
-        totalDeposit: {
-            amount: depositAmount,
-            datetime: d,
-            datetime_hr: datetime_hr,
-            last_amount: parseInt(deposit.amount),
-            last_total: parseInt(this.totalDeposit)
-          }
+      
+
+
+      this.firestore.collection('TallySummary').doc('total_deposit').set({
+            deposit: {
+              amount: depositAmount,
+              datetime: d,
+              datetime_hr: datetime_hr,
+              last_amount: parseInt(deposit.amount),
+              last_total: parseInt(this.totalDeposit)
+            }
+          
+
       }).then(result => {
         this.getTotalDeposit();
       });
+
+
+
+
       this.deposit.amount = null;
       this.deposit.note = null;
     }

@@ -14,21 +14,29 @@ export class HomeComponent implements OnInit {
   constructor(private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
-        this.firestore.collection('TallyExpense').doc('TotalExpense').get().subscribe(object => {
-          this.totalExpense = object.data().totalExpense.amount;
-      
-        }, (error)=> {
-          this.totalExpense = 0;
-          console.log(error, 'error44');
-        });
+        
 
-        this.firestore.collection('TallyDeposit').doc('TotalDeposit').get().subscribe(object => {
-          this.totalDeposit = object.data().totalDeposit.amount;
-      
-        }, (error)=> {
-          this.totalDeposit = 0;
-          console.log(error, 'error44');
-        });
+         this.firestore.collection('TallySummary').doc('total_expense').get().subscribe(object => {
+           this.totalExpense = object.data().expense.amount;
+        
+          }, (error)=> {
+            this.totalExpense = 0;
+            console.log(error, 'error44');
+          });
+
+
+
+         this.firestore.collection('TallySummary').doc('total_deposit').get().subscribe(object => {
+            this.totalDeposit = object.data().deposit.amount;        
+          }, (error)=> {
+            this.totalDeposit = 0;
+            console.log(error, 'error44');
+          });
+
+
+
+
+
 
   }
 

@@ -48,6 +48,7 @@ ngOnInit(): void {
     function moving(e) {
           m.style.top = (e.clientY - 10) + 'px';
           m.style.left = (e.clientX - 20) + 'px';
+          document.getElementById('inputbox').focus();
       };
 
 }
