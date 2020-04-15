@@ -177,8 +177,8 @@ getByRange(range:any) {
 
 getTotalExpense() {
 
-    this.firestore.collection('TallyExpense').doc('TotalExpense').get().subscribe(object => {
-      this.totalExpense = object.data().totalExpense.amount;
+    this.firestore.collection('TallySummary').doc('total_expense').get().subscribe(object => {
+      this.totalExpense = object.data().amount;
   
     }, (error)=> {
       this.totalExpense = 0;
@@ -211,15 +211,19 @@ addExpense(expense:any) {
       });
 
       var expenseAmount = parseInt(expense.amount) + parseInt(this.totalExpense); 
+      var expense_category = expense.category;
+
       var datetime_hr = new Date(datetime).toUTCString();
-      this.firestore.collection('TallyExpense').doc('TotalExpense').set({
-        totalExpense: {
-            amount: expenseAmount,
-            datetime: d,
-            datetime_hr: datetime_hr,
-            last_amount: parseInt(expense.amount),
-            last_total: parseInt(this.totalExpense)
-          }
+      this.firestore.collection('TallySummary').doc('total_expense').set({
+            expense: {
+              amount: expenseAmount,
+              datetime: d,
+              datetime_hr: datetime_hr,
+              last_amount: parseInt(expense.amount),
+              last_total: parseInt(this.totalExpense)
+            }
+          
+
       }).then(result => {
         this.getTotalExpense();
       });
