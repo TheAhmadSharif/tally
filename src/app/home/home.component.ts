@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators'
 import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
 import { TransactionService } from '../services/transaction.service';
+
+
+interface Total {
+  deposit: number,
+  expense: number,
+}
 
 @Component({
   selector: 'app-home',
@@ -9,26 +17,24 @@ import { TransactionService } from '../services/transaction.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  totalExpense:number = 0;
-  totalDeposit:number = 0;
+  total:Total = {
+    deposit: 0,
+    expense: 0
+  }
 
   constructor(private firestore: AngularFirestore, private transactionService: TransactionService) { }
 
-  ngOnInit(): void {
-        
-
-        
-
-
-
-         this.firestore.collection('TallySummary').doc('total_deposit').get().subscribe(object => {
-            this.totalDeposit = object.data().deposit.amount;        
-          }, (error)=> {
-            this.totalDeposit = 0;
-            console.log(error, 'error44');
-          });
-
-
+  ngOnInit() {
+        this.getTotalExpense();
+      
   }
 
+  getTotalExpense():void {
+    this.transactionService.getTotalExpense().subscribe(snapshot => {
+      snapshot.forEach(doc => {
+        console.log(doc.id, '=>', doc.data());
+      });
+    })
+    
+  }
 }

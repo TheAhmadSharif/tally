@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,10 @@ export class TransactionService {
 
   }
 
-  getTotalDeposit() {
-	  	 this.firestore.collection('TallySummary').doc('total_expense').get();
+  getTotalExpense(): Observable<any> {
+       var expense = this.firestore.collection('TallySummary').get();
+      
+       return expense;
   }
 
 }
