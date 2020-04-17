@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
+import { TransactionService } from '../services/transaction.service';
 
 @Component({
   selector: 'app-home',
@@ -11,18 +12,12 @@ export class HomeComponent implements OnInit {
   totalExpense:number = 0;
   totalDeposit:number = 0;
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, private transactionService: TransactionService) { }
 
   ngOnInit(): void {
         
 
-         this.firestore.collection('TallySummary').doc('total_expense').get().subscribe(object => {
-           this.totalExpense = object.data().expense.amount;
         
-          }, (error)=> {
-            this.totalExpense = 0;
-            console.log(error, 'error44');
-          });
 
 
 
@@ -32,10 +27,6 @@ export class HomeComponent implements OnInit {
             this.totalDeposit = 0;
             console.log(error, 'error44');
           });
-
-
-
-
 
 
   }
