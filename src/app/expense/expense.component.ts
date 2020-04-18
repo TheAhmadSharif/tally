@@ -111,7 +111,7 @@ export class ExpenseComponent implements OnInit {
 getTotalExpense() {
   this.totalExpense = 0;
   this.transactionService.getTransactionSummary().subscribe(object => {
-    this.tallySummary = object;
+      this.tallySummary = object;
       this.totalExpense = object[3].expense_aggregate.amount;
   }, (error)=> {
     this.totalExpense = 0;
@@ -119,19 +119,16 @@ getTotalExpense() {
 }
 
 addExpense(expense:any) {
+    var expense_category = expense.category;
     this.notification = null;
     var datetime = new Date().getTime();
     var d = datetime.toString(); 
     var userdate = expense.date.year + '-' + expense.date.month + '-' + expense.date.day;
     var userdate_ms = new Date(userdate).getTime();
+    var expenseAmount = parseInt(expense.amount) + parseInt(this.totalExpense); 
 
 
-    var expense_byCategoryObject = this.tallySummary[3].expense_byCategory;
-    console.log(expense_byCategoryObject, 'expense_byCategoryObject');
-    console.log(expense_byCategoryObject[0]['Foods'], '131');
-    console.log(expense_byCategoryObject[0]['Overtime'], '131');
-
-    throw new Error("message");
+   // throw new Error("message");
 
     if(expense.amount > 0 && expense.category.length > 1) {
       this.firestore.collection('Tally').doc(d).set({
@@ -151,16 +148,18 @@ addExpense(expense:any) {
       });
 
       var expense_byCategoryObject = this.tallySummary[3].expense_byCategory;
-      var expenseAmount = parseInt(expense.amount) + parseInt(this.totalExpense); 
-      var expense_category = expense.category;
+      var category_amount = parseInt(expense_byCategoryObject[0][expense_category].amount) + parseInt(expense.amount);
+      var last_category_amount = parseInt(expense_byCategoryObject[0][expense_category].amount);
+
       var datetime_hr = new Date(datetime).toUTCString();
       expense_byCategoryObject[expense_category] = {
-          amount: expenseAmount,
+          amount: category_amount,
+          category: expense.category,
           datetime_ms: d,
           datetime_hr: datetime_hr,
+          id: datetime,
           last_amount: parseInt(expense.amount),
-          last_total: parseInt(this.totalExpense),
-          expense_type: [expense.category]
+          last_total: last_category_amount
       } 
 
       this.firestore.collection('TallySummary').doc('total_expense').set({
@@ -169,7 +168,8 @@ addExpense(expense:any) {
               datetime_ms: d,
               datetime_hr: datetime_hr,
               last_amount: parseInt(expense.amount),
-              last_total: parseInt(this.totalExpense)
+              last_total: parseInt(this.totalExpense),
+              expense_type: [expense_category]
             },
            expense_byCategory: [expense_byCategoryObject] 
       }).then(result => {
