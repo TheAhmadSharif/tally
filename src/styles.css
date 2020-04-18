@@ -99,10 +99,10 @@
 *::before,
 *::after {
   box-sizing: border-box;
-  transition: all .2s ease;
-  -webkit-transition: all .2s ease;
-  -moz-transition: all .2s ease;
-  -ms-transition: all .2s ease;
+  transition: all .1s ease;
+  -webkit-transition: all .1s ease;
+  -moz-transition: all .1s ease;
+  -ms-transition: all .1s ease;
 }
 
 html {

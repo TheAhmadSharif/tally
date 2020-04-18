@@ -12,10 +12,9 @@ export class TransactionService {
 
   }
 
-  getTotalExpense(): Observable<any> {
-       var expense = this.firestore.collection('TallySummary').get();
-      
-       return expense;
+  getTransactionSummary(): Observable<any> {
+       var summary = this.firestore.collection('TallySummary').valueChanges()
+       return summary;
   }
 
 }

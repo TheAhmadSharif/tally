@@ -25,15 +25,13 @@ export class HomeComponent implements OnInit {
   constructor(private firestore: AngularFirestore, private transactionService: TransactionService) { }
 
   ngOnInit() {
-        this.getTotalExpense();
-      
+    this.getTransactionSummary();
   }
-
-  getTotalExpense():void {
-    this.transactionService.getTotalExpense().subscribe(snapshot => {
-      snapshot.forEach(doc => {
-        console.log(doc.id, '=>', doc.data());
-      });
+  getTransactionSummary():void {
+    this.transactionService.getTransactionSummary().subscribe(object => {
+         console.log(object[0].deposit_category_list, 'object');
+         this.total.deposit = object[2].deposit.amount;
+         this.total.expense = object[3].expense.amount;
     })
     
   }

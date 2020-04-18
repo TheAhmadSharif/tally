@@ -176,7 +176,6 @@ getByRange(range:any) {
 }
 
 getTotalExpense() {
-
     this.firestore.collection('TallySummary').doc('total_expense').get().subscribe(object => {
       this.totalExpense = object.data().expense.amount;  
     }, (error)=> {

@@ -143,10 +143,8 @@ getByRange(range:any) {
 }
 
 getTotalDeposit() {
-
     this.firestore.collection('TallySummary').doc('total_deposit').get().subscribe(object => {
-      // this.totalDeposit = object.data().deposit.amount;  
-      console.log(object.data(), '149');
+      this.totalDeposit = object.data().deposit.amount;  
     }, (error)=> {
       this.totalDeposit = 0;
       console.log(error, 'error44');
