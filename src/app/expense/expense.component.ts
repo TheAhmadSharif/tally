@@ -98,32 +98,21 @@ export class ExpenseComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.totalExpense = 0;
-    
-
       this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime')).valueChanges().subscribe(object=> {
         this.expenses = object;
-       
      }, error => {
   
      });
-
    this.getTotalExpense();
    
 }
-
-
-
 getTotalExpense() {
-  
-    this.transactionService.getTransactionSummary().subscribe(object => {
-      console.log(object, 'object103');
-      this.totalExpense = object[2].expense_aggregate.amount;
+  this.totalExpense = 0;
+  this.transactionService.getTransactionSummary().subscribe(object => {
+      this.totalExpense = object[3].expense_aggregate.amount;
   }, (error)=> {
     this.totalExpense = 0;
-    console.log(error, 'error44');
   });
-
 }
 
 addExpense(expense:any) {
