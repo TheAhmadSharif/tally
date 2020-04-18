@@ -31,7 +31,6 @@ export class DetailsComponent implements OnInit {
           var objectId = this.routeParameter.objectId; 
           this.firestore.collection('Tally').doc(objectId).valueChanges().subscribe(object=> {
             this.object = object;
-            console.log(this.object, '30');
         }, error => {
 
         });

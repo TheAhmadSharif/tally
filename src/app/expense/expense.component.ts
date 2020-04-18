@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
-
+import { TransactionService } from '../services/transaction.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
 
@@ -90,7 +90,8 @@ export class ExpenseComponent implements OnInit {
   
   constructor(
     private firestore: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private transactionService: TransactionService
     ) {
       Object.assign(this.single)
   }
@@ -98,18 +99,99 @@ export class ExpenseComponent implements OnInit {
 
   ngOnInit(): void {
     this.totalExpense = 0;
-    this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime')).valueChanges().subscribe(object=> {
-      this.expenses = object;
-      this.expenses.forEach(element => {
-        this.totalExpense = element.expense.amount + parseInt(this.totalExpense);
-       });
-   }, error => {
+    
 
-   });
+      this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime')).valueChanges().subscribe(object=> {
+        this.expenses = object;
+       
+     }, error => {
+  
+     });
+
    this.getTotalExpense();
    
 }
 
+
+
+getTotalExpense() {
+  
+    this.transactionService.getTransactionSummary().subscribe(object => {
+      console.log(object, 'object103');
+      this.totalExpense = object[2].expense_aggregate.amount;
+  }, (error)=> {
+    this.totalExpense = 0;
+    console.log(error, 'error44');
+  });
+
+}
+
+addExpense(expense:any) {
+    this.notification = null;
+    var datetime = new Date().getTime();
+    var d = datetime.toString(); 
+    var userdate = expense.date.year + '-' + expense.date.month + '-' + expense.date.day;
+    var userdate_ms = new Date(userdate).getTime();
+    if(expense.amount > 0 && expense.category.length > 1) {
+      this.firestore.collection('Tally').doc(d).set({
+          expense: {
+            id: datetime,
+            amount: expense.amount,
+            category: expense.category,
+            subcategory: expense.subcategory,
+            subcategory_others: expense.subcategory_others,
+            transaction_type: "expense",
+            datetime: datetime,
+            userdate: userdate,
+            userdate_ms: userdate_ms,
+            note: expense.note,
+          }
+
+      });
+
+      var expenseAmount = parseInt(expense.amount) + parseInt(this.totalExpense); 
+      var expense_category = expense.category;
+
+      var datetime_hr = new Date(datetime).toUTCString();
+      this.firestore.collection('TallySummary').doc('total_expense').set({
+            expense_aggregate: {
+              amount: expenseAmount,
+              datetime_ms: d,
+              datetime_hr: datetime_hr,
+              last_amount: parseInt(expense.amount),
+              last_total: parseInt(this.totalExpense)
+            },
+           expense_byCategory: {
+             [expense_category]: {
+                amount: expenseAmount,
+                datetime_ms: d,
+                datetime_hr: datetime_hr,
+                last_amount: parseInt(expense.amount),
+                last_total: parseInt(this.totalExpense)
+             }
+         }
+      }).then(result => {
+        this.getTotalExpense();
+      });
+      this.expense.amount = null;
+      this.expense.note = null;
+    }
+    else {
+        this.notification = 'Please put the financial information correctly.'
+    }
+  }
+getCategory(category:string) {
+    this.expense.category = category;
+}
+getSubCategory(subcategory:string) {
+  this.expense.subcategory = subcategory;
+  if(subcategory=== 'Others'){
+      this.sub_others = true;
+  }
+  else {
+    this.sub_others = false;
+  }
+}
 
 getByDay(date:any) {
   this.totalExpense = 0;
@@ -171,83 +253,6 @@ getByRange(range:any) {
             });
         });
       }
-}
-
-getTotalExpense() {
-    this.firestore.collection('TallySummary').doc('total_expense').get().subscribe(object => {
-      this.totalExpense = object.data().expense_sum.amount;  
-    }, (error)=> {
-      this.totalExpense = 0;
-      console.log(error, 'error44');
-    });
-
-}
-
-addExpense(expense:any) {
-    this.notification = null;
-    var datetime = new Date().getTime();
-    var d = datetime.toString(); 
-    var userdate = expense.date.year + '-' + expense.date.month + '-' + expense.date.day;
-    var userdate_ms = new Date(userdate).getTime();
-    if(expense.amount > 0 && expense.category.length > 1) {
-      this.firestore.collection('Tally').doc(d).set({
-          expense: {
-            id: datetime,
-            amount: expense.amount,
-            category: expense.category,
-            subcategory: expense.subcategory,
-            subcategory_others: expense.subcategory_others,
-            transaction_type: "expense",
-            datetime: datetime,
-            userdate: userdate,
-            userdate_ms: userdate_ms,
-            note: expense.note,
-          }
-
-      });
-
-      var expenseAmount = parseInt(expense.amount) + parseInt(this.totalExpense); 
-      var expense_category = expense.category;
-
-      var datetime_hr = new Date(datetime).toUTCString();
-      this.firestore.collection('TallySummary').doc('total_expense').set({
-            expense_sum: {
-              amount: expenseAmount,
-              datetime_ms: d,
-              datetime_hr: datetime_hr,
-              last_amount: parseInt(expense.amount),
-              last_total: parseInt(this.totalExpense)
-            },
-           expense_byCategory: {
-             expense_category: {
-                amount: expenseAmount,
-                datetime_ms: d,
-                datetime_hr: datetime_hr,
-                last_amount: parseInt(expense.amount),
-                last_total: parseInt(this.totalExpense)
-             }
-         }
-      }).then(result => {
-        this.getTotalExpense();
-      });
-      this.expense.amount = null;
-      this.expense.note = null;
-    }
-    else {
-        this.notification = 'Please put the financial information correctly.'
-    }
-  }
-getCategory(category:string) {
-    this.expense.category = category;
-}
-getSubCategory(subcategory:string) {
-  this.expense.subcategory = subcategory;
-  if(subcategory=== 'Others'){
-      this.sub_others = true;
-  }
-  else {
-    this.sub_others = false;
-  }
 }
 
 }
