@@ -67,14 +67,7 @@ export class DepositComponent implements OnInit {
     this.totalDeposit = 0;
     this.firestore.collection('Tally', ref => ref.orderBy('deposit.datetime')).valueChanges().subscribe(object=> {
       this.deposits = object;
-      this.deposits.forEach(element => {
-        this.totalDeposit = element.deposit.amount + parseInt(this.totalDeposit);
-       });
-   }, error => {
-
-   });
-
-   
+    });
    this.getTotalDeposit();
    
 }
