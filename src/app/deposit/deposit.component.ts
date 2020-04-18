@@ -181,10 +181,10 @@ addDeposit(deposit:any) {
       this.firestore.collection('TallySummary').doc('total_deposit').set({
             deposit: {
               amount: depositAmount,
-              datetime: d,
+              datetime_ms: d,
               datetime_hr: datetime_hr,
               last_amount: parseInt(deposit.amount),
-              last_total: parseInt(this.totalDeposit)
+              last_total: parseInt(this.totalDeposit),
             }
           
 

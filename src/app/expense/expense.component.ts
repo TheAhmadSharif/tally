@@ -171,13 +171,11 @@ getByRange(range:any) {
             });
         });
       }
-
-  
 }
 
 getTotalExpense() {
     this.firestore.collection('TallySummary').doc('total_expense').get().subscribe(object => {
-      this.totalExpense = object.data().expense.amount;  
+      this.totalExpense = object.data().expense_sum.amount;  
     }, (error)=> {
       this.totalExpense = 0;
       console.log(error, 'error44');
@@ -213,15 +211,22 @@ addExpense(expense:any) {
 
       var datetime_hr = new Date(datetime).toUTCString();
       this.firestore.collection('TallySummary').doc('total_expense').set({
-            expense: {
+            expense_sum: {
               amount: expenseAmount,
-              datetime: d,
+              datetime_ms: d,
               datetime_hr: datetime_hr,
               last_amount: parseInt(expense.amount),
               last_total: parseInt(this.totalExpense)
-            }
-          
-
+            },
+           expense_byCategory: {
+             expense_category: {
+                amount: expenseAmount,
+                datetime_ms: d,
+                datetime_hr: datetime_hr,
+                last_amount: parseInt(expense.amount),
+                last_total: parseInt(this.totalExpense)
+             }
+         }
       }).then(result => {
         this.getTotalExpense();
       });
@@ -236,7 +241,6 @@ getCategory(category:string) {
     this.expense.category = category;
 }
 getSubCategory(subcategory:string) {
-  console.log(subcategory, 'subcategory');
   this.expense.subcategory = subcategory;
   if(subcategory=== 'Others'){
       this.sub_others = true;

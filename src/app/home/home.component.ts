@@ -29,7 +29,6 @@ export class HomeComponent implements OnInit {
   }
   getTransactionSummary():void {
     this.transactionService.getTransactionSummary().subscribe(object => {
-         console.log(object[0].deposit_category_list, 'object');
          this.total.deposit = object[2].deposit.amount;
          this.total.expense = object[3].expense.amount;
     })
