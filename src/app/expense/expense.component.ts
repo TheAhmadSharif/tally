@@ -125,12 +125,12 @@ addExpense(expense:any) {
     var userdate = expense.date.year + '-' + expense.date.month + '-' + expense.date.day;
     var userdate_ms = new Date(userdate).getTime();
 
-    console.log(this.tallySummary, 'this.tallySummary');
-    console.log(this.tallySummary[3].expense_byCategory, '129');
 
-    
+    var expense_byCategoryObject = this.tallySummary[3].expense_byCategory;
+    console.log(expense_byCategoryObject, 'expense_byCategoryObject');
+    console.log(expense_byCategoryObject[0]['Overtime'], '131');
 
-    // throw new Error("message");
+    throw new Error("message");
 
     if(expense.amount > 0 && expense.category.length > 1) {
       this.firestore.collection('Tally').doc(d).set({
@@ -149,10 +149,10 @@ addExpense(expense:any) {
 
       });
 
+      var expense_byCategoryObject = this.tallySummary[3].expense_byCategory;
       var expenseAmount = parseInt(expense.amount) + parseInt(this.totalExpense); 
       var expense_category = expense.category;
       var datetime_hr = new Date(datetime).toUTCString();
-      var expense_byCategoryObject = this.tallySummary[3].expense_byCategory;
       expense_byCategoryObject[expense_category] = {
           amount: expenseAmount,
           datetime_ms: d,
