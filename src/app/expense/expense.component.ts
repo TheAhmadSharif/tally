@@ -22,6 +22,8 @@ interface Expense {
 
 export class ExpenseComponent implements OnInit {
 
+  tallySummary:any;
+
   single: any[] = [
     {
       "name": "Utility",
@@ -109,6 +111,7 @@ export class ExpenseComponent implements OnInit {
 getTotalExpense() {
   this.totalExpense = 0;
   this.transactionService.getTransactionSummary().subscribe(object => {
+    this.tallySummary = object;
       this.totalExpense = object[3].expense_aggregate.amount;
   }, (error)=> {
     this.totalExpense = 0;
@@ -121,6 +124,14 @@ addExpense(expense:any) {
     var d = datetime.toString(); 
     var userdate = expense.date.year + '-' + expense.date.month + '-' + expense.date.day;
     var userdate_ms = new Date(userdate).getTime();
+
+    console.log(this.tallySummary, 'this.tallySummary');
+    console.log(this.tallySummary[3].expense_byCategory, '129');
+
+    
+
+    // throw new Error("message");
+
     if(expense.amount > 0 && expense.category.length > 1) {
       this.firestore.collection('Tally').doc(d).set({
           expense: {
@@ -140,8 +151,16 @@ addExpense(expense:any) {
 
       var expenseAmount = parseInt(expense.amount) + parseInt(this.totalExpense); 
       var expense_category = expense.category;
-
       var datetime_hr = new Date(datetime).toUTCString();
+      var expense_byCategoryObject = this.tallySummary[3].expense_byCategory;
+      expense_byCategoryObject[expense_category] = {
+          amount: expenseAmount,
+          datetime_ms: d,
+          datetime_hr: datetime_hr,
+          last_amount: parseInt(expense.amount),
+          last_total: parseInt(this.totalExpense)
+      } 
+
       this.firestore.collection('TallySummary').doc('total_expense').set({
             expense_aggregate: {
               amount: expenseAmount,
@@ -150,15 +169,7 @@ addExpense(expense:any) {
               last_amount: parseInt(expense.amount),
               last_total: parseInt(this.totalExpense)
             },
-           expense_byCategory: {
-             [expense_category]: {
-                amount: expenseAmount,
-                datetime_ms: d,
-                datetime_hr: datetime_hr,
-                last_amount: parseInt(expense.amount),
-                last_total: parseInt(this.totalExpense)
-             }
-         }
+           expense_byCategory: [expense_byCategoryObject] 
       }).then(result => {
         this.getTotalExpense();
       });
@@ -169,6 +180,20 @@ addExpense(expense:any) {
         this.notification = 'Please put the financial information correctly.'
     }
   }
+removeObject(id:any) {
+  var object_id = id.toString();
+  var r = confirm("Are you sure you want to delete this Item?");
+  /* if (r == true) {
+          this.firestore.collection("Tally").doc(object_id).delete().then(result => {
+              console.log("Document successfully deleted!");
+              this.getTotalExpense();
+          }).catch(function(error) {
+              console.error("Error removing document: ", error);
+          });
+  } else {
+
+  } */
+}
 getCategory(category:string) {
     this.expense.category = category;
 }
@@ -230,12 +255,10 @@ getByRange(range:any) {
 
   var nextdate = range.nextdate.year + '-' + range.nextdate.month + '-' + range.nextdate.day;
   var nextdate_ms = new Date(nextdate).getTime();
-  console.log(prevdate_ms, nextdate_ms, 'prevdate_ms', 'nextdate_ms');
 
       if(prevdate_ms < nextdate_ms) {
           this.totalExpense = 0;
           this.firestore.collection('Tally', ref => ref.where('expense.userdate_ms', '>=', prevdate_ms).where('expense.userdate_ms', '<=', nextdate_ms)).valueChanges().subscribe(object=> {
-            console.log(object, 'object');
             this.expenses = object;
             this.expenses.forEach(element => {
             this.totalExpense = element.expense.amount + this.totalExpense;
