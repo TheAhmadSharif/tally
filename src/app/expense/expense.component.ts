@@ -128,6 +128,7 @@ addExpense(expense:any) {
 
     var expense_byCategoryObject = this.tallySummary[3].expense_byCategory;
     console.log(expense_byCategoryObject, 'expense_byCategoryObject');
+    console.log(expense_byCategoryObject[0]['Foods'], '131');
     console.log(expense_byCategoryObject[0]['Overtime'], '131');
 
     throw new Error("message");
@@ -158,7 +159,8 @@ addExpense(expense:any) {
           datetime_ms: d,
           datetime_hr: datetime_hr,
           last_amount: parseInt(expense.amount),
-          last_total: parseInt(this.totalExpense)
+          last_total: parseInt(this.totalExpense),
+          expense_type: [expense.category]
       } 
 
       this.firestore.collection('TallySummary').doc('total_expense').set({
