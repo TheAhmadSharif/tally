@@ -111,8 +111,13 @@ export class ExpenseComponent implements OnInit {
 getTotalExpense() {
   this.totalExpense = 0;
   this.transactionService.getTransactionSummary().subscribe(object => {
-      this.tallySummary = object;
-      this.totalExpense = object[3].expense_aggregate.amount;
+      
+      if(object && object[3] && object[3].expense_aggregate.amount) {
+        this.tallySummary = object;
+        this.totalExpense = object[3].expense_aggregate.amount;
+      }
+
+      
   }, (error)=> {
     this.totalExpense = 0;
   });
@@ -126,7 +131,7 @@ addExpense(expense:any) {
     var userdate = expense.date.year + '-' + expense.date.month + '-' + expense.date.day;
     var userdate_ms = new Date(userdate).getTime();
     var expenseAmount = parseInt(expense.amount) + parseInt(this.totalExpense); 
-
+    var datetime_hr = new Date(datetime).toUTCString();
 
    // throw new Error("message");
 
@@ -147,12 +152,26 @@ addExpense(expense:any) {
 
       });
 
-      var expense_byCategoryObject = this.tallySummary[3].expense_byCategory;
-      var category_amount = parseInt(expense_byCategoryObject[0][expense_category].amount) + parseInt(expense.amount);
-      var last_category_amount = parseInt(expense_byCategoryObject[0][expense_category].amount);
+      var expense_byCategoryObject:any;
 
-      var datetime_hr = new Date(datetime).toUTCString();
-      expense_byCategoryObject[expense_category] = {
+      if(this.tallySummary && this.tallySummary[3] && this.tallySummary[3].expense_byCategory) {
+        var expense_byCategoryObject = this.tallySummary[3].expense_byCategory;
+        var category_amount = parseInt(expense_byCategoryObject[0][expense_category].amount) + parseInt(expense.amount);
+        var last_category_amount = parseInt(expense_byCategoryObject[0][expense_category].amount);
+      }
+      else {
+        var expense_byCategoryObject:any = {};
+        var category_amount = parseInt(expense.amount);
+        var last_category_amount = 0;
+      }
+
+      
+      
+
+      console.log(category_amount, 'category_amount', last_category_amount, 'last_category_amount');
+
+      
+      expense_byCategoryObject[0][expense_category] = {
           amount: category_amount,
           category: expense.category,
           datetime_ms: d,
@@ -163,7 +182,7 @@ addExpense(expense:any) {
       } 
 
       this.firestore.collection('TallySummary').doc('total_expense').set({
-            expense_aggregate: {
+              expense_aggregate: {
               amount: expenseAmount,
               datetime_ms: d,
               datetime_hr: datetime_hr,
