@@ -22,7 +22,10 @@ interface Expense {
 
 export class ExpenseComponent implements OnInit {
 
-  tallySummary:any;
+  tallySummary = {
+    expense_aggregate: '',
+    expense_byCategory: '',
+  }
 
   single: any[] = [
     {
@@ -112,21 +115,26 @@ getTotalExpense() {
   this.totalExpense = 0;
   this.transactionService.getTransactionSummary().subscribe(object => {
 
+      console.log(object, '115');
+      
         if(object) {
           this.tallySummary = object;
-            object.forEach(item => {
-              if(item.expense_aggregate) {
-                this.totalExpense = item.expense_aggregate.amount;
-                console.log(item.expense_aggregate.amount, 'item123');
-              }
-              
+            object.forEach((item:any) => {
+                      if(item.expense_aggregate) {
+                        this.totalExpense = this.tallySummary.expense_aggregate = item.expense_aggregate.amount;
+                        console.log(item.expense_aggregate.amount, 'item123');
+                      }
+                      if(item.expense_byCategory) {
+                          this.tallySummary.expense_byCategory = item.expense_byCategory;
+                          console.log(item.expense_byCategory, 'item.expense_byCategory');
+                      }
+                    
             })
         }
 
-       
-
-      
-    
+        else {
+          this.tallySummary.expense_byCategory = null;
+        }
   }, (error)=> {
     this.totalExpense = 0;
   });
@@ -173,12 +181,6 @@ addExpense(expense:any) {
         var category_amount = parseInt(expense.amount);
         var last_category_amount = 0;
       }
-
-      
-      
-
-      console.log(category_amount, 'category_amount', last_category_amount, 'last_category_amount');
-
       
       expense_byCategoryObject[expense_category] = {
           amount: category_amount,
