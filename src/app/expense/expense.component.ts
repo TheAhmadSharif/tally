@@ -13,7 +13,10 @@ interface Expense {
   subcategory_others: string,
   note: string
 }
-
+interface TallySummary {
+  expense_aggregate: object,
+  expense_byCategory: object,
+}
 @Component({
   selector: 'app-expense',
   templateUrl: './expense.component.html',
@@ -22,9 +25,9 @@ interface Expense {
 
 export class ExpenseComponent implements OnInit {
 
-  tallySummary = {
-    expense_aggregate: '',
-    expense_byCategory: '',
+  tallySummary: TallySummary = {
+    expense_aggregate: {},
+    expense_byCategory: {}
   }
 
   single: any[] = [
@@ -133,7 +136,7 @@ getTotalExpense() {
         }
 
         else {
-          this.tallySummary.expense_byCategory = null;
+          this.tallySummary.expense_byCategory = {};
         }
   }, (error)=> {
     this.totalExpense = 0;
@@ -169,18 +172,11 @@ addExpense(expense:any) {
 
       });
 
-      var expense_byCategoryObject:any;
+      
+      var expense_byCategoryObject = this.tallySummary.expense_byCategory;
+      var category_amount = parseInt(expense_byCategoryObject[expense_category].amount) + parseInt(expense.amount);
+      var last_category_amount = parseInt(expense_byCategoryObject[expense_category].amount);
 
-      if(this.tallySummary && this.tallySummary[3] && this.tallySummary[3].expense_byCategory) {
-        var expense_byCategoryObject = this.tallySummary[3].expense_byCategory;
-        var category_amount = parseInt(expense_byCategoryObject[0][expense_category].amount) + parseInt(expense.amount);
-        var last_category_amount = parseInt(expense_byCategoryObject[0][expense_category].amount);
-      }
-      else {
-        var expense_byCategoryObject:any = {};
-        var category_amount = parseInt(expense.amount);
-        var last_category_amount = 0;
-      }
       
       expense_byCategoryObject[expense_category] = {
           amount: category_amount,
@@ -199,7 +195,7 @@ addExpense(expense:any) {
                   datetime_hr: datetime_hr,
                   last_amount: parseInt(expense.amount),
                   last_total: parseInt(this.totalExpense),
-                  expense_type: expense_category
+                  last_expense_type: expense_category
               },
              expense_byCategory: expense_byCategoryObject
       }).then(result => {
