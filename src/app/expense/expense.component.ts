@@ -111,13 +111,22 @@ export class ExpenseComponent implements OnInit {
 getTotalExpense() {
   this.totalExpense = 0;
   this.transactionService.getTransactionSummary().subscribe(object => {
-      
-      if(object && object[3] && object[3].expense_aggregate.amount) {
-        this.tallySummary = object;
-        this.totalExpense = object[3].expense_aggregate.amount;
-      }
+
+        if(object) {
+          this.tallySummary = object;
+            object.forEach(item => {
+              if(item.expense_aggregate) {
+                this.totalExpense = item.expense_aggregate.amount;
+                console.log(item.expense_aggregate.amount, 'item123');
+              }
+              
+            })
+        }
+
+       
 
       
+    
   }, (error)=> {
     this.totalExpense = 0;
   });
@@ -171,7 +180,7 @@ addExpense(expense:any) {
       console.log(category_amount, 'category_amount', last_category_amount, 'last_category_amount');
 
       
-      expense_byCategoryObject[0][expense_category] = {
+      expense_byCategoryObject[expense_category] = {
           amount: category_amount,
           category: expense.category,
           datetime_ms: d,
@@ -183,14 +192,14 @@ addExpense(expense:any) {
 
       this.firestore.collection('TallySummary').doc('total_expense').set({
               expense_aggregate: {
-              amount: expenseAmount,
-              datetime_ms: d,
-              datetime_hr: datetime_hr,
-              last_amount: parseInt(expense.amount),
-              last_total: parseInt(this.totalExpense),
-              expense_type: [expense_category]
-            },
-           expense_byCategory: [expense_byCategoryObject] 
+                  amount: expenseAmount,
+                  datetime_ms: d,
+                  datetime_hr: datetime_hr,
+                  last_amount: parseInt(expense.amount),
+                  last_total: parseInt(this.totalExpense),
+                  expense_type: expense_category
+              },
+             expense_byCategory: expense_byCategoryObject
       }).then(result => {
         this.getTotalExpense();
       });
