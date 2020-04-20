@@ -30,21 +30,8 @@ export class ExpenseComponent implements OnInit {
     expense_byCategory: {}
   }
 
-  single: any[] = [
-    {
-      "name": "Utility",
-      "value": 1400,
-    },
-    {
-      "name": "Foods",
-      "value": 3500
-    },
-    {
-      "name": "Salary",
-      "value": 15000
-    }
-  ];
-
+  
+  single: any = [];
   view: any[] = [350, 200];
   showXAxis = true;
   showYAxis = true;
@@ -86,7 +73,6 @@ export class ExpenseComponent implements OnInit {
   }
   isCollapsed:boolean = true;
 
-
   expense:Expense = {
     amount: '',
     date: {year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate()},
@@ -103,20 +89,39 @@ export class ExpenseComponent implements OnInit {
     ) {
       Object.assign(this.single)
   }
-
-
   ngOnInit(): void {
+    // console.log(_.chunk(['a', 'b', 'c', 'd'], 2)); //lodash function
+    // console.log(_.random(1, 100)); //lodash function
+
     this.totalExpense = 0;
       this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime')).valueChanges().subscribe(object=> {
         this.expenses = object;
      }, error => {
   
      });
+     
   this.getTotalExpense();
    
 }
 getTotalExpense() {
   this.transactionService.getTransactionSummary().subscribe(object => {
+
+
+    this.single = [
+      {
+        "name": "Utility",
+        "value": 1400,
+      },
+      {
+        "name": "Foods",
+        "value": 3500
+      },
+      {
+        "name": "Salary",
+        "value": 15000
+      }
+    ];
+    
             object.forEach((item:any) => {
                       if(item.expense_aggregate) {
                         this.totalExpense = this.tallySummary.expense_aggregate = item.expense_aggregate.amount;
@@ -231,7 +236,6 @@ getSubCategory(subcategory:string) {
     this.sub_others = false;
   }
 }
-
 getByDay(date:any) {
   this.totalExpense = 0;
   var givendate = date.year + '-' + date.month + '-' + date.day;  
@@ -245,7 +249,6 @@ getByDay(date:any) {
 
     });
 }
-
 getPrevDate(date:any) {
   var day = new Date(date.year + '-' + date.month + '-' + date.day);
   var nextDay = new Date(day);
@@ -257,7 +260,6 @@ getPrevDate(date:any) {
     day: d1.getDate()
   };
 }
-
 getNextDate(date:any) {
   var day = new Date(date.year + '-' + date.month + '-' + date.day);
   var nextDay = new Date(day);
@@ -272,7 +274,6 @@ getNextDate(date:any) {
   };
 
 }
-
 getByRange(range:any) {
 
   var prevdate = range.prevdate.year + '-' + range.prevdate.month + '-' + range.prevdate.day;

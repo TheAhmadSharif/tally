@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   }
 
 ngOnInit(): void {
-   // console.log(_.chunk(['a', 'b', 'c', 'd'], 2)); //lodash function
+   console.log(_.chunk(['a', 'b', 'c', 'd'], 2)); //lodash function
    // console.log(_.random(1, 100)); //lodash function
    setTimeout(() => this.equation.nativeElement.focus());
 
