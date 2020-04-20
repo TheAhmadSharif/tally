@@ -107,9 +107,10 @@ getTotalExpense() {
   this.single = [];
   this.transactionService.getTransactionSummary().subscribe(object => {
 
-    var data = object[0].expense_byCategory;
+    var data = [object[0].expense_byCategory].forEach((item:any) => {
+          console.log(item, Object.keys(item), 'item112');
+    });
 
-    console.log(data, 'data');
 
     this.single = [
       {
@@ -245,7 +246,7 @@ getByDay(date:any) {
   var givendate = date.year + '-' + date.month + '-' + date.day;  
   this.firestore.collection('Tally', ref => ref.where('expense.userdate', '==', givendate)).valueChanges().subscribe(object=> {
         this.expenses = object; 
-        this.expenses.forEach(element => {
+        this.expenses.forEach((element:any) => {
           this.totalExpense = parseInt(element.expense.amount) + this.totalExpense;
         });
     },
@@ -290,7 +291,7 @@ getByRange(range:any) {
           this.totalExpense = 0;
           this.firestore.collection('Tally', ref => ref.where('expense.userdate_ms', '>=', prevdate_ms).where('expense.userdate_ms', '<=', nextdate_ms)).valueChanges().subscribe(object=> {
             this.expenses = object;
-            this.expenses.forEach(element => {
+            this.expenses.forEach((element:any) => {
             this.totalExpense = element.expense.amount + this.totalExpense;
             });
         });
