@@ -107,7 +107,6 @@ export class ExpenseComponent implements OnInit {
 
   ngOnInit(): void {
     this.totalExpense = 0;
-    console.log(this.tallySummary, '112');
       this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime')).valueChanges().subscribe(object=> {
         this.expenses = object;
      }, error => {
@@ -142,23 +141,23 @@ addExpense(expense:any) {
     var expenseAmount = parseInt(expense.amount) + parseInt(this.totalExpense); 
     var datetime_hr = new Date(datetime).toUTCString();
 
-    console.log(this.tallySummary, '151');
-    console.log(this.tallySummary.expense_aggregate, '152');
+    var expense_byCategoryObject = this.tallySummary.expense_byCategory;
 
-    if(this.tallySummary.expense_aggregate[expense.category] && this.tallySummary.expense_aggregate[expense_category].amount) {
-        var new_category_amount = parseInt(this.tallySummary.expense_aggregate[expense.category].amount)  + parseInt(expense.amount);
+
+    if(this.tallySummary.expense_byCategory[expense_category] && this.tallySummary.expense_byCategory[expense_category].amount) {
+        var last_category_amount = parseInt(this.tallySummary.expense_byCategory[expense_category].amount);
+        var new_category_amount = last_category_amount + parseInt(expense.amount);
+
+        console.log(new_category_amount, 'if new_category_amount');
     }
     else {
-      var new_category_amount = 0;
+      var new_category_amount = parseInt(expense.amount);
+      var last_category_amount = 0;
     }
    
-    var last_category_amount = 0;
-
-    var expense_byCategoryObject = this.tallySummary.expense_byCategory;
-    console.log(expense_byCategoryObject, 'expense_byCategoryObject151');
-
    
-    console.log(expense_byCategoryObject, 'expense_byCategoryObject163');
+    console.log(this.tallySummary, 'expense_byCategoryObject158');
+    
     throw new Error("message");
 
     expense_byCategoryObject[expense_category] = {
@@ -170,10 +169,6 @@ addExpense(expense:any) {
       last_amount: parseInt(expense.amount),
       last_total: last_category_amount
   } 
-
-
-    
-    var new_category_amount = last_category_amount + parseInt(expense.amount);
     // throw new Error("message");
 
     if(expense.amount > 0 && expense.category.length > 1) {
@@ -192,8 +187,6 @@ addExpense(expense:any) {
           }
 
       });
-
-     
       
       this.firestore.collection('TallySummary').doc('total_expense').set({
               expense_aggregate: {
