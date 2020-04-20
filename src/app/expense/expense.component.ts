@@ -104,8 +104,12 @@ export class ExpenseComponent implements OnInit {
    
 }
 getTotalExpense() {
+  this.single = [];
   this.transactionService.getTransactionSummary().subscribe(object => {
 
+    var data = object[0].expense_byCategory;
+
+    console.log(data, 'data');
 
     this.single = [
       {
@@ -121,15 +125,15 @@ getTotalExpense() {
         "value": 15000
       }
     ];
-    
-            object.forEach((item:any) => {
-                      if(item.expense_aggregate) {
-                        this.totalExpense = this.tallySummary.expense_aggregate = item.expense_aggregate.amount;
-                      }
-                      if(item.expense_byCategory) {
-                          this.tallySummary.expense_byCategory = item.expense_byCategory;
-                      }
-            })
+
+      object.forEach((item:any) => {
+                if(item.expense_aggregate) {
+                  this.totalExpense = this.tallySummary.expense_aggregate = item.expense_aggregate.amount;
+                }
+                if(item.expense_byCategory) {
+                    this.tallySummary.expense_byCategory = item.expense_byCategory;
+                }
+      })
         
   }, (error)=> {
     this.totalExpense = 0;
