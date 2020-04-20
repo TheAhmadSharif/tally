@@ -148,17 +148,15 @@ addExpense(expense:any) {
         var last_category_amount = parseInt(this.tallySummary.expense_byCategory[expense_category].amount);
         var new_category_amount = last_category_amount + parseInt(expense.amount);
 
-        console.log(new_category_amount, 'if new_category_amount');
+       // console.log(new_category_amount, 'if new_category_amount');
     }
     else {
       var new_category_amount = parseInt(expense.amount);
       var last_category_amount = 0;
+     // console.log(new_category_amount, 'Else new_category_amount');
     }
-   
-   
-    console.log(this.tallySummary, 'expense_byCategoryObject158');
-    
-    throw new Error("message");
+
+    // throw new Error("message");
 
     expense_byCategoryObject[expense_category] = {
       amount: new_category_amount,
@@ -169,7 +167,6 @@ addExpense(expense:any) {
       last_amount: parseInt(expense.amount),
       last_total: last_category_amount
   } 
-    // throw new Error("message");
 
     if(expense.amount > 0 && expense.category.length > 1) {
       this.firestore.collection('Tally').doc(d).set({
