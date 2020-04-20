@@ -109,18 +109,15 @@ export class ExpenseComponent implements OnInit {
 
   ngOnInit(): void {
     this.totalExpense = 0;
+    console.log(this.tallySummary.expense_byCategory, '112');
     this.tallySummary.expense_byCategory = {};
-    this.tallySummary.expense_byCategory = {
-      Foods : {
+    this.tallySummary.expense_byCategory['Foods'] = {
         amount: 200
-      }
     }
+    this.tallySummary.expense_byCategory['Utility'] = {
+      amount: 200
+  }
 
-    this.tallySummary.expense_byCategory = {
-      Utility: {
-        amount: 600
-      }
-    }
     console.log(this.tallySummary.expense_byCategory, 'this.tallySummary');
     
       
