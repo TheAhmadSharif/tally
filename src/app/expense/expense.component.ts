@@ -118,8 +118,6 @@ export class ExpenseComponent implements OnInit {
 }
 getTotalExpense() {
   this.transactionService.getTransactionSummary().subscribe(object => {
-        if(object) {
-          this.tallySummary = object;
             object.forEach((item:any) => {
                       if(item.expense_aggregate) {
                         this.totalExpense = this.tallySummary.expense_aggregate = item.expense_aggregate.amount;
@@ -127,12 +125,8 @@ getTotalExpense() {
                       if(item.expense_byCategory) {
                           this.tallySummary.expense_byCategory = item.expense_byCategory;
                       }
-                    
             })
-        }
-
-        else {
-        }
+        
   }, (error)=> {
     this.totalExpense = 0;
   });
@@ -150,55 +144,70 @@ addExpense(expense:any) {
 
     console.log(this.tallySummary, '151');
     console.log(this.tallySummary.expense_aggregate, '152');
+
+    if(this.tallySummary.expense_aggregate[expense.category] && this.tallySummary.expense_aggregate[expense_category].amount) {
+        var new_category_amount = parseInt(this.tallySummary.expense_aggregate[expense.category].amount)  + parseInt(expense.amount);
+    }
+    else {
+      var new_category_amount = 0;
+    }
    
     var last_category_amount = 0;
 
-    
-    var new_category_amount = last_category_amount + parseInt(expense.amount);
+    var expense_byCategoryObject = this.tallySummary.expense_byCategory;
+    console.log(expense_byCategoryObject, 'expense_byCategoryObject151');
+
+   
+    console.log(expense_byCategoryObject, 'expense_byCategoryObject163');
     throw new Error("message");
 
+    expense_byCategoryObject[expense_category] = {
+      amount: new_category_amount,
+      category: expense.category,
+      datetime_ms: d,
+      datetime_hr: datetime_hr,
+      id: datetime,
+      last_amount: parseInt(expense.amount),
+      last_total: last_category_amount
+  } 
+
+
+    
+    var new_category_amount = last_category_amount + parseInt(expense.amount);
+    // throw new Error("message");
+
     if(expense.amount > 0 && expense.category.length > 1) {
-      // this.firestore.collection('Tally').doc(d).set({
-      //     expense: {
-      //       id: datetime,
-      //       amount: expense.amount,
-      //       category: expense.category,
-      //       subcategory: expense.subcategory,
-      //       subcategory_others: expense.subcategory_others,
-      //       transaction_type: "expense",
-      //       datetime: datetime,
-      //       userdate: userdate,
-      //       userdate_ms: userdate_ms,
-      //       note: expense.note,
-      //     }
+      this.firestore.collection('Tally').doc(d).set({
+          expense: {
+            id: datetime,
+            amount: expense.amount,
+            category: expense.category,
+            subcategory: expense.subcategory,
+            subcategory_others: expense.subcategory_others,
+            transaction_type: "expense",
+            datetime: datetime,
+            userdate: userdate,
+            userdate_ms: userdate_ms,
+            note: expense.note,
+          }
 
-      // });
+      });
 
-      // expense_byCategoryObject[expense_category] = {
-      //     amount: new_category_amount,
-      //     category: expense.category,
-      //     datetime_ms: d,
-      //     datetime_hr: datetime_hr,
-      //     id: datetime,
-      //     last_amount: parseInt(expense.amount),
-      //     last_total: last_category_amount
-      // } 
-
+     
       
-      throw new Error("message");
-      // this.firestore.collection('TallySummary').doc('total_expense').set({
-      //         expense_aggregate: {
-      //             amount: expenseAmount,
-      //             datetime_ms: d,
-      //             datetime_hr: datetime_hr,
-      //             last_amount: parseInt(expense.amount),
-      //             last_total: parseInt(this.totalExpense),
-      //             last_expense_type: expense_category
-      //         },
-      //        expense_byCategory: expense_byCategoryObject
-      // }).then(result => {
-      //   this.getTotalExpense();
-      // });
+      this.firestore.collection('TallySummary').doc('total_expense').set({
+              expense_aggregate: {
+                  amount: expenseAmount,
+                  datetime_ms: d,
+                  datetime_hr: datetime_hr,
+                  last_amount: parseInt(expense.amount),
+                  last_total: parseInt(this.totalExpense),
+                  last_expense_type: expense_category
+              },
+             expense_byCategory: expense_byCategoryObject
+      }).then(result => {
+        this.getTotalExpense();
+      });
       this.expense.amount = null;
       this.expense.note = null;
     }
