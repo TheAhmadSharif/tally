@@ -15,6 +15,11 @@ interface Deposit {
   note: string
 }
 
+interface TallySummary {
+  deposit_aggregate: object,
+  deposit_byCategory: object,
+}
+
 
 
 @Component({
@@ -23,6 +28,10 @@ interface Deposit {
   styleUrls: ['./deposit.component.css']
 })
 export class DepositComponent implements OnInit {
+  tallySummary: TallySummary = {
+    deposit_aggregate: {},
+    deposit_byCategory: {}
+  }
  
   deposits:any;
   totalDeposit:any = 0;
@@ -74,9 +83,19 @@ export class DepositComponent implements OnInit {
 getTotalDeposit() {
   this.totalDeposit = 0;
   this.transactionService.getTransactionSummary().subscribe(object => {
-        this.totalDeposit = object[2].deposit_aggregate.amount;
-    }, (error)=> {
-      this.totalDeposit = 0;
+
+
+      object.forEach((item:any) => {
+                if(item.expense_aggregate) {
+                  this.totalDeposit = this.tallySummary.deposit_aggregate = item.deposit_aggregate.amount;
+                }
+                if(item.deposit_byCategory) {
+                    this.tallySummary.deposit_byCategory = item.expense_byCategory;
+                }
+      })
+        
+  }, (error)=> {
+    this.totalDeposit = 0;
   });
 
 }

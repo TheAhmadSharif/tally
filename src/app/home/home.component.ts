@@ -29,6 +29,18 @@ export class HomeComponent implements OnInit {
   }
   getTransactionSummary():void {
     this.transactionService.getTransactionSummary().subscribe(object => {
+
+      object.forEach((item:any) => {
+        if(item.expense_aggregate) {
+          this.total.expense = item.expense_aggregate.amount;
+          
+        }
+        
+        if(item.deposit_aggregate) {
+          this.total.deposit = item.deposit_aggregate.amount;
+        }
+})
+         
          this.total.deposit = object[2].deposit.amount;
          this.total.expense = object[3].expense.amount;
     })
