@@ -154,8 +154,8 @@ addExpense(expense:any) {
     var expense_byCategoryObject = this.tallySummary.expense_byCategory;
 
 
-    if(this.tallySummary.expense_byCategory[expense_category] && this.tallySummary.expense_byCategory[expense_category].amount) {
-        var last_category_amount = parseInt(this.tallySummary.expense_byCategory[expense_category].amount);
+    if(expense_byCategoryObject[expense_category] && expense_byCategoryObject[expense_category].amount) {
+        var last_category_amount = parseInt(expense_byCategoryObject[expense_category].amount);
         var new_category_amount = last_category_amount + parseInt(expense.amount);
 
        // console.log(new_category_amount, 'if new_category_amount');
@@ -169,14 +169,14 @@ addExpense(expense:any) {
     // throw new Error("message");
 
     expense_byCategoryObject[expense_category] = {
-      amount: new_category_amount,
-      category: expense.category,
-      datetime_ms: d,
-      datetime_hr: datetime_hr,
-      id: datetime,
-      last_amount: parseInt(expense.amount),
-      last_total: last_category_amount
-  } 
+        amount: new_category_amount,
+        category: expense.category,
+        datetime_ms: d,
+        datetime_hr: datetime_hr,
+        id: datetime,
+        last_amount: parseInt(expense.amount),
+        last_total: last_category_amount
+    } 
 
     if(expense.amount > 0 && expense.category.length > 1) {
       this.firestore.collection('Tally').doc(d).set({

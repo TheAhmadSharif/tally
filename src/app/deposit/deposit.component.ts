@@ -86,11 +86,11 @@ getTotalDeposit() {
 
 
       object.forEach((item:any) => {
-                if(item.expense_aggregate) {
+                if(item.deposit_aggregate) {
                   this.totalDeposit = this.tallySummary.deposit_aggregate = item.deposit_aggregate.amount;
                 }
                 if(item.deposit_byCategory) {
-                    this.tallySummary.deposit_byCategory = item.expense_byCategory;
+                    this.tallySummary.deposit_byCategory = item.deposit_byCategory;
                 }
       })
         
@@ -102,11 +102,45 @@ getTotalDeposit() {
 
 
 addDeposit(deposit:any) {
+
+
+
+
+    var deposit_category = deposit.category;
     this.notification = null;
     var datetime = new Date().getTime();
     var d = datetime.toString(); 
     var userdate = deposit.date.year + '-' + deposit.date.month + '-' + deposit.date.day;
     var userdate_ms = new Date(userdate).getTime();
+    var depositAmount = parseInt(deposit.amount) + parseInt(this.totalDeposit); 
+    var datetime_hr = new Date(datetime).toUTCString();
+
+    var deposit_byCategoryObject = this.tallySummary.deposit_byCategory;
+
+
+    if(deposit_byCategoryObject[deposit_category] && deposit_byCategoryObject[deposit_category].amount) {
+        var last_category_amount = parseInt(deposit_byCategoryObject[deposit_category].amount);
+        var new_category_amount = last_category_amount + parseInt(deposit.amount);
+
+       // console.log(new_category_amount, 'if new_category_amount');
+    }
+    else {
+      var new_category_amount = parseInt(deposit.amount);
+      var last_category_amount = 0;
+     // console.log(new_category_amount, 'Else new_category_amount');
+    }
+
+    deposit_byCategoryObject[deposit_category] = {
+        amount: new_category_amount,
+        category: deposit.category,
+        datetime_ms: d,
+        datetime_hr: datetime_hr,
+        id: datetime,
+        last_amount: parseInt(deposit.amount),
+        last_total: last_category_amount
+    } 
+
+
     if(deposit.amount > 0 && deposit.category.length > 1) {
       this.firestore.collection('Tally').doc(d).set({
           deposit: {
@@ -122,27 +156,16 @@ addDeposit(deposit:any) {
 
       });
 
-      var depositAmount = parseInt(deposit.amount) + parseInt(this.totalDeposit); 
-      var datetime_hr = new Date(datetime).toUTCString();
-      var deposit_category = deposit.category;
-      
       this.firestore.collection('TallySummary').doc('total_deposit').set({
         deposit_aggregate: {
           amount: depositAmount,
+          last_deposit_type: deposit_category,
           datetime_ms: d,
           datetime_hr: datetime_hr,
           last_amount: parseInt(deposit.amount),
           last_total: parseInt(this.totalDeposit)
         },
-        deposit_byCategory: {
-         [deposit_category]: {
-            amount: depositAmount,
-            datetime_ms: d,
-            datetime_hr: datetime_hr,
-            last_amount: parseInt(deposit.amount),
-            last_total: parseInt(this.totalDeposit)
-         }
-     }
+        deposit_byCategory: deposit_byCategoryObject
   }).then(result => {
     this.getTotalDeposit();
   });
