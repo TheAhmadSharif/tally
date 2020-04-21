@@ -102,10 +102,6 @@ getTotalDeposit() {
 
 
 addDeposit(deposit:any) {
-
-
-
-
     var deposit_category = deposit.category;
     this.notification = null;
     var datetime = new Date().getTime();
@@ -169,10 +165,6 @@ addDeposit(deposit:any) {
   }).then(result => {
     this.getTotalDeposit();
   });
-
-
-
-
       this.deposit.amount = null;
       this.deposit.note = null;
     }
