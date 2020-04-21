@@ -22,11 +22,11 @@ interface SortedIcon {
       icon: string,
       order: boolean
     },
-    bill_type: {
+    category: {
       icon: string,
       order: boolean
     },
-    transaction_date: {
+    userdate_ms: {
       icon: string,
       order: boolean
     }
@@ -48,11 +48,11 @@ export class ExpenseComponent implements OnInit {
       icon: 'keyboard_arrow_up',
       order: true,
     },
-    bill_type: {
+    category: {
       icon: 'keyboard_arrow_up',
       order: true,
     },
-    transaction_date: {
+    userdate_ms: {
       icon: 'keyboard_arrow_up',
       order: true,
     }
@@ -118,12 +118,19 @@ export class ExpenseComponent implements OnInit {
       Object.assign(this.single)
   }
   getDataSort(sorting_type:any) {
-      this.sortedIcon.amount.order =! this.sortedIcon.amount.order;
-      console.log(this.sortedIcon.amount.order, 'this.sortedIcon.amount.order108');
-      var sortedByAmount = _.sortBy(this.expenses, [function(o) { return o.expense.amount;}]).reverse();
-      this.expenses = sortedByAmount;
-      this.sortedIcon.amount.icon = 'keyboard_arrow_down';
-  }
+    var sortingType = sorting_type;
+    this.sortedIcon[sortingType].order =! this.sortedIcon[sortingType].order;
+    if(this.sortedIcon[sortingType].order) {
+      var sortedDataDesc = _.sortBy(this.expenses, [function(o) { return o.expense[sortingType]}]);
+      this.expenses = sortedDataDesc;
+      this.sortedIcon[sorting_type].icon = 'keyboard_arrow_down';
+    }
+    else {
+        var sortedDataAsc = _.sortBy(this.expenses, [function(o) { return o.expense[sortingType];}]).reverse();
+        this.expenses = sortedDataAsc;
+        this.sortedIcon[sorting_type].icon = 'keyboard_arrow_up';
+    }
+}
   ngOnInit(): void {
 
     this.totalExpense = 0;
