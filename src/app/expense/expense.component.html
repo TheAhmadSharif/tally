@@ -158,7 +158,7 @@
       
                     <tr *ngFor="let object of expenses | paginate: { itemsPerPage: 4, currentPage: p }; let i = index;">
                       <td> {{ i + 1 }} </td>
-                      <td> <a routerLink="/{{object.expense.transaction_type}}/{{ object.expense.category.split(' ')[0]  + '/' + object.expense.datetime }}">{{ object.expense.amount }} </a> TK</td>
+                      <td style="text-align: right;"> <a routerLink="/{{object.expense.transaction_type}}/{{ object.expense.category.split(' ')[0]  + '/' + object.expense.datetime }}">{{ object.expense.amount }} </a> TK</td>
                       <td> <a routerLink="{{ object.expense.category.split(' ')[0] }}">{{ object.expense.category  }}</a> </td>
                       <td> {{ object.expense.userdate | date:'MMM d, y, EE' }} </td>
                       <td> {{ object.expense.note  }} </td>
