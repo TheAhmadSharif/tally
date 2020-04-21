@@ -148,9 +148,9 @@
                   <table class="table table-bordered">
                     <tr>
                       <td>#SL</td>
-                      <td class="cp" (click)="doAmountSort()">Amount <span class="material-icons">{{ sortedIcon.amount }}</span></td>
-                      <td>Bill Type</td>
-                      <td>Date</td>
+                      <td class="cp" (click)="getDataSort('amount')">Amount <span class="material-icons">{{ sortedIcon.amount.icon }}</span></td>
+                      <td class="cp" (click)="getDataSort('bill_type')">Bill Type <span class="material-icons">{{ sortedIcon.bill_type.icon }}</span></td>
+                      <td class="cp" (click)="getDataSort('transaction_date')">Date <span class="material-icons">{{ sortedIcon.transaction_date.icon }}</span></td>
                       <td>Note</td>
                     </tr>
       

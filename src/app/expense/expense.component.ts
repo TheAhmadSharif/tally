@@ -17,6 +17,20 @@ interface TallySummary {
   expense_aggregate: object,
   expense_byCategory: object,
 }
+interface SortedIcon {
+    amount: {
+      icon: string,
+      order: boolean
+    },
+    bill_type: {
+      icon: string,
+      order: boolean
+    },
+    transaction_date: {
+      icon: string,
+      order: boolean
+    }
+}
 @Component({
   selector: 'app-expense',
   templateUrl: './expense.component.html',
@@ -29,8 +43,19 @@ export class ExpenseComponent implements OnInit {
     expense_aggregate: {},
     expense_byCategory: {}
   }
-  sortedIcon:any = {
-    amount: 'keyboard_arrow_up'
+  sortedIcon: SortedIcon = {
+    amount: {
+      icon: 'keyboard_arrow_up',
+      order: true,
+    },
+    bill_type: {
+      icon: 'keyboard_arrow_up',
+      order: true,
+    },
+    transaction_date: {
+      icon: 'keyboard_arrow_up',
+      order: true,
+    }
   };
 
   
@@ -92,15 +117,14 @@ export class ExpenseComponent implements OnInit {
     ) {
       Object.assign(this.single)
   }
-  doAmountSort() {
-      var sortedByAmount = _.sortBy(this.expenses, [function(o) { return o.expense.amount;}])
+  getDataSort(sorting_type:any) {
+      this.sortedIcon.amount.order =! this.sortedIcon.amount.order;
+      console.log(this.sortedIcon.amount.order, 'this.sortedIcon.amount.order108');
+      var sortedByAmount = _.sortBy(this.expenses, [function(o) { return o.expense.amount;}]).reverse();
       this.expenses = sortedByAmount;
-      this.sortedIcon.amount = 'keyboard_arrow_down';
+      this.sortedIcon.amount.icon = 'keyboard_arrow_down';
   }
   ngOnInit(): void {
-    // console.log(_.chunk(['a', 'b', 'c', 'd'], 2)); //lodash function
-    // console.log(_.random(1, 100)); //lodash function
-    this.sortedIcon.amount = 'keyboard_arrow_up';
 
     this.totalExpense = 0;
       this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime')).valueChanges().subscribe(object=> {
