@@ -6,14 +6,15 @@ import { ExpenseComponent } from './expense/expense.component';
 import { HomeComponent } from './home/home.component';
 import { DetailsComponent } from './details/details.component';
 import { DepositComponent } from './deposit/deposit.component';
-
+import { GraphExpenseComponent } from './graph/graph-expense/graph-expense.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent},
-  { path: 'expense', component: ExpenseComponent},
-  { path: 'deposit', component: DepositComponent},
-  { path: ':category/:categoryname', component: CategoryComponent},
-  { path: ':category/:categoryname/:objectId', component: DetailsComponent},
+  { path: '', component: HomeComponent, pathMatch: 'full'},
+  { path: 'expense', component: ExpenseComponent, pathMatch: 'full'},
+  { path: 'deposit', component: DepositComponent, pathMatch: 'full'},
+  { path: ':category/:categoryname', component: CategoryComponent, pathMatch: 'full'},
+  { path: ':category/:categoryname/:objectId', component: DetailsComponent, pathMatch: 'full' },
+  { path: 'graph/graphexpense', component: GraphExpenseComponent, pathMatch: 'full'},
 ];
 
 

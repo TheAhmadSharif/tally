@@ -19,6 +19,20 @@ interface TallySummary {
   deposit_aggregate: object,
   deposit_byCategory: object,
 }
+interface SortedIcon {
+  amount: {
+    icon: string,
+    order: boolean
+  },
+  category: {
+    icon: string,
+    order: boolean
+  },
+  userdate_ms: {
+    icon: string,
+    order: boolean
+  }
+}
 
 
 
@@ -32,6 +46,21 @@ export class DepositComponent implements OnInit {
     deposit_aggregate: {},
     deposit_byCategory: {}
   }
+
+  sortedIcon: SortedIcon = {
+    amount: {
+      icon: 'keyboard_arrow_down',
+      order: true,
+    },
+    category: {
+      icon: 'keyboard_arrow_down',
+      order: true,
+    },
+    userdate_ms: {
+      icon: 'keyboard_arrow_down',
+      order: true,
+    }
+  };
  
   deposits:any;
   totalDeposit:any = 0;
@@ -72,13 +101,27 @@ export class DepositComponent implements OnInit {
     ) {
       
   }
-  ngOnInit(): void {
+ngOnInit(): void {
     this.totalDeposit = 0;
     this.firestore.collection('Tally', ref => ref.orderBy('deposit.datetime')).valueChanges().subscribe(object=> {
       this.deposits = object;
     });
-   this.getTotalDeposit();
-   
+    this.getTotalDeposit();
+}
+
+getDataSort(sorting_type:any) {
+  var sortingType = sorting_type;
+  this.sortedIcon[sortingType].order =! this.sortedIcon[sortingType].order;
+  if(this.sortedIcon[sortingType].order) {
+    var sortedDataDesc = _.sortBy(this.deposits, [function(o) { return o.deposit[sortingType]}]);
+    this.deposits = sortedDataDesc;
+    this.sortedIcon[sorting_type].icon = 'keyboard_arrow_down';
+  }
+  else {
+    var sortedDataAsc = _.sortBy(this.deposits, [function(o) { return o.deposit[sortingType];}]).reverse();
+    this.deposits = sortedDataAsc;
+    this.sortedIcon[sorting_type].icon = 'keyboard_arrow_up';  
+  }
 }
 getTotalDeposit() {
   this.totalDeposit = 0;

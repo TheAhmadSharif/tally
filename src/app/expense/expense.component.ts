@@ -45,15 +45,15 @@ export class ExpenseComponent implements OnInit {
   }
   sortedIcon: SortedIcon = {
     amount: {
-      icon: 'keyboard_arrow_up',
+      icon: 'keyboard_arrow_down',
       order: true,
     },
     category: {
-      icon: 'keyboard_arrow_up',
+      icon: 'keyboard_arrow_down',
       order: true,
     },
     userdate_ms: {
-      icon: 'keyboard_arrow_up',
+      icon: 'keyboard_arrow_down',
       order: true,
     }
   };
@@ -69,7 +69,6 @@ export class ExpenseComponent implements OnInit {
   xAxisLabel = 'Expenditure Category';
   showYAxisLabel = true;
   yAxisLabel = 'Expenditure';
-
   colorScheme = {
     domain: ['#ffc107', '#28a745', '#8BC34A']
   };
@@ -130,7 +129,7 @@ export class ExpenseComponent implements OnInit {
         this.expenses = sortedDataAsc;
         this.sortedIcon[sorting_type].icon = 'keyboard_arrow_up';
     }
-}
+ }
   ngOnInit(): void {
 
     this.totalExpense = 0;

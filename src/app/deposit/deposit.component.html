@@ -132,9 +132,9 @@
                   <table class="table table-bordered">
                     <tr>
                       <td>#Serial</td>
-                      <td>Amount</td>
-                      <td>Bill Type</td>
-                      <td>Date</td>
+                      <td class="cp" (click)="getDataSort('amount')">Amount <span class="material-icons">{{ sortedIcon.amount.icon }}</span></td>
+                      <td class="cp" (click)="getDataSort('category')">Bill Type <span class="material-icons">{{ sortedIcon.category.icon }}</span></td>
+                      <td class="cp" (click)="getDataSort('userdate_ms')">Date <span class="material-icons">{{ sortedIcon.userdate_ms.icon }}</span></td>
                       <td>Note</td>
                     </tr>
       
