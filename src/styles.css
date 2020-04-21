@@ -10375,10 +10375,10 @@ ul,ol,li {
   height: 100%;
   border-right: 1px solid #eee;
 
-  transition: all .95s ease;
-  -webkit-transition: all .95s ease;
-  -moz-transition: all .95s ease;
-  -ms-transition: all .95s ease;
+  transition: all .55s ease;
+  -webkit-transition: all .55s ease;
+  -moz-transition: all .55s ease;
+  -ms-transition: all .55s ease;
 }
 
 .sb-content {
@@ -10403,9 +10403,9 @@ ul,ol,li {
 @media only screen and (max-width: 770px) {
   .sidebar {
     left: -300px;
-    -webkit-transition: all .95s ease;
-  -moz-transition: all .95s ease;
-  -ms-transition: all .95s ease;
+    -webkit-transition: all .55s ease;
+  -moz-transition: all .55s ease;
+  -ms-transition: all .55s ease;
   }
   .dashboard {
     margin-left: 0;
@@ -10416,10 +10416,10 @@ ul,ol,li {
 }
 .sidebar.active {
   left: 0;
-  transition: all .95s ease;
-  -webkit-transition: all .95s ease;
-  -moz-transition: all .95s ease;
-  -ms-transition: all .95s ease;
+  transition: all .55s ease;
+  -webkit-transition: all .55s ease;
+  -moz-transition: all .55s ease;
+  -ms-transition: all .55s ease;
 }
 
 
