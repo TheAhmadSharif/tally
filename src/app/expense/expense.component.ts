@@ -29,6 +29,9 @@ export class ExpenseComponent implements OnInit {
     expense_aggregate: {},
     expense_byCategory: {}
   }
+  sortedIcon:any = {
+    amount: 'keyboard_arrow_up'
+  };
 
   
   single: any = [];
@@ -89,9 +92,15 @@ export class ExpenseComponent implements OnInit {
     ) {
       Object.assign(this.single)
   }
+  doAmountSort() {
+      var sortedByAmount = _.sortBy(this.expenses, [function(o) { return o.expense.amount;}])
+      this.expenses = sortedByAmount;
+      this.sortedIcon.amount = 'keyboard_arrow_down';
+  }
   ngOnInit(): void {
     // console.log(_.chunk(['a', 'b', 'c', 'd'], 2)); //lodash function
     // console.log(_.random(1, 100)); //lodash function
+    this.sortedIcon.amount = 'keyboard_arrow_up';
 
     this.totalExpense = 0;
       this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime')).valueChanges().subscribe(object=> {
@@ -107,9 +116,9 @@ getTotalExpense() {
   this.single = [];
   this.transactionService.getTransactionSummary().subscribe(object => {
 
-    var data = [object[0].expense_byCategory].forEach((item:any) => {
-          console.log(item, Object.keys(item), 'item112');
-    });
+    // var data = [object[0].expense_byCategory].forEach((item:any) => {
+    //       console.log(item, Object.keys(item), 'item112');
+    // });
 
 
     this.single = [

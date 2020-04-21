@@ -146,11 +146,9 @@
               <div *ngIf="expenses">
                 <div class = "table-responsive">
                   <table class="table table-bordered">
-
-                
                     <tr>
                       <td>#SL</td>
-                      <td>Amount</td>
+                      <td class="cp" (click)="doAmountSort()">Amount <span class="material-icons">{{ sortedIcon.amount }}</span></td>
                       <td>Bill Type</td>
                       <td>Date</td>
                       <td>Note</td>
