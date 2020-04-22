@@ -20,6 +20,7 @@ import { CategoryComponent } from './category/category.component';
 import { DetailsComponent } from './details/details.component';
 import { HomeComponent } from './home/home.component';
 import { GraphExpenseComponent } from './graph/graph-expense/graph-expense.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { GraphExpenseComponent } from './graph/graph-expense/graph-expense.compo
     CategoryComponent,
     DetailsComponent,
     HomeComponent,
-    GraphExpenseComponent
+    GraphExpenseComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

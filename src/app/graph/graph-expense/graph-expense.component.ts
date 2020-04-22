@@ -15,7 +15,7 @@ export class GraphExpenseComponent implements OnInit {
       xAxisLabel: 'Deposit Category',
       yAxisLabel: 'Deposit',
       colorScheme: {
-        domain: ['#8ec6c5', '#8566aa', '#8ec6c5']
+        domain: ['#9dab86', '#e08f62', '#d7c79e']
       }
     },
     expense : {
@@ -61,7 +61,7 @@ export class GraphExpenseComponent implements OnInit {
                       "value": data[i]['amount'],
                     })
                   }
-                  this.graphData.deposit.data = _.sortBy(deposit_data, [function(o) { return o.value}]);;
+                  this.graphData.deposit.data = _.sortBy(deposit_data, [function(o) { return o.value}]).reverse();
               }
           });
       })
