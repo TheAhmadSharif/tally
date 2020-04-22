@@ -8,51 +8,60 @@ import * as _ from 'lodash';
   styleUrls: ['./graph-expense.component.css']
 })
 export class GraphExpenseComponent implements OnInit {
-
-  expenseData: any = [];
-  depositData: any = [];
+  
+  graphData = {
+    deposit: {
+      data: [],
+      xAxisLabel: 'Deposit Category',
+      yAxisLabel: 'Deposit',
+      colorScheme: {
+        domain: ['#8ec6c5', '#8566aa', '#8ec6c5']
+      }
+    },
+    expense : {
+      data: [],
+      xAxisLabel:'Expenditure Category',
+      yAxisLabel: 'Expenditure',
+      colorScheme: {
+        domain: ['#16817a', '#ffb385', '#00bcd4']
+      }
+    }
+  }
   view: any[] = [450, 300];
   showXAxis = true;
   showYAxis = true;
-  gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Expenditure Category';
   showYAxisLabel = true;
-  yAxisLabel = 'Expenditure';
-  colorScheme = {
-    domain: ['#16817a', '#28a745', '#fa744f']
-  };
 
   constructor(private transactionService: TransactionService) {}
 
   ngOnInit(): void {
 
       this.transactionService.getTransactionSummary().subscribe((object:any)=> {
-
           var data = object.forEach((item:any) => {
                 if(item.expense_byCategory){
                     var data = _.flatMap(item.expense_byCategory);
-                    var chardata = [];
+                    var expense_data = [];
                     for(var i = 0; i < data.length; i++) {
-                      chardata.push({
+                      expense_data.push({
                         "name": data[i]['category'],
                         "value": data[i]['amount'],
                       })
                     }
-                    this.expenseData = chardata;
+                    this.graphData.expense.data = _.sortBy(expense_data, [function(o) { return o.value}]);
                 }
 
                 if(item.deposit_byCategory){
                   var data = _.flatMap(item.deposit_byCategory);
-                  var chardata = [];
+                  var deposit_data = [];
                   for(var i = 0; i < data.length; i++) {
-                    chardata.push({
+                    deposit_data.push({
                       "name": data[i]['category'],
                       "value": data[i]['amount'],
                     })
                   }
-                  this.depositData = chardata;
+                  this.graphData.deposit.data = _.sortBy(deposit_data, [function(o) { return o.value}]);;
               }
           });
       })

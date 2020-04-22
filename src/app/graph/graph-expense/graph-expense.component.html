@@ -5,15 +5,15 @@
                       <div>
                         <ngx-charts-bar-vertical
                         [view]="view"
-                        [scheme]="colorScheme"
-                        [results]="expenseData"
+                        [scheme]="graphData.expense.colorScheme"
+                        [results]="graphData.expense.data"
                         [xAxis]="showXAxis"
                         [yAxis]="showYAxis"
                         [legend]="showLegend"
                         [showXAxisLabel]="showXAxisLabel"
                         [showYAxisLabel]="showYAxisLabel"
-                        [xAxisLabel]="xAxisLabel"
-                        [yAxisLabel]="yAxisLabel">
+                        [xAxisLabel]="graphData.expense.xAxisLabel"
+                      [yAxisLabel]="graphData.expense.yAxisLabel">
                       </ngx-charts-bar-vertical>
                       </div>
             </div> <!-- End card body -->
@@ -27,15 +27,15 @@
                     <div>
                       <ngx-charts-bar-vertical
                       [view]="view"
-                      [scheme]="colorScheme"
-                      [results]="depositData"
+                      [scheme]="graphData.deposit.colorScheme"
+                      [results]="graphData.deposit.data"
                       [xAxis]="showXAxis"
                       [yAxis]="showYAxis"
                       [legend]="showLegend"
                       [showXAxisLabel]="showXAxisLabel"
                       [showYAxisLabel]="showYAxisLabel"
-                      [xAxisLabel]="xAxisLabel"
-                      [yAxisLabel]="yAxisLabel">
+                      [xAxisLabel]="graphData.deposit.xAxisLabel"
+                      [yAxisLabel]="graphData.deposit.yAxisLabel">
                     </ngx-charts-bar-vertical>
                     </div>
           </div> <!-- End card body -->

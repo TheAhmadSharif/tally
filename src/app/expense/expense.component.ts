@@ -126,8 +126,6 @@ export class ExpenseComponent implements OnInit {
 }
 getTotalExpense() {
   this.transactionService.getTransactionSummary().subscribe(object => {
-
-    
       object.forEach((item:any) => {
                 if(item.expense_aggregate) {
                   this.totalExpense = this.tallySummary.expense_aggregate = item.expense_aggregate.amount;
@@ -151,10 +149,7 @@ addExpense(expense:any) {
     var userdate_ms = new Date(userdate).getTime();
     var expenseAmount = parseInt(expense.amount) + parseInt(this.totalExpense); 
     var datetime_hr = new Date(datetime).toUTCString();
-
     var expense_byCategoryObject = this.tallySummary.expense_byCategory;
-
-
     if(expense_byCategoryObject[expense_category] && expense_byCategoryObject[expense_category].amount) {
         var last_category_amount = parseInt(expense_byCategoryObject[expense_category].amount);
         var new_category_amount = last_category_amount + parseInt(expense.amount);
