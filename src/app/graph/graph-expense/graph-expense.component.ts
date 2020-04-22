@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TransactionService } from '../../services/transaction.service';
-
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-graph-expense',
@@ -27,20 +27,24 @@ export class GraphExpenseComponent implements OnInit {
   constructor(private transactionService: TransactionService) {Object.assign(this.single) }
 
   ngOnInit(): void {
-            this.single = [
-              {
-                "name": "Utility",
-                "value": 1400,
-              },
-              {
-                "name": "Foods",
-                "value": 3500
-              },
-              {
-                "name": "Salary",
-                "value": 15000
-              }
-            ];
+      this.single = [
+        {
+          "name": "Utility",
+          "value": 1400,
+        },
+        {
+          "name": "Foods",
+          "value": 3500
+        },
+        {
+          "name": "Salary",
+          "value": 15000
+        }
+      ];
+
+      this.transactionService.getTransactionSummary().subscribe((object:any)=> {
+          console.log(object, 'object46');
+      })
   }
 
 }
