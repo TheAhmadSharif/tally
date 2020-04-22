@@ -3,8 +3,8 @@
        <div class="card">
            <div class="card-body">
             
-            <ngb-tabset>
-                <ngb-tab title="Signup">
+            <ngb-tabset #t="ngbTabset">
+                <ngb-tab title="Signup" id="signupTab">
                   <ng-template ngbTabContent>
                     <div style="width: 360px;">
                         <div class="card-body">
@@ -26,12 +26,12 @@
                       
                               <div class="d-flex justify-content-between">
                                 <div class="align-self-start">
-                                  <button type="submit" class="btn btn-success" (click)="createUser(email_address.value, password.value, displayName.value)">Signup</button>
+                                  <button type="submit" class="btn btn-sm btn-success" (click)="createUser(email_address.value, password.value, displayName.value)">Signup</button>
                                 </div>
                                 
                       
                                 <span class="mt-2">
-                                  <span class="p-2 text-muted-custom"><small>Already have an account ? <a routerLink="/signin" style="color: #666">Login</a></small></span>
+                                  <span class="p-2 text-muted-custom"><small>Already have an account ? <a class="cp" (click)="t.select('signinTab')" style="color: #666">Login</a></small></span>
               
                                   <div class="d-flex justify-content-end mt-2 f-link">
                                       <li class="text-muted-custom"><small><a routerLink="/contact">&#9679; Need help</a></small></li>
@@ -54,7 +54,7 @@
                     </div> <!-- End card -->
                   </ng-template>
                 </ngb-tab>
-                <ngb-tab title="Signin">
+                <ngb-tab title="Signin" id="signinTab">
                   <ng-template ngbTabContent>
                     <div style="width: 360px;">
                         <div class="card-body">
@@ -72,11 +72,11 @@
                     
                                 <div class="d-flex justify-content-between">
                                 <div class="align-self-start">
-                                    <button type="submit" class="btn btn-success" (click)="doDogin(email.value, password.value)">Signin</button>
+                                    <button type="submit" class="btn btn-sm btn-success" (click)="doDogin(email.value, password.value)">Signin</button>
                                 </div>  <!-- End -->
                     
                                 <span class="mt-2">
-                                    <span class="p-2 text-muted-custom"><small>Does not have any account ? <a routerLink="/signup" style="color: #666">Signup</a></small></span>
+                                    <span class="p-2 text-muted-custom"><small>Does not have any account ? <span class="cp" (click)="t.select('signupTab')" style="color: #666">Signup</span></small></span>
                     
                                     <div class="d-flex justify-content-end mt-2 f-link">
                                         <li class="text-muted-custom"><small><a routerLink="/contact">&#9679; Need help</a></small></li>

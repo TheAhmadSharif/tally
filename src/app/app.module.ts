@@ -23,6 +23,7 @@ import { GraphExpenseComponent } from './graph/graph-expense/graph-expense.compo
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NopageComponent } from './nopage/nopage.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { NopageComponent } from './nopage/nopage.component';
     GraphExpenseComponent,
     LoginComponent,
     DashboardComponent,
-    NopageComponent
+    NopageComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

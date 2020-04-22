@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
+import { AuthService } from '../services/auth.service';
 import {NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @Component({
@@ -10,12 +15,17 @@ import {NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(config: NgbTabsetConfig) {
+  constructor(
+    config: NgbTabsetConfig, 
+    private router: Router
+    ) {
     config.justify = 'center';
     config.type = 'pills';
   }
 
   ngOnInit(): void {
   }
+
+  
 
 }

@@ -13,10 +13,10 @@ import { NopageComponent } from './nopage/nopage.component';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full'},
-  { path: 'login', component: LoginComponent, pathMatch: 'full'},
+  { path: '', component: LoginComponent, pathMatch: 'full'},
   { path: 'dashboard', component: DashboardComponent, 
       children: [
+        { path: '', component: HomeComponent, pathMatch: 'full'},
         { path: 'expense', component: ExpenseComponent, pathMatch: 'full'},
         { path: 'deposit', component: DepositComponent, pathMatch: 'full'},        
         { path: ':category/:categoryname', component: CategoryComponent, pathMatch: 'full'},        
