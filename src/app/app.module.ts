@@ -22,6 +22,7 @@ import { HomeComponent } from './home/home.component';
 import { GraphExpenseComponent } from './graph/graph-expense/graph-expense.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { NopageComponent } from './nopage/nopage.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HomeComponent,
     GraphExpenseComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    NopageComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import { DepositComponent } from './deposit/deposit.component';
 import { GraphExpenseComponent } from './graph/graph-expense/graph-expense.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { NopageComponent } from './nopage/nopage.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'graph/expense', component: GraphExpenseComponent, pathMatch: 'full'},
   { path: ':category/:categoryname', component: CategoryComponent},
   { path: ':category/:categoryname/:objectId', component: DetailsComponent, pathMatch: 'full' },
+  { path: '**', component: NopageComponent}
 ];
 
 
