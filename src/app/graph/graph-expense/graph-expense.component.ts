@@ -9,8 +9,9 @@ import * as _ from 'lodash';
 })
 export class GraphExpenseComponent implements OnInit {
 
-  single: any = [];
-  view: any[] = [350, 200];
+  expenseData: any = [];
+  depositData: any = [];
+  view: any[] = [450, 300];
   showXAxis = true;
   showYAxis = true;
   gradient = false;
@@ -20,18 +21,15 @@ export class GraphExpenseComponent implements OnInit {
   showYAxisLabel = true;
   yAxisLabel = 'Expenditure';
   colorScheme = {
-    domain: ['#ffc107', '#28a745']
+    domain: ['#16817a', '#28a745', '#fa744f']
   };
-  chartdata:any;
 
-  constructor(private transactionService: TransactionService) {Object.assign(this.single) }
+  constructor(private transactionService: TransactionService) {}
 
   ngOnInit(): void {
 
-
-
-
       this.transactionService.getTransactionSummary().subscribe((object:any)=> {
+
           var data = object.forEach((item:any) => {
                 if(item.expense_byCategory){
                     var data = _.flatMap(item.expense_byCategory);
@@ -42,8 +40,20 @@ export class GraphExpenseComponent implements OnInit {
                         "value": data[i]['amount'],
                       })
                     }
-                    this.single = chardata;
+                    this.expenseData = chardata;
                 }
+
+                if(item.deposit_byCategory){
+                  var data = _.flatMap(item.deposit_byCategory);
+                  var chardata = [];
+                  for(var i = 0; i < data.length; i++) {
+                    chardata.push({
+                      "name": data[i]['category'],
+                      "value": data[i]['amount'],
+                    })
+                  }
+                  this.depositData = chardata;
+              }
           });
       })
 
