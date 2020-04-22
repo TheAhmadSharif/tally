@@ -1,1 +1,111 @@
-<p>login works!</p>
+<div class="h-100" style="background: #EEE">
+    <div class="d-flex justify-content-center" style="background-color: #eee;">
+
+       <div class="card">
+           <div class="card-body">
+            
+            <ngb-tabset>
+                <ngb-tab title="Signin">
+                  <ng-template ngbTabContent>
+                    <div style="width: 360px;">
+                        <div class="card-body">
+                            
+                        <form>
+                         
+                          <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Email Address" #email>
+                          </div> <!-- End -->
+                    
+                    
+                          <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Password" #password>
+              
+                          </div> <!-- End -->
+                
+                
+                          <div class="d-flex justify-content-between">
+                            <div class="align-self-start">
+                              <button type="submit" class="btn btn-success" (click)="doDogin(email.value, password.value)">Signin</button>
+                            </div>  <!-- End -->
+                           
+                
+              
+                            <span class="mt-2">
+                              <span class="p-2 text-muted-custom"><small>Does not have any account ? <a routerLink="/signup" style="color: #666">Signup</a></small></span>
+              
+                              <div class="d-flex justify-content-end mt-2 f-link">
+                                  <li class="text-muted-custom"><small><a routerLink="/contact">&#9679; Need help</a></small></li>
+                              </div>
+                            </span>
+              
+              
+                          </div> <!-- End div -->
+                
+                    
+                        </form>
+                
+                        <div *ngIf="notification" class="mt-4">
+                          <div class="alert alert-warning">
+                                <span>{{ notification }}</span>
+                          </div> <!-- End alert -->
+                        </div> <!-- End notification-->
+                       
+                        </div> <!-- End -->
+                    </div> <!-- End card -->
+                  </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Signup">
+                  <ng-template ngbTabContent>
+                    <div style="width: 360px;">
+                        <div class="card-body">
+              
+                            <form>
+                              <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Name" #displayName>
+                              </div>
+                        
+                              <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Email Address" #email_address>
+                              </div> <!-- End -->
+                        
+                        
+                              <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Password" #password>
+                              </div> <!-- End -->
+                      
+                      
+                              <div class="d-flex justify-content-between">
+                                <div class="align-self-start">
+                                  <button type="submit" class="btn btn-success" (click)="createUser(email_address.value, password.value, displayName.value)">Signup</button>
+                                </div>
+                                
+                      
+                                <span class="mt-2">
+                                  <span class="p-2 text-muted-custom"><small>Already have an account ? <a routerLink="/signin" style="color: #666">Login</a></small></span>
+              
+                                  <div class="d-flex justify-content-end mt-2 f-link">
+                                      <li class="text-muted-custom"><small><a routerLink="/contact">&#9679; Need help</a></small></li>
+                                  </div>
+                                </span>
+                              </div> <!-- End div -->
+                              <span>
+                               
+                              </span>
+                        
+                            </form>
+                
+                        <div *ngIf="notification" class="mt-4">
+                          <div class="alert alert-warning">
+                                <span>{{ notification }}</span>
+                          </div> <!-- End alert -->
+                        </div> <!-- End notification-->
+                       
+                        </div> <!-- End -->
+                      </div> <!-- End card -->
+                  </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+           </div>   <!-- End card body -->
+       </div>   <!-- End card -->
+  </div>  <!-- End flex -->
+</div> <!-- End div -->

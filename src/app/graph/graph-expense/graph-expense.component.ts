@@ -34,6 +34,11 @@ export class GraphExpenseComponent implements OnInit {
   showXAxisLabel = true;
   showYAxisLabel = true;
 
+  gradient: boolean = true;
+  showLabels: boolean = true;
+  isDoughnut: boolean = false;
+  legendPosition: string = 'below';
+
   constructor(private transactionService: TransactionService) {}
 
   ngOnInit(): void {
