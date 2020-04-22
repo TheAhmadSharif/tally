@@ -8,10 +8,21 @@ import { DetailsComponent } from './details/details.component';
 import { DepositComponent } from './deposit/deposit.component';
 import { GraphExpenseComponent } from './graph/graph-expense/graph-expense.component';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full'},
   { path: 'login', component: LoginComponent, pathMatch: 'full'},
+  { path: 'dashboard', component: DashboardComponent, 
+      children: [
+        { path: 'expense', component: ExpenseComponent, pathMatch: 'full'},
+        { path: 'deposit', component: DepositComponent, pathMatch: 'full'},        
+        { path: ':category/:categoryname', component: CategoryComponent, pathMatch: 'full'},        
+        { path: ':category/:categoryname/:objectId', component: DetailsComponent, pathMatch: 'full'},        
+        { path: 'graph/expense', component: GraphExpenseComponent, pathMatch: 'full'},        
+      ]
+  },
   { path: 'expense', component: ExpenseComponent},
   { path: 'deposit', component: DepositComponent},
   { path: 'graph/expense', component: GraphExpenseComponent, pathMatch: 'full'},
