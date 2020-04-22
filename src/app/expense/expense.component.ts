@@ -58,22 +58,6 @@ export class ExpenseComponent implements OnInit {
     }
   };
 
-  
-  single: any = [];
-  view: any[] = [350, 200];
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Expenditure Category';
-  showYAxisLabel = true;
-  yAxisLabel = 'Expenditure';
-  colorScheme = {
-    domain: ['#ffc107', '#28a745', '#8BC34A']
-  };
-
-  chartdata:any;
   expenses:any;
   totalExpense:any = 0;
   notification:any;
@@ -113,9 +97,7 @@ export class ExpenseComponent implements OnInit {
     private firestore: AngularFirestore,
     private router: Router,
     private transactionService: TransactionService
-    ) {
-      Object.assign(this.single)
-  }
+    ) {}
   getDataSort(sorting_type:any) {
     var sortingType = sorting_type;
     this.sortedIcon[sortingType].order =! this.sortedIcon[sortingType].order;
@@ -143,29 +125,9 @@ export class ExpenseComponent implements OnInit {
    
 }
 getTotalExpense() {
-  this.single = [];
   this.transactionService.getTransactionSummary().subscribe(object => {
 
-    // var data = [object[0].expense_byCategory].forEach((item:any) => {
-    //       console.log(item, Object.keys(item), 'item112');
-    // });
-
-
-    this.single = [
-      {
-        "name": "Utility",
-        "value": 1400,
-      },
-      {
-        "name": "Foods",
-        "value": 3500
-      },
-      {
-        "name": "Salary",
-        "value": 15000
-      }
-    ];
-
+    
       object.forEach((item:any) => {
                 if(item.expense_aggregate) {
                   this.totalExpense = this.tallySummary.expense_aggregate = item.expense_aggregate.amount;

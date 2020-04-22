@@ -42,9 +42,16 @@ export class GraphExpenseComponent implements OnInit {
         }
       ];
 
+      // var data = [object[0].expense_byCategory].forEach((item:any) => {
+      //       console.log(item, Object.keys(item), 'item112');
+      // });
+
+
       this.transactionService.getTransactionSummary().subscribe((object:any)=> {
           console.log(object, 'object46');
       })
+
+      console.log(_.chunk([1,2,3,4], 2));
   }
 
 }
