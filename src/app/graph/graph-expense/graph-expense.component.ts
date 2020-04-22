@@ -20,38 +20,33 @@ export class GraphExpenseComponent implements OnInit {
   showYAxisLabel = true;
   yAxisLabel = 'Expenditure';
   colorScheme = {
-    domain: ['#ffc107', '#28a745', '#8BC34A']
+    domain: ['#ffc107', '#28a745']
   };
   chartdata:any;
 
   constructor(private transactionService: TransactionService) {Object.assign(this.single) }
 
   ngOnInit(): void {
-      this.single = [
-        {
-          "name": "Utility",
-          "value": 1400,
-        },
-        {
-          "name": "Foods",
-          "value": 3500
-        },
-        {
-          "name": "Salary",
-          "value": 15000
-        }
-      ];
 
-      // var data = [object[0].expense_byCategory].forEach((item:any) => {
-      //       console.log(item, Object.keys(item), 'item112');
-      // });
+
 
 
       this.transactionService.getTransactionSummary().subscribe((object:any)=> {
-          console.log(object, 'object46');
+          var data = object.forEach((item:any) => {
+                if(item.expense_byCategory){
+                    var data = _.flatMap(item.expense_byCategory);
+                    var chardata = [];
+                    for(var i = 0; i < data.length; i++) {
+                      chardata.push({
+                        "name": data[i]['category'],
+                        "value": data[i]['amount'],
+                      })
+                    }
+                    this.single = chardata;
+                }
+          });
       })
 
-      console.log(_.chunk([1,2,3,4], 2));
   }
 
 }
