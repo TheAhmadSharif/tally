@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
             this.notification = "You have successfully signup in our system. Now, you are going to land in our system's dashboard page.";
 
             setTimeout(()=> {
-              this.router.navigate(['dashboard/user']);
+              this.router.navigate(['dashboard']);
             }, 1500);
 
         }, function(error) {

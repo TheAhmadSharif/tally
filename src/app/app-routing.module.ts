@@ -16,19 +16,14 @@ const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full'},
   { path: 'dashboard', component: DashboardComponent, 
       children: [
-        { path: '', component: HomeComponent, pathMatch: 'full'},
+        { path: 'home', component: HomeComponent, pathMatch: 'full'},
         { path: 'expense', component: ExpenseComponent, pathMatch: 'full'},
         { path: 'deposit', component: DepositComponent, pathMatch: 'full'},        
+        { path: 'graph/expense', component: GraphExpenseComponent, pathMatch: 'full'},        
         { path: ':category/:categoryname', component: CategoryComponent, pathMatch: 'full'},        
         { path: ':category/:categoryname/:objectId', component: DetailsComponent, pathMatch: 'full'},        
-        { path: 'graph/expense', component: GraphExpenseComponent, pathMatch: 'full'},        
       ]
   },
-  { path: 'expense', component: ExpenseComponent},
-  { path: 'deposit', component: DepositComponent},
-  { path: 'graph/expense', component: GraphExpenseComponent, pathMatch: 'full'},
-  { path: ':category/:categoryname', component: CategoryComponent},
-  { path: ':category/:categoryname/:objectId', component: DetailsComponent, pathMatch: 'full' },
   { path: '**', component: NopageComponent}
 ];
 

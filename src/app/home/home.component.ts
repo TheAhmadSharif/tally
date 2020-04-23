@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators'
 import { AngularFirestore } from '@angular/fire/firestore';
-import 'firebase/firestore';
 import { TransactionService } from '../services/transaction.service';
+import 'firebase/firestore';
 
 
 interface Total {
@@ -33,11 +31,14 @@ export class HomeComponent implements OnInit {
       object.forEach((item:any) => {
             if(item.expense_aggregate) {
               this.total.expense = item.expense_aggregate.amount;
+            
             }
             
             if(item.deposit_aggregate) {
               this.total.deposit = item.deposit_aggregate.amount;
             }
+
+            console.log(item, 'item');
       })
          
     })
