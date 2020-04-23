@@ -32,8 +32,7 @@ export class LoginComponent implements OnInit {
     return this.angularFireAuth.signInWithEmailAndPassword(email, password)
       .then((result:any) => {
         this.authService;
-
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['dashboard/home']);
         
       }).catch((error:any) => {
         this.notification = error.message;
@@ -56,7 +55,7 @@ export class LoginComponent implements OnInit {
             this.notification = "You have successfully signup in our system. Now, you are going to land in our system's dashboard page.";
 
             setTimeout(()=> {
-              this.router.navigate(['dashboard']);
+              this.router.navigate(['dashboard/home']);
             }, 1500);
 
         }, function(error) {
