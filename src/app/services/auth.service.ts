@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   logout() {
-    this.aufAuth.auth.signOut().then(function() {
+    this.aufAuth.signOut().then(function() {
       console.log('Signout success');
       localStorage.removeItem('user');
     }).catch(function(error) {
@@ -36,7 +36,7 @@ export class AuthService {
 
 
    getUserStatus() {
-      this.aufAuth.auth.onAuthStateChanged((user) => {
+      this.aufAuth.onAuthStateChanged((user) => {
         this.userStatus = user;
         if(user) {
 
