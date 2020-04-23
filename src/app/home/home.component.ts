@@ -7,6 +7,8 @@ import 'firebase/firestore';
 interface Total {
   deposit: number,
   expense: number,
+  depositCategory: any,
+  expenseCategory: any
 }
 
 @Component({
@@ -17,13 +19,19 @@ interface Total {
 export class HomeComponent implements OnInit {
   total:Total = {
     deposit: 0,
-    expense: 0
+    expense: 0,
+    depositCategory: null,
+    expenseCategory: null,
   }
 
   constructor(private firestore: AngularFirestore, private transactionService: TransactionService) { }
 
   ngOnInit() {
     this.getTransactionSummary();
+    this.transactionService.getTransactionObject();
+    
+
+    console.log(this.total.depositCategory, 'this.total.depositCategory');
   }
   getTransactionSummary():void {
     this.transactionService.getTransactionSummary().subscribe(object => {
@@ -33,12 +41,9 @@ export class HomeComponent implements OnInit {
               this.total.expense = item.expense_aggregate.amount;
             
             }
-            
             if(item.deposit_aggregate) {
               this.total.deposit = item.deposit_aggregate.amount;
             }
-
-            console.log(item, 'item');
       })
          
     })

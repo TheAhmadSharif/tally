@@ -31,15 +31,11 @@
 
 .material-icons {
   font-family: 'Material Icons';
-  font-weight: normal;
   font-style: normal;
   font-size: 24px;  /* Preferred icon size */
   display: inline-block;
   line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
+
   direction: ltr;
   vertical-align: middle;
   color: #666;
@@ -47,6 +43,7 @@
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'liga';
+  min-width: 24px;
 }
 
 .material-icons-outlined {
@@ -56,15 +53,13 @@
   font-size: 24px; 
   display: inline-block;
   line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
   vertical-align: middle;
   color: #666;
+  min-width: 24px;
 }
-
+.md-18 {
+  font-size: 18px !important;;
+}
 
 :root {
   --blue: #007bff;
@@ -10283,17 +10278,15 @@ ul,ol,li {
 }
 
 .dashboard-link li {
-  border-bottom: 1px solid #d2d2d2;
+  border-bottom: 1px solid #e5e5e5;
   padding: 0.25rem 0;
-  margin: 10px;
+  margin: 1px 10px;
 }
 .dashboard-link li  a {
-    color: #333;
+    color: #666;
   }
-
-  .sidebar a, a {
+.sidebar a, a {
   cursor: pointer;
-  font-size: 14px;
 }
 
 .deposit-bg {

@@ -12,7 +12,7 @@
 	 	<div class="col-sm-4 col-12 mb-1">
 	 		<div class="card bg-info">
 	 			<div class="card-body text-white">
-	 				Total Expense: <span class="h2">{{ total.expense  }}</span> TK
+	 				Total Expense: <span class="h2">{{ total.expense | number}}</span> TK
 	 			</div> <!-- End card body -->
 	 		</div> <!-- End card -->
 	 	</div> <!-- End col 4 -->
@@ -20,7 +20,12 @@
  		<div class="col-sm-4 col-12 mb-1">
 	 		<div class="card bg-success">
 	 			<div class="card-body text-white">
-	 				Total Deposit: <span class="h2">{{ total.deposit  }}</span> TK
+					 Total Deposit: <span class="h2">{{ total.deposit | number }}</span> TK
+
+					 <div>
+					 </div>
+					 
+
 	 			</div> <!-- End card body -->
 	 		</div> <!-- End card -->
 	 	</div> <!-- End col 4 -->
@@ -28,7 +33,7 @@
 	 	<div class="col-sm-4 col-12 mb-1">
 	 		<div class="card">
 	 			<div class="card-body">
-	 				Profit or Loss  <span class="h2">{{ total.deposit - total.expense }}</span> TK
+	 				Profit or Loss  <span class="h2">{{ total.deposit - total.expense | number }}</span> TK
 	 			</div> <!-- End card body -->
 	 		</div> <!-- End card -->
 		 </div> <!-- End col 4 -->

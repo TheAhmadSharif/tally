@@ -45,7 +45,7 @@
                 <input type="text" placeholder="Deposit note" class="form-control mb-2" [(ngModel)]="deposit.note">
              </div> <!-- End form-group-->
       
-              <div class="form-group">
+              <div class="form-group mb-0">
                 <button class="btn btn-sm btn-success" (click)="addDeposit(deposit)">Add Deposit</button>
               </div>  <!-- End form-group-->
         </div> <!-- End card body -->
@@ -148,15 +148,21 @@
                       <td> {{ object.deposit.note  }} </td>
                     </tr>
                   </table>
-                  <div class="mb-2">
-                    Total Deposit: <span class="h4">{{ totalDeposit }} </span> <span>TK</span>
-                   </div> <!-- End -->
+                  
                 </div> <!-- End ngIf -->
+
+                <div class="d-flex justify-content-between">
+                  <div class="">
+                    Total Deposit: <span class="h5">{{ totalDeposit }} </span> <span>TK</span>
+                   </div> <!-- End -->
+
+                   <div class="d-flex justify-content-end">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                   </div>   <!-- End Pagination -->
+                </div> <!-- End d-flex -->
                 
   
-                 <div class="d-flex justify-content-end">
-                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                 </div>  
+                 
              
             </div>    <!-- End card body -->
             </div> <!-- End card  -->

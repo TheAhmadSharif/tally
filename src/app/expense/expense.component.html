@@ -61,7 +61,7 @@
               <input type="text" placeholder="Expense note" class="form-control mb-2" [(ngModel)]="expense.note">
            </div> <!-- End form-group-->
     
-            <div class="form-group">
+            <div class="form-group mb-0">
               <button class="btn btn-sm btn-success" (click)="addExpense(expense)">Add Expense</button>
             </div>  <!-- End form-group-->
       </div> <!-- End card body -->
@@ -157,8 +157,9 @@
       
                     <tr *ngFor="let object of expenses | paginate: { itemsPerPage: 4, currentPage: p }; let i = index;">
                       <td> {{ i + 1 }} </td>
-                      <td style="text-align: right;"> <a routerLink="/dashboard//{{object.expense.transaction_type}}/{{ object.expense.category.split(' ')[0]  + '/' + object.expense.datetime }}">{{ object.expense.amount }} </a> TK</td>
-                      <td> <a routerLink="/dashboard/{{ object.expense.category.split(' ')[0] }}">{{ object.expense.category  }}</a> </td>
+                      <td style="text-align: right;"> <a routerLink="/dashboard/{{object.expense.transaction_type}}/{{ object.expense.category.split(' ')[0]  + '/' + object.expense.datetime }}">{{ object.expense.amount }} </a> TK</td>
+
+                      <td> <a routerLink="/dashboard/{{object.expense.transaction_type}}/{{ object.expense.category.split(' ')[0] }}">{{ object.expense.category  }}</a> </td>
                       <td> {{ object.expense.userdate | date:'MMM d, y, EE' }} </td>
                       <td> {{ object.expense.note  }} </td>
                       
@@ -166,15 +167,18 @@
                   </table>
                 </div>   <!-- End Table resposive -->
                 
-                <div class="mb-2">
-                  Total Expense: <span class="h4">{{ totalExpense }} </span> <span>TK</span>
+               <div class="d-flex justify-content-between">
+                <div class="">
+                  Total Expense: <span class="h5">{{ totalExpense }} </span> <span>TK</span>
                  </div> <!-- End -->
+                 <div class="d-flex justify-content-end">
+                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                 </div>    <!-- End -->
+               </div>   <!-- End d-flex -->
               </div> <!-- End ngIf -->
               
 
-               <div class="d-flex justify-content-end">
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
-               </div>  
+               
            
           </div>    <!-- End card body -->
           </div> <!-- End card  -->

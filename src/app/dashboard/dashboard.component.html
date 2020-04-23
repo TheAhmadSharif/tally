@@ -61,7 +61,7 @@
                     </li>
                     <li>
                         <i class="material-icons md-18">attach_money</i>
-                        <a routerLink="/dashboard/deposit" routerLinkActive="active"> Deposit </a>
+                        <a routerLink="/dashboard/deposit" routerLinkActive="active">Deposit</a>
                     </li>
                     <li>
                         <i class="material-icons md-18">money_off</i>
@@ -70,13 +70,15 @@
                     <li>
                         <i class="material-icons-outlined md-18">drag_indicator</i>
                         <span class="cp" (click)="switchCalculator()"
-                        [attr.aria-expanded]="!isCollapsed" aria-controls="calculator"> Calculator </span>
+                        [attr.aria-expanded]="!isCollapsed" aria-controls="calculator" style="color: #666">Calculator</span>
                     </li>
-
                     <li>
                         <i class="material-icons-outlined md-18">assessment</i> 
-                        <a routerLink="/dashboard/graph/expense" routerLinkActive="active"> Report </a>
-                       
+                        <a routerLink="/dashboard/graph/expense" routerLinkActive="active">Report</a>
+                    </li>
+                    <li>
+                        <i class="material-icons-outlined md-18">settings_power</i> 
+                        <a routerLink="/" routerLinkActive="active">Logout</a>
                     </li>
                     
                 </ul>  <!-- End dashboard linkn -->
