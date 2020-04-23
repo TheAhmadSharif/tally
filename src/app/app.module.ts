@@ -5,6 +5,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from "@angular/fire/auth";
+
+
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -45,6 +48,7 @@ import { ContactComponent } from './contact/contact.component';
     BrowserAnimationsModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase), 
+    AngularFireAuthModule,
     FormsModule,
     NgbModule,
     NgxPaginationModule,
