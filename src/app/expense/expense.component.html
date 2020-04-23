@@ -157,7 +157,7 @@
       
                     <tr *ngFor="let object of expenses | paginate: { itemsPerPage: 4, currentPage: p }; let i = index;">
                       <td> {{ i + 1 }} </td>
-                      <td style="text-align: right;"> <a routerLink="/dashboard/{{object.expense.transaction_type}}/{{ object.expense.category.split(' ')[0]  + '/' + object.expense.datetime }}">{{ object.expense.amount }} </a> TK</td>
+                      <td> <a routerLink="/dashboard/{{object.expense.transaction_type}}/{{ object.expense.category.split(' ')[0]  + '/' + object.expense.datetime }}"> <span class="span_amount">{{ object.expense.amount | number}}</span></a> TK</td>
 
                       <td> <a routerLink="/dashboard/{{object.expense.transaction_type}}/{{ object.expense.category.split(' ')[0] }}">{{ object.expense.category  }}</a> </td>
                       <td> {{ object.expense.userdate | date:'MMM d, y, EE' }} </td>
@@ -169,7 +169,7 @@
                 
                <div class="d-flex justify-content-between">
                 <div class="">
-                  Total Expense: <span class="h5">{{ totalExpense }} </span> <span>TK</span>
+                  Total Expense: <span class="h5">{{ totalExpense | number }} </span> <span>TK</span>
                  </div> <!-- End -->
                  <div class="d-flex justify-content-end">
                   <pagination-controls (pageChange)="p = $event"></pagination-controls>

@@ -112,7 +112,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 body {
   margin: 0;
   font-family: 'jostLight', sans-serif;
-  font-size: 0.90rem;
+  font-size: 0.80rem;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
@@ -294,7 +294,6 @@ select,
 optgroup,
 textarea {
   margin: 0;
-  font-size: inherit;
   line-height: inherit;
 }
 
@@ -365,7 +364,6 @@ legend {
   max-width: 100%;
   padding: 0;
   margin-bottom: .5rem;
-  font-size: 1.5rem;
   line-height: inherit;
   color: inherit;
   white-space: normal;
@@ -566,19 +564,6 @@ a > code {
   color: inherit;
 }
 
-kbd {
-  padding: 0.2rem 0.4rem;
-  font-size: 87.5%;
-  color: #fff;
-  background-color: #212529;
-  border-radius: 0.2rem;
-}
-
-kbd kbd {
-  padding: 0;
-  font-size: 100%;
-  font-weight: 700;
-}
 
 pre {
   display: block;
@@ -2583,7 +2568,7 @@ textarea.form-control {
   background-color: transparent;
   border: 1px solid transparent;
   padding: 0.375rem 0.75rem;
-  font-size: 1rem;
+  /* font-size: 1rem; */
   line-height: 1.5;
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -3483,7 +3468,6 @@ input[type="button"].btn-block {
   display: block;
   padding: 0.5rem 1.5rem;
   margin-bottom: 0;
-  font-size: 0.875rem;
   color: #6c757d;
   white-space: nowrap;
 }
@@ -3741,7 +3725,6 @@ input[type="button"].btn-block {
   align-items: center;
   padding: 0.375rem 0.75rem;
   margin-bottom: 0;
-  font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   color: #495057;
@@ -4023,7 +4006,6 @@ input[type="button"].btn-block {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   padding-left: 0.5rem;
-  font-size: 0.875rem;
 }
 
 .custom-select-lg {
@@ -4031,7 +4013,6 @@ input[type="button"].btn-block {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 1rem;
-  font-size: 1.25rem;
 }
 
 .custom-file {
@@ -4403,7 +4384,6 @@ input[type="button"].btn-block {
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
   margin-right: 1rem;
-  font-size: 1.25rem;
   line-height: inherit;
   white-space: nowrap;
 }
@@ -5106,7 +5086,6 @@ input[type="button"].btn-block {
 
 .pagination-lg .page-link {
   padding: 0.75rem 1.5rem;
-  font-size: 1.25rem;
   line-height: 1.5;
 }
 
@@ -5122,7 +5101,6 @@ input[type="button"].btn-block {
 
 .pagination-sm .page-link {
   padding: 0.25rem 0.5rem;
-  font-size: 0.875rem;
   line-height: 1.5;
 }
 
@@ -5476,7 +5454,6 @@ a.badge-dark:focus, a.badge-dark.focus {
   display: flex;
   height: 1rem;
   overflow: hidden;
-  font-size: 0.75rem;
   background-color: #e9ecef;
   border-radius: 0.25rem;
 }
@@ -6310,7 +6287,6 @@ a.close.disabled {
   word-spacing: normal;
   white-space: normal;
   line-break: auto;
-  font-size: 0.875rem;
   word-wrap: break-word;
   background-color: #fff;
   background-clip: padding-box;
@@ -10430,18 +10406,7 @@ ul,ol,li {
   cursor: move !important;
 }
 
-  ::-webkit-input-placeholder {
-    font-size: 13px;
-   }
-  ::-moz-placeholder {
-    font-size: 13px;
-   }
-  :-ms-input-placeholder {
-    font-size: 13px;
-   }
-  :-moz-placeholder {
-    font-size: 13px;
-   }
+ 
 
 /* Login */
 .nav-pills .nav-link {
@@ -10506,7 +10471,6 @@ ul,ol,li {
     margin: 10px 0;
     border: 1px solid #888;
     padding: 0 10px;
-    font-size: 14px;
     min-height: 24px; 
 }
 
@@ -10521,4 +10485,9 @@ ul,ol,li {
     border: 1px solid green !important;
     box-shadow: none;
     outline: 0;
+}
+.span_amount {
+    min-width: 60px;
+    text-align: right;
+    display: inline-block;
 }

@@ -2,7 +2,7 @@
   <div class="col-sm-12">
     <div class="card">
         <div class="card-body">
-            <div class="" style="margin: 20px 0;">
+            <div class="" style="margin: 0;">
               <div class="row">
                 <div class="col-sm-6 col-12">
                   <div class="d-flex">
@@ -78,16 +78,16 @@
               <table class="table">
                 <tr>
                   <td>#Serial</td>
-                  <td>Amount</td>
-                  <td>Bill Type</td>
-                  <td>Date</td>
-                  <td>Creatime Time</td>
+                  <td class="cp" (click)="getDataSort('amount')">Amount <span class="material-icons">{{ sortedIcon.amount.icon }}</span></td>
+                  <td class="cp">Bill Type </td>
+                  <td class="cp" (click)="getDataSort('userdate_ms')">Date <span class="material-icons">{{ sortedIcon.userdate_ms.icon }}</span></td>
+                  <td class="cp" (click)="getDataSort('datetime')">Creatime Time <span class="material-icons">{{ sortedIcon.datetime.icon }}</span></td>
                   <td>Note</td>
                 </tr>
-                <tr *ngFor="let object of objects; let i = index;">
+                <tr *ngFor="let object of objects | paginate: { itemsPerPage: 4, currentPage: p }; let i = index;">
                   <td> {{ i + 1 }}</td>
 
-                  <td> <a routerLink="/{{ routeParameter.category + '/'+ object[routeParameter.category]['category'].split(' ')[0]  + '/' + object[routeParameter.category]['datetime'] }}">{{ object[routeParameter.category]['amount'] }} </a>  TK </td>
+                  <td> <a routerLink="/dashboard/{{ routeParameter.category + '/'+ object[routeParameter.category]['category'].split(' ')[0]  + '/' + object[routeParameter.category]['datetime'] }}"> <span class="span_amount">{{ object[routeParameter.category]['amount'] | number }} </span> </a>  TK </td>
 
                   <td> {{ object[routeParameter.category]['category']  }} </td>
                   <td> {{ object[routeParameter.category]['userdate'] | date:'MMM d, y, EE' }} </td>
@@ -95,12 +95,23 @@
                   <td> {{ object[routeParameter.category]['note']  }} </td>
                 </tr>
               </table>
+
+              <div class="d-flex justify-content-between">
+                <div class="">
+                  Total Amount: <span class="h5">{{ totalAmount | number }} </span> <span>TK</span>
+                </div> <!-- End -->
+                <div class="d-flex justify-content-end">
+                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>    <!-- End -->
+              </div>   <!-- End d-flex -->
+               
             </div>    <!-- End ngIf -->
-          <div class="p-2 mt-2">
-            Total Amount: <span class="h5">{{ totalAmount }}/ </span> <span>TK</span>
-           </div> <!-- End -->
+          
         </div>    <!-- End card body -->
         
     </div> <!-- End card  -->
   </div>  <!-- End col -->
 </div>  <!-- End row -->
+
+
+

@@ -141,7 +141,7 @@
                     <tr *ngFor="let object of deposits | paginate: { itemsPerPage: 4, currentPage: p }; let i = index;">
                       <td> {{ i + 1 }} </td>
                       
-                      <td style="text-align: right;"> <a routerLink="/dashboard/{{object.deposit.transaction_type}}/{{ object.deposit.category.split(' ')[0]  + '/' + object.deposit.datetime }}">{{ object.deposit.amount }} </a> TK</td>
+                      <td> <a routerLink="/dashboard/{{object.deposit.transaction_type}}/{{ object.deposit.category.split(' ')[0]  + '/' + object.deposit.datetime }}"><span class="span_amount">{{ object.deposit.amount | number }}</span> </a> TK</td>
 
                       <td> <a routerLink="/dashboard/{{object.deposit.transaction_type}}/{{ object.deposit.category.split(' ')[0] }}">{{ object.deposit.category  }}</a> </td>
                       <td> {{ object.deposit.userdate | date:'MMM d, y, EE' }} </td>
@@ -153,7 +153,7 @@
 
                 <div class="d-flex justify-content-between">
                   <div class="">
-                    Total Deposit: <span class="h5">{{ totalDeposit }} </span> <span>TK</span>
+                    Total Deposit: <span class="h5">{{ totalDeposit | number }} </span> <span>TK</span>
                    </div> <!-- End -->
 
                    <div class="d-flex justify-content-end">

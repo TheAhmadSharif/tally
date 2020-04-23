@@ -2,6 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
+import * as _ from 'lodash';
+
+interface SortedIcon {
+  amount: {
+    icon: string,
+    order: boolean
+  },
+  userdate_ms: {
+    icon: string,
+    order: boolean
+  },
+  datetime: {
+    icon: string,
+    order: boolean
+  }
+}
 
 @Component({
   selector: 'app-category',
@@ -9,6 +25,22 @@ import 'firebase/firestore';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
+  sortedIcon: SortedIcon = {
+    amount: {
+      icon: 'keyboard_arrow_down',
+      order: true,
+    },
+    userdate_ms: {
+      icon: 'keyboard_arrow_down',
+      order: true,
+    },
+    datetime: {
+      icon: 'keyboard_arrow_down',
+      order: true,
+    }
+   
+  };
+  
   routeParameter = {
     category: '',
     categoryname: '',
@@ -21,6 +53,7 @@ export class CategoryComponent implements OnInit {
     day: new Date().getDate()
   };
   placement = 'bottom';
+  p: number = 1;
 
   range:any = {
     prevdate: {
@@ -50,12 +83,27 @@ ngOnInit(): void {
     var category = `${this.routeParameter.category}.category`;
     this.firestore.collection('Tally', ref => ref.where(category, '==', this.routeParameter.categoryname)).valueChanges().subscribe(object=> {
       this.objects = object;
-      this.objects.forEach(element => {
+      this.objects.forEach((element:any) => {
         this.totalAmount = element[this.routeParameter.category]['amount'] + this.totalAmount;
       });
    });
 }
 
+getDataSort(sorting_type:any) {
+  var transactioType = this.routeParameter.category;
+  var sortingType = sorting_type;
+  this.sortedIcon[sortingType].order =! this.sortedIcon[sortingType].order;
+  if(this.sortedIcon[sortingType].order) {
+    var sortedDataDesc = _.sortBy(this.objects, [function(o) { return o[transactioType][sortingType]}]);
+    this.objects = sortedDataDesc;
+    this.sortedIcon[sorting_type].icon = 'keyboard_arrow_down';
+  }
+  else {
+      var sortedDataAsc = _.sortBy(this.objects, [function(o) { return o[transactioType][sortingType];}]).reverse();
+      this.objects = sortedDataAsc;
+      this.sortedIcon[sorting_type].icon = 'keyboard_arrow_up';
+  }
+}
 getByDay(date:any) {
     var category = `${this.routeParameter.category}.category`;
     var userdate  = `${this.routeParameter.category}.userdate`;
