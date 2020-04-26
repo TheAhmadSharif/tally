@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   calculateBox:any = '';
   output:any = 'Result';
   switch:boolean = false;
+  year: number = new Date().getFullYear();
 
   styleTop:any;
 
@@ -24,10 +25,7 @@ export class DashboardComponent implements OnInit {
   constructor( private elementRef: ElementRef) { }
 
   ngOnInit(): void {
-    // console.log(_.chunk(['a', 'b', 'c', 'd'], 2)); //lodash function
-    // console.log(_.random(1, 100)); //lodash function
     setTimeout(() => this.equation.nativeElement.focus());
- 
      var m = document.getElementById('calculator');
      m.addEventListener('mousedown', mouseDown, false);
      window.addEventListener('mouseup', mouseUp, false);
@@ -35,23 +33,22 @@ export class DashboardComponent implements OnInit {
      function mouseUp() {
          window.removeEventListener('mousemove', moving, true);
      }
- 
-     function mouseDown(e) {
+
+     function mouseDown(e:any) {
          window.addEventListener('mousemove', moving, true);
      }
  
-     function moving(e) {
+     function moving(e:any) {
            m.style.top = (e.clientY - 10) + 'px';
            m.style.left = (e.clientX - 20) + 'px';
            document.getElementById('inputbox').focus();
-       };
+      };
  
  }
  
  ngAfterViewInit(){
      document.getElementById('inputbox').focus();
    }
- 
  
    navSwitch(){
      this.switch=!this.switch;

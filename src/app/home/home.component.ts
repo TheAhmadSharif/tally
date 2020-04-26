@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { TransactionService } from '../services/transaction.service';
 import 'firebase/firestore';
-
+import * as _ from 'lodash';
 
 interface Total {
   deposit: number,
@@ -27,16 +27,39 @@ export class HomeComponent implements OnInit {
   constructor(private firestore: AngularFirestore, private transactionService: TransactionService) { }
 
   ngOnInit() {
-    this.getTransactionSummary();
-    this.transactionService.getTransactionObject();
-    
-
-    console.log(this.total.depositCategory, 'this.total.depositCategory');
+      this.getTransactionSummary();
   }
   getTransactionSummary():void {
     this.transactionService.getTransactionSummary().subscribe(object => {
 
       object.forEach((item:any) => {
+
+        if(item.expense_byCategory){
+                var data = _.flatMap(item.expense_byCategory);
+                var expense_data = [];
+                for(var i = 0; i < data.length; i++) {
+                  expense_data.push({
+                    "name": data[i]['category'],
+                    "value": data[i]['amount'],
+                  })
+                }
+                this.total.expenseCategory = _.sortBy(expense_data, [function(o) { return o.value}]);
+
+         }
+
+         if(item.deposit_byCategory){
+                  var data = _.flatMap(item.deposit_byCategory);
+                  var deposit_data = [];
+                  for(var i = 0; i < data.length; i++) {
+                    deposit_data.push({
+                      "name": data[i]['category'],
+                      "value": data[i]['amount'],
+                    })
+                  }
+                  this.total.depositCategory = _.sortBy(deposit_data, [function(o) { return o.value}]);
+                  console.log(this.total.depositCategory, '60');
+          }
+
             if(item.expense_aggregate) {
               this.total.expense = item.expense_aggregate.amount;
             
