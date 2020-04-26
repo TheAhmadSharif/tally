@@ -77,5 +77,4 @@ export class DashboardComponent implements OnInit {
      this.output = eval(equation);
      this.ngOnInit();
    }
-
 }

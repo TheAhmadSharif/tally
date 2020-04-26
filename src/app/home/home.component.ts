@@ -57,7 +57,6 @@ export class HomeComponent implements OnInit {
                     })
                   }
                   this.total.depositCategory = _.sortBy(deposit_data, [function(o) { return o.value}]);
-                  console.log(this.total.depositCategory, '60');
           }
 
             if(item.expense_aggregate) {
