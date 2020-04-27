@@ -1,8 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 import 'firebase/firestore';
-import 'lodash';
-declare var _:any;
 
 @Component({
   selector: 'app-dashboard',
@@ -17,12 +16,14 @@ export class DashboardComponent implements OnInit {
   output:any = 'Result';
   switch:boolean = false;
   year: number = new Date().getFullYear();
-
   styleTop:any;
-
   @ViewChild('equation') equation:ElementRef;
 
-  constructor( private elementRef: ElementRef) { }
+  constructor( 
+    private elementRef: ElementRef, 
+    private router: Router,
+    public angularFireAuth: AngularFireAuth
+    ) { }
 
   ngOnInit(): void {
     setTimeout(() => this.equation.nativeElement.focus());
@@ -61,20 +62,24 @@ export class DashboardComponent implements OnInit {
      this.calculateBox = '';
      this.ngOnInit();
    }
- 
    removeElement() {
      this.calculateBox = '';
      this.ngOnInit();
    }
- 
    addToDisplay(item:any) {
-     this.ngOnInit();
-     var s = item;
-     s = s.replace(/^0+/, "");
-     this.calculateBox =  this.calculateBox + item;
+        this.ngOnInit();
+        var s = item;
+        s = s.replace(/^0+/, "");
+        this.calculateBox =  this.calculateBox + item;
    }
    getResult(equation:any) {
      this.output = eval(equation);
      this.ngOnInit();
+   }
+   doLogout() {
+    this.angularFireAuth.signOut().then((result:any) => {
+        console.log(result, 'Logout');
+        this.router.navigate(['/']);
+    });
    }
 }

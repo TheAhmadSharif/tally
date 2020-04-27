@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '../services/auth.service';
 import {NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
@@ -31,13 +31,14 @@ export class LoginComponent implements OnInit {
   doDogin(email:string, password:string) {
     return this.angularFireAuth.signInWithEmailAndPassword(email, password)
       .then((result:any) => {
+
         this.authService;
         this.router.navigate(['dashboard/home']);
         
       }).catch((error:any) => {
         this.notification = error.message;
-      })
-  }
+      })   
+    }
 
   createUser(email:string, password:string, displayName:string) {
     var emailaddress = email;
