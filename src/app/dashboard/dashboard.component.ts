@@ -26,11 +26,20 @@ export class DashboardComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.angularFireAuth.authState.subscribe(user => {
+      if (user) {
+        console.log(user, '31');
+      } else {
+        this.router.navigate(['/']);
+        console.log('no user', '34');
+      }
+    })
+
     setTimeout(() => this.equation.nativeElement.focus());
      var m = document.getElementById('calculator');
      m.addEventListener('mousedown', mouseDown, false);
      window.addEventListener('mouseup', mouseUp, false);
- 
+     
      function mouseUp() {
          window.removeEventListener('mousemove', moving, true);
      }

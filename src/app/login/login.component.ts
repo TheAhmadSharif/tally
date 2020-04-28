@@ -31,8 +31,7 @@ export class LoginComponent implements OnInit {
   doDogin(email:string, password:string) {
     return this.angularFireAuth.signInWithEmailAndPassword(email, password)
       .then((result:any) => {
-
-        this.authService;
+      
         this.router.navigate(['dashboard/home']);
         
       }).catch((error:any) => {
