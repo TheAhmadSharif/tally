@@ -17,7 +17,7 @@
 					 <table class="table mt-4 mb-0">
 						<tr *ngFor="let o of total.expenseCategory">
 							   <td> {{  o.name }}</td>
-							   <td> {{  o.value }}</td>
+							   <td> {{  o.value | number }}</td>
 						</tr>
 					</table>
 	 			</div> <!-- End card body -->
@@ -33,7 +33,7 @@
 						 <table class="table mt-4 mb-0">
 							 <tr *ngFor="let o of total.depositCategory">
 									<td> {{  o.name }}</td>
-									<td> {{  o.value }}</td>
+									<td> {{  o.value | number }}</td>
 							 </tr>
 						 </table>
 					</div> <!-- End summary -->

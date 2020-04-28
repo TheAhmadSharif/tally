@@ -24,16 +24,18 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     public angularFireAuth: AngularFireAuth
     ) { }
-
   ngOnInit(): void {
-    this.angularFireAuth.authState.subscribe(user => {
-      if (user) {
-        console.log(user, '31');
-      } else {
-        this.router.navigate(['/']);
-        console.log('no user', '34');
+    this.angularFireAuth.onAuthStateChanged(function (user) {
+      if(user) {
+        console.log(user, 'user');
       }
+      else {
+        this.router.navigate(['/']);
+        console.log('no user');
+      }
+
     })
+   
 
     setTimeout(() => this.equation.nativeElement.focus());
      var m = document.getElementById('calculator');

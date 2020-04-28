@@ -34,22 +34,16 @@ export class AuthService {
     });
   }
 
-
    getUserStatus() {
       this.aufAuth.onAuthStateChanged((user) => {
-        this.userStatus = user;
         if(user) {
-
+            this.userStatus = user;
+            localStorage.setItem("user_info", this.userStatus);
+            return user;
         }
         else {
-
+            return false;
         }
-      });
-
+      });    
   }
-    
-
-
-
-
 }
