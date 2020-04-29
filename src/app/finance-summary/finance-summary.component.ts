@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { TransactionService } from '../services/transaction.service';
+import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
 
 import 'firebase/firestore';
@@ -30,7 +31,8 @@ export class FinanceSummaryComponent implements OnInit {
   constructor(private firestore: AngularFirestore, 
     private transactionService: TransactionService,
     public angularFireAuth: AngularFireAuth,
-    private router: Router) { }
+    private router: Router,
+    public authenticationService: AuthenticationService) { }
 
   ngOnInit() {
       this.getTransactionSummary();

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { TransactionService } from '../services/transaction.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 import 'firebase/firestore';
 
 interface Expense {
@@ -95,6 +96,7 @@ export class ExpenseComponent implements OnInit {
   
   constructor(
     private firestore: AngularFirestore,
+    public angularFireAuth: AngularFireAuth,
     private router: Router,
     private transactionService: TransactionService
     ) {}
@@ -115,29 +117,35 @@ export class ExpenseComponent implements OnInit {
   ngOnInit(): void {
 
     this.totalExpense = 0;
-      this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime')).valueChanges().subscribe(object=> {
-        this.expenses = object;
-     }, error => {
-  
-     });
+    this.angularFireAuth.onAuthStateChanged((user) => {
+        this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime')).valueChanges().subscribe(object=> {
+          this.expenses = object;
+      }, error => {
+
+      });
+    })
+     
      
   this.getTotalExpense();
    
 }
 getTotalExpense() {
-  this.transactionService.getTransactionSummary().subscribe(object => {
-      object.forEach((item:any) => {
-                if(item.expense_aggregate) {
-                  this.totalExpense = this.tallySummary.expense_aggregate = item.expense_aggregate.amount;
-                }
-                if(item.expense_byCategory) {
-                    this.tallySummary.expense_byCategory = item.expense_byCategory;
-                }
-      })
-        
-  }, (error)=> {
-    this.totalExpense = 0;
-  });
+  this.angularFireAuth.onAuthStateChanged((user) => {
+        this.transactionService.getTransactionSummary().subscribe(object => {
+          object.forEach((item:any) => {
+                    if(item.expense_aggregate) {
+                      this.totalExpense = this.tallySummary.expense_aggregate = item.expense_aggregate.amount;
+                    }
+                    if(item.expense_byCategory) {
+                        this.tallySummary.expense_byCategory = item.expense_byCategory;
+                    }
+          })
+              
+        }, (error)=> {
+          this.totalExpense = 0;
+        });
+  })
+  
 }
 
 addExpense(expense:any) {
@@ -153,7 +161,6 @@ addExpense(expense:any) {
     if(expense_byCategoryObject[expense_category] && expense_byCategoryObject[expense_category].amount) {
         var last_category_amount = parseInt(expense_byCategoryObject[expense_category].amount);
         var new_category_amount = last_category_amount + parseInt(expense.amount);
-
     }
     else {
       var new_category_amount = parseInt(expense.amount);

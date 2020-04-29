@@ -7,7 +7,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthenticationService {
 
   userData: any; 
   userStatus:any;
