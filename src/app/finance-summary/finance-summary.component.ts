@@ -22,12 +22,11 @@ interface Total {
 export class FinanceSummaryComponent implements OnInit {
   total:Total = {
     deposit: 0,
-    expense: 0,
+    expense: 0,      
     depositCategory: null,
     expenseCategory: null,
   }
-
-
+                         
   constructor(private firestore: AngularFirestore, 
     private transactionService: TransactionService,
     public angularFireAuth: AngularFireAuth,

@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AuthService } from '../services/auth.service';
+import { AuthenticationService } from '../services/authentication.service';
 import 'firebase/firestore';
 import { Observable } from 'rxjs';
 
@@ -19,7 +19,7 @@ export class TransactionService implements OnInit{
     expense: []
   }
   constructor(private firestore: AngularFirestore,
-      private authService: AuthService) {
+      private authService: AuthenticationService) {
   }
   ngOnInit(): void {}
 

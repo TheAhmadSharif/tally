@@ -31,15 +31,15 @@ export class AuthenticationService {
       localStorage.removeItem('user');
     }).catch(function(error) {
       console.log('Signout Failure');
-    });
-  }
-
+    });                       
+  }            
+ 
    getUserStatus() {
       this.aufAuth.onAuthStateChanged((user) => {
         if(user) {
             this.userStatus = user;
             localStorage.setItem("user_info", this.userStatus);
-            return user;
+            return user;    
         }
         else {
             return false;

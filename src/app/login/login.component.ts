@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AuthService } from '../services/auth.service';
+import { AuthenticationService } from '../services/authentication.service';
 import {NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(
     public angularFireAuth: AngularFireAuth, 
     private router: Router,
-    public authService: AuthService,
+    public authService: AuthenticationService,
     config: NgbTabsetConfig, 
     ) {
     config.justify = 'center';
