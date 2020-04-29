@@ -154,15 +154,12 @@ addExpense(expense:any) {
         var last_category_amount = parseInt(expense_byCategoryObject[expense_category].amount);
         var new_category_amount = last_category_amount + parseInt(expense.amount);
 
-       // console.log(new_category_amount, 'if new_category_amount');
     }
     else {
       var new_category_amount = parseInt(expense.amount);
       var last_category_amount = 0;
-     // console.log(new_category_amount, 'Else new_category_amount');
     }
 
-    // throw new Error("message");
 
     expense_byCategoryObject[expense_category] = {
         amount: new_category_amount,

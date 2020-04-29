@@ -21,7 +21,7 @@ import { CategoryComponent } from './category/category.component';
 import { DetailsComponent } from './details/details.component';
 import { GraphExpenseComponent } from './graph/graph-expense/graph-expense.component';
 
-import { HomeComponent } from './home/home.component';
+import { FinanceSummaryComponent } from './finance-summary/finance-summary.component';
 
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -35,7 +35,7 @@ import { ContactComponent } from './contact/contact.component';
     DepositComponent,
     CategoryComponent,
     DetailsComponent,
-    HomeComponent,
+    FinanceSummaryComponent,
     GraphExpenseComponent,
     LoginComponent,
     DashboardComponent,

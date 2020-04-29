@@ -35,6 +35,7 @@ export class DashboardComponent implements OnInit {
       }
 
     })
+  
    
 
     setTimeout(() => this.equation.nativeElement.focus());

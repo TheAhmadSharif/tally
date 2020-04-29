@@ -13,13 +13,12 @@ interface Total {
   depositCategory: any,
   expenseCategory: any
 }
-
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-financeSummary',
+  templateUrl: './finance-summary.component.html',
+  styleUrls: ['./finance-summary.component.css']
 })
-export class HomeComponent implements OnInit {
+export class FinanceSummaryComponent implements OnInit {
   total:Total = {
     deposit: 0,
     expense: 0,
@@ -83,10 +82,6 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['/']);
         console.log('no user');
       }
-
     })
-
-    
-    
   }
 }
