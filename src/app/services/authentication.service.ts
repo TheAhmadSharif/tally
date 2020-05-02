@@ -39,7 +39,7 @@ export class AuthenticationService {
         if(user) {
             this.userStatus = user;
             localStorage.setItem("user_info", this.userStatus);
-            return user;    
+            return true;    
         }
         else {
             return false;

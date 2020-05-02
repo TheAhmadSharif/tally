@@ -27,11 +27,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.angularFireAuth.onAuthStateChanged(function (user) {
       if(user) {
-        console.log(user, 'user');
       }
       else {
         this.router.navigate(['/']);
-        console.log('no user');
       }
 
     })

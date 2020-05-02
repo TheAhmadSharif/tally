@@ -24,7 +24,7 @@ export class FinanceSummaryComponent implements OnInit {
     deposit: 0,
     expense: 0,      
     depositCategory: null,
-    expenseCategory: null,
+    expenseCategory: null,   
   }
                          
   constructor(private firestore: AngularFirestore, 
@@ -38,9 +38,11 @@ export class FinanceSummaryComponent implements OnInit {
   }
   getTransactionSummary():void {
 
+    var loginStatus = this.authenticationService.getUserStatus();
+    console.log(loginStatus, '42');
+
     this.angularFireAuth.onAuthStateChanged((user) => {
       if(user) {
-        console.log(user, 'user');
         this.transactionService.getTransactionSummary().subscribe(object => {
 
           object.forEach((item:any) => {
@@ -86,3 +88,5 @@ export class FinanceSummaryComponent implements OnInit {
     })
   }
 }
+
+  
