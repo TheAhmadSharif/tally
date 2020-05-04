@@ -117,34 +117,31 @@ export class ExpenseComponent implements OnInit {
   ngOnInit(): void {
 
     this.totalExpense = 0;
-    this.angularFireAuth.onAuthStateChanged((user) => {
-        this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime')).valueChanges().subscribe(object=> {
-          this.expenses = object;
-      }, error => {
+    this.firestore.collection('Tally', ref => ref.orderBy('expense.datetime')).valueChanges().subscribe(object=> {
+        this.expenses = object;
+    }, error => {
 
-      });
-    })
-     
+    });
      
   this.getTotalExpense();
    
-}
-getTotalExpense() {
-  this.angularFireAuth.onAuthStateChanged((user) => {
-        this.transactionService.getTransactionSummary().subscribe(object => {
-          object.forEach((item:any) => {
-                    if(item.expense_aggregate) {
-                      this.totalExpense = this.tallySummary.expense_aggregate = item.expense_aggregate.amount;
-                    }
-                    if(item.expense_byCategory) {
-                        this.tallySummary.expense_byCategory = item.expense_byCategory;
-                    }
-          })
+} 
               
-        }, (error)=> {
-          this.totalExpense = 0;
-        });
-  })
+     
+getTotalExpense() {
+  this.transactionService.getTransactionSummary().subscribe(object => {
+    object.forEach((item:any) => {
+              if(item.expense_aggregate) {
+                this.totalExpense = this.tallySummary.expense_aggregate = item.expense_aggregate.amount;
+              }
+              if(item.expense_byCategory) {
+                  this.tallySummary.expense_byCategory = item.expense_byCategory;
+              }
+    })
+        
+  }, (error)=> {
+    this.totalExpense = 0;
+  });
   
 }
 

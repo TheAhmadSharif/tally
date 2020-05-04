@@ -25,10 +25,10 @@ export class AuthenticationService {
     return (user !== null && user.emailVerified !== false) ? true : false;
   }
 
-  logout() {
+  doLogout() {
     this.aufAuth.signOut().then(function() {
       console.log('Signout success');
-      localStorage.removeItem('user');
+      localStorage.removeItem("user");
     }).catch(function(error) {
       console.log('Signout Failure');
     });                       
@@ -38,7 +38,7 @@ export class AuthenticationService {
       this.aufAuth.onAuthStateChanged((user) => {
         if(user) {
             this.userStatus = user;
-            localStorage.setItem("user_info", this.userStatus);
+            localStorage.setItem("user", this.userStatus);
             return true;    
         }
         else {

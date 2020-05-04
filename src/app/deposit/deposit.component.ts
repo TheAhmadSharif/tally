@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { TransactionService } from '../services/transaction.service';
-
-
 import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
 

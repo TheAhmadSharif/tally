@@ -3,9 +3,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { TransactionService } from '../services/transaction.service';
 import { AuthenticationService } from '../services/authentication.service';
-import { Router } from '@angular/router';
-
-import 'firebase/firestore';
 import * as _ from 'lodash';
 
 interface Total {
@@ -22,7 +19,7 @@ interface Total {
 export class FinanceSummaryComponent implements OnInit {
   total:Total = {
     deposit: 0,
-    expense: 0,      
+    expense: 0,       
     depositCategory: null,
     expenseCategory: null,   
   }
@@ -30,7 +27,6 @@ export class FinanceSummaryComponent implements OnInit {
   constructor(private firestore: AngularFirestore, 
     private transactionService: TransactionService,
     public angularFireAuth: AngularFireAuth,
-    private router: Router,
     public authenticationService: AuthenticationService) { }
 
   ngOnInit() {
@@ -41,52 +37,42 @@ export class FinanceSummaryComponent implements OnInit {
     var loginStatus = this.authenticationService.getUserStatus();
     console.log(loginStatus, '42');
 
-    this.angularFireAuth.onAuthStateChanged((user) => {
-      if(user) {
-        this.transactionService.getTransactionSummary().subscribe(object => {
+    this.transactionService.getTransactionSummary().subscribe(object => {
 
-          object.forEach((item:any) => {
-            if(item.expense_byCategory){
-                    var data = _.flatMap(item.expense_byCategory);
-                    var expense_data = [];
-                    for(var i = 0; i < data.length; i++) {
-                      expense_data.push({
-                        "name": data[i]['category'],
-                        "value": data[i]['amount'],
-                      })
-                    }
-                    this.total.expenseCategory = _.sortBy(expense_data, [function(o) { return o.value}]);
-             }
-    
-             if(item.deposit_byCategory){
-                      var data = _.flatMap(item.deposit_byCategory);
-                      var deposit_data = [];
-                      for(var i = 0; i < data.length; i++) {
-                        deposit_data.push({
-                          "name": data[i]['category'],
-                          "value": data[i]['amount'],
-                        })
-                      }
-                      this.total.depositCategory = _.sortBy(deposit_data, [function(o) { return o.value}]);
-              }
-    
-                if(item.expense_aggregate) {
-                  this.total.expense = item.expense_aggregate.amount;
-                
+      object.forEach((item:any) => {
+        if(item.expense_byCategory){
+                var data = _.flatMap(item.expense_byCategory);
+                var expense_data = [];
+                for(var i = 0; i < data.length; i++) {
+                  expense_data.push({
+                    "name": data[i]['category'],
+                    "value": data[i]['amount'],
+                  })
                 }
-                if(item.deposit_aggregate) {
-                  this.total.deposit = item.deposit_aggregate.amount;
-                }
-          })
-             
-        })
-      }
-      else {
-        this.router.navigate(['/']);
-        console.log('no user');
-      }
-    })
+                this.total.expenseCategory = _.sortBy(expense_data, [function(o) { return o.value}]);
+         }
+
+         if(item.deposit_byCategory){
+                  var data = _.flatMap(item.deposit_byCategory);
+                  var deposit_data = [];
+                  for(var i = 0; i < data.length; i++) {
+                    deposit_data.push({
+                      "name": data[i]['category'],
+                      "value": data[i]['amount'],
+                    })
+                  }
+                  this.total.depositCategory = _.sortBy(deposit_data, [function(o) { return o.value}]);
+          }
+
+            if(item.expense_aggregate) {
+              this.total.expense = item.expense_aggregate.amount;
+            
+            }
+            if(item.deposit_aggregate) {
+              this.total.deposit = item.deposit_aggregate.amount;
+            }
+      })
+         
+    })  
   }
-}
-
-  
+} 

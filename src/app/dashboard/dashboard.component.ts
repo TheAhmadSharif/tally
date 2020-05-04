@@ -1,7 +1,8 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import 'firebase/firestore';
+import { AuthenticationService } from '../services/authentication.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +10,6 @@ import 'firebase/firestore';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
   total:any;
   isCollapsed:boolean = true;
   calculateBox:any = '';
@@ -22,14 +22,19 @@ export class DashboardComponent implements OnInit {
   constructor( 
     private elementRef: ElementRef, 
     private router: Router,
-    public angularFireAuth: AngularFireAuth
+    public angularFireAuth: AngularFireAuth,
+    public authenticationService: AuthenticationService
     ) { }
   ngOnInit(): void {
+
+
+
     this.angularFireAuth.onAuthStateChanged(function (user) {
       if(user) {
+        this.router.navigate(['dashboard/home']);
       }
       else {
-        this.router.navigate(['/']);
+        this.router.navigate(['']);
       }
 
     })
@@ -87,9 +92,6 @@ export class DashboardComponent implements OnInit {
      this.ngOnInit();
    }
    doLogout() {
-    this.angularFireAuth.signOut().then((result:any) => {
-        console.log(result, 'Logout');
-        this.router.navigate(['/']);
-    });
+     this.authenticationService.doLogout();
    }
-}
+}    
