@@ -19,7 +19,7 @@ import { ExpenseComponent } from './expense/expense.component';
 import { DepositComponent } from './deposit/deposit.component';
 import { CategoryComponent } from './category/category.component';
 import { DetailsComponent } from './details/details.component';
-import { GraphExpenseComponent } from './graph/graph-expense/graph-expense.component';
+import { ReportComponent } from './report/report.component';
 
 import { FinanceSummaryComponent } from './finance-summary/finance-summary.component';
 
@@ -36,7 +36,7 @@ import { ContactComponent } from './contact/contact.component';
     CategoryComponent,
     DetailsComponent,
     FinanceSummaryComponent,
-    GraphExpenseComponent,
+    ReportComponent,
     LoginComponent,
     DashboardComponent,
     NopageComponent,

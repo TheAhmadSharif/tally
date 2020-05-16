@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { TransactionService } from '../../services/transaction.service';
+import { TransactionService } from '../services/transaction.service';
+import { AuthenticationService } from '../services/authentication.service';
+
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'app-graph-expense',
-  templateUrl: './graph-expense.component.html',
-  styleUrls: ['./graph-expense.component.css']
+  selector: 'app-report',
+  templateUrl: './report.component.html',
+  styleUrls: ['./report.component.css']
 })
-export class GraphExpenseComponent implements OnInit {
+export class ReportComponent implements OnInit {
   
   graphData = {
     deposit: {
@@ -15,7 +17,7 @@ export class GraphExpenseComponent implements OnInit {
       xAxisLabel: 'Deposit Category',
       yAxisLabel: 'Deposit',
       colorScheme: {
-        domain: ['#9dab86', '#e08f62', '#d7c79e']
+        domain: ['#0083c2', '#fdb813', '#ff6d37']
       }
     },
     expense : {
@@ -23,7 +25,7 @@ export class GraphExpenseComponent implements OnInit {
       xAxisLabel:'Expenditure Category',
       yAxisLabel: 'Expenditure',
       colorScheme: {
-        domain: ['#16817a', '#ffb385', '#00bcd4']
+        domain: ['#fdb813', '#17a2b8', '#8BC34A', '#0083c2']
       }
     }
   }
