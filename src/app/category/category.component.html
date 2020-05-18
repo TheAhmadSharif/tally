@@ -20,13 +20,7 @@
 
                   <div class="d-flex arrow-block" style="margin: 0;">
                               <div>
-                                <span class="material-icons cp arrow" (click)="getPrevDate(selected_day)">
-                                  keyboard_arrow_left
-                                  </span>
-
-                                  <span class="material-icons cp arrow" (click)="getNextDate(selected_day)">
-                                   keyboard_arrow_right
-                                  </span>
+                                
                               </div> <!-- End div  -->
                               <div>
                                 <span class="btn btn-sm btn-outline-success" (click)="getByDay(selected_day)">Get Data</span>
@@ -39,7 +33,10 @@
                     <div class="d-flex flex-column align-items-end">
                           <div class="cp" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
                           Get Data By Range
-                          <span class="material-icons">keyboard_arrow_down</span>
+                          <i class="chevron down icon cp"></i>
+
+                           <i class="chevron left icon cp" (click)="getPrevDate(selected_day)"></i>
+                           <i class="chevron right icon cp" (click)="getNextDate(selected_day)"></i>
                           </div>
                         <div id="collapseExample" [ngbCollapse]="isCollapsed">
                           <div class="d-flex flex-column align-items-end date-range">
@@ -78,10 +75,17 @@
               <table class="table">
                 <tr>
                   <td>#Serial</td>
-                  <td class="cp" (click)="getDataSort('amount')">Amount <span class="material-icons">{{ sortedIcon.amount.icon }}</span></td>
+                  <td class="cp" (click)="getDataSort('amount')">Amount 
+                    <i [class]="sortedIcon.amount.icon"></i>
+                  </td>
                   <td class="cp">Bill Type </td>
-                  <td class="cp" (click)="getDataSort('userdate_ms')">Date <span class="material-icons">{{ sortedIcon.userdate_ms.icon }}</span></td>
-                  <td class="cp" (click)="getDataSort('datetime')">Creatime Time <span class="material-icons">{{ sortedIcon.datetime.icon }}</span></td>
+                  <td class="cp" (click)="getDataSort('userdate_ms')">Date 
+                    <i [class]="sortedIcon.userdate_ms.icon"></i>
+
+                  </td>
+                  <td class="cp" (click)="getDataSort('datetime')">Creatime Time 
+                    <i [class]="sortedIcon.datetime.icon"></i>
+                  </td>
                   <td>Note</td>
                 </tr>
                 <tr *ngFor="let object of objects | paginate: { itemsPerPage: 4, currentPage: p }; let i = index;">

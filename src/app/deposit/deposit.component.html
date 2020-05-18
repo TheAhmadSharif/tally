@@ -16,7 +16,7 @@
                       <input class="form-control" placeholder="yyyy/Fmm/dd"
                               ngbDatepicker #depositDate="ngbDatepicker" (click)="depositDate.toggle()" [(ngModel)]="deposit.date">
                       <div class="input-group-append">
-                        <button class="btn btn-outline-secondary disabled calendar" (click)="depositDate.toggle()"><i class="calendar alternate outline icon"></i>
+                        <button class="btn btn-outline-secondary disabled calendar" (click)="depositDate.toggle()" style="padding: 0 5px;"><span class="calendar-icon"></span>
                           </button>
                       </div>
                     </div> <!-- End input group -->
@@ -104,7 +104,7 @@
                                   name="range.prevdate" [(ngModel)]="range.prevdate" ngbDatepicker #prevdate="ngbDatepicker" [placement]="placement">
                                   <div class="date-block">
                                     <span>{{  range.prevdate.year + '-' + range.prevdate.month + '-' + range.prevdate.day | date: 'dd, MMM y' }}</span>
-                                    <span class="btn disabled cp calendar" (click)="prevdate.toggle()"><i class="calendar alternate outline icon"></i></span>
+                                    <span class="btn disabled cp calendar" (click)="prevdate.toggle()"><span class="calendar-icon"></span></span>
                                   </div>  <!-- End date-block -->
                                 </div> <!-- End div -->
           
@@ -114,7 +114,7 @@
                                   <div class="date-block">
                                     <span>{{  range.nextdate.year + '-' + range.nextdate.month + '-' + range.nextdate.day | date: 'dd, MMM y' }}</span>
                                       
-                                    <span class="btn disabled cp calendar" (click)="nextdate.toggle()"><i class="calendar alternate outline icon"></i></span>
+                                    <span class="btn disabled cp calendar" (click)="nextdate.toggle()"><span class="calendar-icon"></span></span>
                                   </div>  <!-- End date-block -->
                                 </div> <!-- End div -->
           
@@ -149,9 +149,9 @@
                     <tr *ngFor="let object of deposits | paginate: { itemsPerPage: 4, currentPage: p }; let i = index;">
                       <td> {{ i + 1 }} </td>
                       
-                      <td> <a routerLink="/finance/{{object.deposit.transaction_type}}/{{ object.deposit.category.split(' ')[0]  + '/' + object.deposit.datetime }}"><span class="span_amount">{{ object.deposit.amount | number }}</span> </a> TK</td>
+                      <td> <a routerLink="/dashboard/{{object.deposit.transaction_type}}/{{ object.deposit.category.split(' ')[0]  + '/' + object.deposit.datetime }}"><span class="span_amount">{{ object.deposit.amount | number }}</span> </a> TK</td>
 
-                      <td> <a routerLink="/finance/{{object.deposit.transaction_type}}/{{ object.deposit.category.split(' ')[0] }}">{{ object.deposit.category  }}</a> </td>
+                      <td> <a routerLink="/dashboard/{{object.deposit.transaction_type}}/{{ object.deposit.category.split(' ')[0] }}">{{ object.deposit.category  }}</a> </td>
                       <td> {{ object.deposit.userdate | date:'MMM d, y, EE' }} </td>
                       <td> {{ object.deposit.note  }} </td>
                     </tr>

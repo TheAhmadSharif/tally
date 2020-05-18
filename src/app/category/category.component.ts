@@ -27,15 +27,15 @@ interface SortedIcon {
 export class CategoryComponent implements OnInit {
   sortedIcon: SortedIcon = {
     amount: {
-      icon: 'keyboard_arrow_down',
+      icon: 'chevron down icon',
       order: true,
     },
     userdate_ms: {
-      icon: 'keyboard_arrow_down',
+      icon: 'chevron down icon',
       order: true,
     },
     datetime: {
-      icon: 'keyboard_arrow_down',
+      icon: 'chevron down icon',
       order: true,
     }
    
@@ -96,12 +96,12 @@ getDataSort(sorting_type:any) {
   if(this.sortedIcon[sortingType].order) {
     var sortedDataDesc = _.sortBy(this.objects, [function(o) { return o[transactioType][sortingType]}]);
     this.objects = sortedDataDesc;
-    this.sortedIcon[sorting_type].icon = 'keyboard_arrow_down';
+    this.sortedIcon[sorting_type].icon = 'chevron down icon';
   }
   else {
       var sortedDataAsc = _.sortBy(this.objects, [function(o) { return o[transactioType][sortingType];}]).reverse();
       this.objects = sortedDataAsc;
-      this.sortedIcon[sorting_type].icon = 'keyboard_arrow_up';
+      this.sortedIcon[sorting_type].icon = 'chevron up icon';
   }
 }
 getByDay(date:any) {
