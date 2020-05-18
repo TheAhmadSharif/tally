@@ -46,15 +46,15 @@ export class ExpenseComponent implements OnInit {
   }
   sortedIcon: SortedIcon = {
     amount: {
-      icon: 'keyboard_arrow_down',
+      icon: 'chevron down icon',
       order: true,
     },
     category: {
-      icon: 'keyboard_arrow_down',
+      icon: 'chevron down icon',
       order: true,
     },
     userdate_ms: {
-      icon: 'keyboard_arrow_down',
+      icon: 'chevron down icon',
       order: true,
     }
   };
@@ -106,12 +106,12 @@ export class ExpenseComponent implements OnInit {
     if(this.sortedIcon[sortingType].order) {
       var sortedDataDesc = _.sortBy(this.expenses, [function(o) { return o.expense[sortingType]}]);
       this.expenses = sortedDataDesc;
-      this.sortedIcon[sorting_type].icon = 'keyboard_arrow_down';
+      this.sortedIcon[sorting_type].icon = 'chevron down icon';
     }
     else {
         var sortedDataAsc = _.sortBy(this.expenses, [function(o) { return o.expense[sortingType];}]).reverse();
         this.expenses = sortedDataAsc;
-        this.sortedIcon[sorting_type].icon = 'keyboard_arrow_up';
+        this.sortedIcon[sorting_type].icon = 'chevron up icon';
     }
  }
   ngOnInit(): void {

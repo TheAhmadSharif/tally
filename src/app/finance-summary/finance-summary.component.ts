@@ -35,7 +35,6 @@ export class FinanceSummaryComponent implements OnInit {
   getTransactionSummary():void {
 
     var loginStatus = this.authenticationService.getUserStatus();
-    console.log(loginStatus, '42');
 
     this.transactionService.getTransactionSummary().subscribe(object => {
 

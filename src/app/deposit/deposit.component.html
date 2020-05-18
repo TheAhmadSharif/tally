@@ -16,7 +16,7 @@
                       <input class="form-control" placeholder="yyyy/Fmm/dd"
                               ngbDatepicker #depositDate="ngbDatepicker" (click)="depositDate.toggle()" [(ngModel)]="deposit.date">
                       <div class="input-group-append">
-                        <button class="btn btn-outline-secondary disabled calendar" (click)="depositDate.toggle()">
+                        <button class="btn btn-outline-secondary disabled calendar" (click)="depositDate.toggle()"><i class="calendar alternate outline icon"></i>
                           </button>
                       </div>
                     </div> <!-- End input group -->
@@ -75,12 +75,13 @@
   
                       <div class="d-flex arrow-block" style="margin: 0;">
                                   <div>
-                                    <span class="material-icons cp arrow" (click)="getPrevDate(selected_day)">
-                                      keyboard_arrow_left
+                                    <span class="cp arrow" (click)="getPrevDate(selected_day)">
+                                      <i class="chevron left icon"></i>
                                       </span>
   
-                                      <span class="material-icons cp arrow" (click)="getNextDate(selected_day)">
-                                       keyboard_arrow_right
+                                      <span class="cp arrow" (click)="getNextDate(selected_day)">
+                                       <i class="chevron right icon"></i>
+
                                       </span>
                                   </div> <!-- End div  -->
                                   <div>
@@ -94,7 +95,7 @@
                         <div class="d-flex flex-column align-items-end">
                               <div class="cp" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
                               Get Data By Range
-                              <span class="material-icons">keyboard_arrow_down</span>
+                              <i class="chevron down icon"></i>
                               </div>
                             <div id="collapseExample" [ngbCollapse]="isCollapsed">
                               <div class="d-flex flex-column align-items-end date-range">
@@ -103,7 +104,7 @@
                                   name="range.prevdate" [(ngModel)]="range.prevdate" ngbDatepicker #prevdate="ngbDatepicker" [placement]="placement">
                                   <div class="date-block">
                                     <span>{{  range.prevdate.year + '-' + range.prevdate.month + '-' + range.prevdate.day | date: 'dd, MMM y' }}</span>
-                                    <span class="btn disabled cp calendar" (click)="prevdate.toggle()"></span>
+                                    <span class="btn disabled cp calendar" (click)="prevdate.toggle()"><i class="calendar alternate outline icon"></i></span>
                                   </div>  <!-- End date-block -->
                                 </div> <!-- End div -->
           
@@ -113,7 +114,7 @@
                                   <div class="date-block">
                                     <span>{{  range.nextdate.year + '-' + range.nextdate.month + '-' + range.nextdate.day | date: 'dd, MMM y' }}</span>
                                       
-                                    <span class="btn disabled cp calendar" (click)="nextdate.toggle()"></span>
+                                    <span class="btn disabled cp calendar" (click)="nextdate.toggle()"><i class="calendar alternate outline icon"></i></span>
                                   </div>  <!-- End date-block -->
                                 </div> <!-- End div -->
           
@@ -132,18 +133,25 @@
                   <table class="table table-bordered">
                     <tr>
                       <td>#Serial</td>
-                      <td class="cp" (click)="getDataSort('amount')">Amount <span class="material-icons">{{ sortedIcon.amount.icon }}</span></td>
-                      <td class="cp" (click)="getDataSort('category')">Bill Type <span class="material-icons">{{ sortedIcon.category.icon }}</span></td>
-                      <td class="cp" (click)="getDataSort('userdate_ms')">Date <span class="material-icons">{{ sortedIcon.userdate_ms.icon }}</span></td>
+                      <td class="cp" (click)="getDataSort('amount')">Amount 
+
+                        <i [class]="sortedIcon.amount.icon"></i>
+                        
+                        </td>
+
+                      <td class="cp" (click)="getDataSort('category')">Bill Type <i [class]="sortedIcon.category.icon"></i>
+                      
+                      </td>
+                      <td class="cp" (click)="getDataSort('userdate_ms')">Date <i [class]="sortedIcon.userdate_ms.icon"></i></td>
                       <td>Note</td>
                     </tr>
       
                     <tr *ngFor="let object of deposits | paginate: { itemsPerPage: 4, currentPage: p }; let i = index;">
                       <td> {{ i + 1 }} </td>
                       
-                      <td> <a routerLink="/dashboard/{{object.deposit.transaction_type}}/{{ object.deposit.category.split(' ')[0]  + '/' + object.deposit.datetime }}"><span class="span_amount">{{ object.deposit.amount | number }}</span> </a> TK</td>
+                      <td> <a routerLink="/finance/{{object.deposit.transaction_type}}/{{ object.deposit.category.split(' ')[0]  + '/' + object.deposit.datetime }}"><span class="span_amount">{{ object.deposit.amount | number }}</span> </a> TK</td>
 
-                      <td> <a routerLink="/dashboard/{{object.deposit.transaction_type}}/{{ object.deposit.category.split(' ')[0] }}">{{ object.deposit.category  }}</a> </td>
+                      <td> <a routerLink="/finance/{{object.deposit.transaction_type}}/{{ object.deposit.category.split(' ')[0] }}">{{ object.deposit.category  }}</a> </td>
                       <td> {{ object.deposit.userdate | date:'MMM d, y, EE' }} </td>
                       <td> {{ object.deposit.note  }} </td>
                     </tr>

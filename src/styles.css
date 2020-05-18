@@ -1,3 +1,5 @@
+@import 'icon.css';
+
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
@@ -8,55 +10,9 @@
   font-family: 'jostLight';
   src: URL('assets/fonts/Jost-400-Book.ttf') format('truetype');
 }
+@import 'icon.css';
 
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url('assets/fonts/material-icon/MaterialIcons-Regular.eot'); /* For IE6-8 */
-  src: local('assets/fonts/material-icon/Material Icons'),
-       local('assets/fonts/material-icon/MaterialIcons-Regular'),
-       url('assets/fonts/material-icon/MaterialIcons-Regular.woff2') format('woff2'),
-       url('assets/fonts/material-icon/MaterialIcons-Regular.woff') format('woff'),
-       url('assets/fonts/material-icon/MaterialIcons-Regular.ttf') format('truetype');
-}
 
-@font-face {
-  font-family: 'Material Icons Outlined';
-  font-style: normal;
-  font-weight: 400;
-  src: url('assets/fonts/material-icon/MaterialIcons-Outline.woff2') format('woff2');
-  
-}
-
-.material-icons {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
-  display: inline-block;
-  line-height: 1;
-
-  direction: ltr;
-  vertical-align: middle;
-  color: #666;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: 'liga';
-  min-width: 24px;
-}
-
-.material-icons-outlined {
-  font-family: 'Material Icons Outlined';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px; 
-  display: inline-block;
-  line-height: 1;
-  vertical-align: middle;
-  color: #666;
-  min-width: 24px;
-}
 .md-18 {
   font-size: 18px !important;;
 }
@@ -10421,7 +10377,7 @@ ul,ol,li {
   font-size: 12px;
 }
 /*  End Placeholder */
-.calculator {
+.calculator-div {
   position: fixed;
   z-index: 16;
   background: none;
@@ -10460,7 +10416,7 @@ ul,ol,li {
     min-height: 24px; 
 }
 
-.calculator input {
+.calculator-div input {
     height: 26px;
     padding: 5px 10px;
     box-sizing: border-box;

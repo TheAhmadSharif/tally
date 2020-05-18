@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
     public authenticationService: AuthenticationService
     ) { }
   ngOnInit(): void {
-    this.angularFireAuth.onAuthStateChanged(function (user) {
+    this.angularFireAuth.onAuthStateChanged((user) => {
       if(user) {
         this.router.navigate(['dashboard/home']);
       }

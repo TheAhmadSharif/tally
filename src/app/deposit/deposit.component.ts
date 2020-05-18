@@ -44,18 +44,18 @@ export class DepositComponent implements OnInit {
     deposit_aggregate: {},
     deposit_byCategory: {}
   }
-
+  
   sortedIcon: SortedIcon = {
     amount: {
-      icon: 'keyboard_arrow_down',
+      icon: 'chevron down icon',
       order: true,
     },
     category: {
-      icon: 'keyboard_arrow_down',
+      icon: 'chevron down icon',
       order: true,
     },
     userdate_ms: {
-      icon: 'keyboard_arrow_down',
+      icon: 'chevron down icon',
       order: true,
     }
   };
@@ -113,12 +113,12 @@ getDataSort(sorting_type:any) {
   if(this.sortedIcon[sortingType].order) {
     var sortedDataDesc = _.sortBy(this.deposits, [function(o) { return o.deposit[sortingType]}]);
     this.deposits = sortedDataDesc;
-    this.sortedIcon[sorting_type].icon = 'keyboard_arrow_down';
+    this.sortedIcon[sorting_type].icon = 'chevron down icon'; 
   }
   else {
     var sortedDataAsc = _.sortBy(this.deposits, [function(o) { return o.deposit[sortingType];}]).reverse();
     this.deposits = sortedDataAsc;
-    this.sortedIcon[sorting_type].icon = 'keyboard_arrow_up';  
+    this.sortedIcon[sorting_type].icon = 'chevron up icon';  
   }
 }
 getTotalDeposit() {

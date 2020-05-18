@@ -35,15 +35,6 @@ export class AuthenticationService {
   }            
  
    getUserStatus() {
-      this.aufAuth.onAuthStateChanged((user) => {
-        if(user) {
-            this.userStatus = user;
-            localStorage.setItem("user", this.userStatus);
-            return true;    
-        }
-        else {
-            return false;
-        }
-      });    
+         
   }
 }
