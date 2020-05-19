@@ -1,3 +1,59 @@
+<div class="navigation-switch">
+    <i class="list ul icon" (click)="navSwitch()"></i>
+</div> <!-- End navigation switch -->
+<div class="container-fluid h-100" style="width: 100%; max-width: 100%;">
+        <div class="row h-100">
+
+            <div class="sidebar shadow-sm" [ngClass]="{'active' : switch==true}">
+                <ul class="dashboard-link" style="margin-top: 80px">
+                    <li>
+                        <i class="clone outline icon" style="color: #6c757d;"></i> 
+                        <a routerLink="/dashboard/home" routerLinkActive="active">Home</a>
+                    </li>
+                    
+                    <li>
+                        <i class="dollar sign icon" style="color: #6c757d;"></i>
+                        <a routerLink="/dashboard/deposit" routerLinkActive="active">Deposit</a>
+                    </li>
+                    <li>
+                        <i class="money bill alternate outline icon" style="color: #6c757d;"></i>
+                        <a routerLink="/dashboard/expense" routerLinkActive="active">Expense</a>
+                    </li>
+                    <li>
+                        <i class="calculator icon" style="color: #6c757d;"></i>
+                        <span class="cp" (click)="switchCalculator()"
+                        [attr.aria-expanded]="!isCollapsed" aria-controls="calculator" style="color: #666">Calculator</span>
+                    </li>
+                    <li>
+                        <i class="chart bar icon" style="color: #6c757d;"></i> 
+                        <a routerLink="/dashboard/report" routerLinkActive="active">Report</a>
+                    </li>
+                    <li>
+                        <i class="sign-out icon" style="color: #6c757d;"></i> 
+                        <a routerLink="/" routerLinkActive="active" (click)="doLogout()">Logout</a>
+                    </li>
+                    
+                </ul>  <!-- End dashboard linkn -->
+               
+           </div> <!-- End sidebar -->
+           <div class="dashboard h-80">
+                <div class="col-sm-12">
+                        <div class="h-80" style="margin-top: 20px;">
+                                <router-outlet></router-outlet>
+                        </div> <!-- End -->
+                </div>  <!-- End col 12 -->
+
+                <footer class="p-4">
+                    &copy; <span>{{ year }}</span>. All rights reserved.
+                </footer>
+            </div> <!-- End Dashboard -->
+           
+        </div> <!-- End row -->
+</div> <!-- End container -->
+
+
+
+
 <div [ngClass]="{'overlay-active' : isCollapsed==false}" draggable="true"></div>  <!-- End overlay -->
 
 <div class="calculator-div" id="calculator" [ngbCollapse]="isCollapsed">
@@ -6,7 +62,7 @@
             
             <div class="d-flex justify-content-between pb-1">
                 <div class="cm">
-                    <span class="material-icons" style="color: #c7c7c7; font-size: 18px">zoom_out_map</span>
+                    <i class="expand arrows alternate icon" style="color: #c7c7c7; font-size: 18px"></i>
                  </div> 
                 <button type="button" class="close" aria-label="Close" (click)="switchCalculator()" aria-controls="calculator">
                     <span aria-hidden="true">&times;</span>
@@ -44,57 +100,3 @@
        </div> <!-- End div -->
     </div> <!-- End calculator block-->
 </div> <!-- End calculator -->
-  
-<div class="navigation-switch">
-    <i class="expand arrows alternate" (click)="navSwitch()"></i>
-</div> <!-- End navigation switch -->
-<div class="container-fluid h-100" style="width: 100%; max-width: 100%;">
-        <div class="row h-100">
-
-            <div class="sidebar shadow-sm" [ngClass]="{'active' : switch==true}">
-                <ul class="dashboard-link" style="margin-top: 80px">
-                    <li>
-                        <i class="clone outline icon"></i>
-                        <a routerLink="/dashboard/home" routerLinkActive="active">Home</a>
-                    </li>
-                    
-                    <li>
-                        <i class="dollar sign icon"></i>
-                        <a routerLink="/dashboard/deposit" routerLinkActive="active">Deposit</a>
-                    </li>
-                    <li>
-                        <i class="money bill alternate outline icon"></i>
-                        <a routerLink="/dashboard/expense" routerLinkActive="active">Expense</a>
-                    </li>
-                    <li>
-                        <i class="calculator icon"></i>
-                        <span class="cp" (click)="switchCalculator()"
-                        [attr.aria-expanded]="!isCollapsed" aria-controls="calculator" style="color: #666">Calculator</span>
-                    </li>
-                    <li>
-                        <i class="chart bar icon"></i> 
-                        <a routerLink="/dashboard/report" routerLinkActive="active">Report</a>
-                    </li>
-                    <li>
-                        <i class="sign-out icon"></i> 
-                        <a routerLink="/" routerLinkActive="active" (click)="doLogout()">Logout</a>
-                    </li>
-                    
-                </ul>  <!-- End dashboard linkn -->
-               
-           </div> <!-- End sidebar -->
-           <div class="dashboard h-80">
-                <div class="col-sm-12">
-                        <div class="h-80" style="margin-top: 20px;">
-                                <router-outlet></router-outlet>
-                        </div> <!-- End -->
-                </div>  <!-- End col 12 -->
-
-                <footer class="p-4">
-                    &copy; <span>{{ year }}</span>. All rights reserved.
-                </footer>
-            </div> <!-- End Dashboard -->
-           
-        </div> <!-- End row -->
-    </div> <!-- End container -->
-    

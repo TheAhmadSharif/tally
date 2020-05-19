@@ -83,6 +83,7 @@ export class DepositComponent implements OnInit {
     }
   }
   isCollapsed:boolean = true;
+  depositCollapse:boolean = true;
 
 
   deposit:Deposit = {

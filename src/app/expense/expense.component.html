@@ -1,4 +1,3 @@
-
 <div class="row">
   <div class="col-sm-12 col-12" style="margin-bottom: 20px;"> 
     <div class="card">
@@ -40,6 +39,7 @@
                       <option value="Utility">Utility</option>
                       <option value="LifeStyle">LifeStyle</option>
                       <option value="LifeStyle">Gift</option>
+                      <option value="Loan">Loan Payment</option>
                       <option value="Others">Others</option>
                   </select>    
                 </div> <!-- End form-group-->
@@ -112,9 +112,10 @@
                             Get Data By Range
                             <i class="chevron down icon"></i>
                             </div>
+
+
                           <div id="dateRangeDiv" [ngbCollapse]="isCollapsed">
-                            <div class="d-flex justify-content-end">
-                                 <div class="d-flex date-range">
+                            <div class="d-flex flex-column align-items-end date-range">
                                     <div class="range">
                                       <input type="hidden"
                                       name="range.prevdate" [(ngModel)]="range.prevdate" ngbDatepicker #prevdate="ngbDatepicker" [placement]="placement">
@@ -138,9 +139,8 @@
                                        </span>
                                       </div>  <!-- End date-block -->
                                     </div> <!-- End div -->
-                                  </div> <!-- End d-flex -->
                                   <div class="date-block my-2">
-                                      <span class="btn btn-sm btn-outline-success" (click)="getByRange(range)">Get Data by Range</span>
+                                      <span class="btn btn-sm btn-outline-success" (click)="getByRange(range)" style="line-height: 1">Search</span>
                                   </div>  <!-- End d-flex -->
                             </div> <!-- End d-flex -->
                           </div>  <!-- End collapse -->

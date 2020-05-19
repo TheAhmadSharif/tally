@@ -1,0 +1,10 @@
+.card.login-div { 
+	width: 320px;
+}
+
+.@media only screen and (max-width: 480px) {
+  .card.login-div {
+  		max-width: 240px;
+    	width: 100%;
+  }
+}
