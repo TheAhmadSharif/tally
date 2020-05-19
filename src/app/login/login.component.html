@@ -9,12 +9,17 @@
                           <form>
                           
                               <div class="form-group">
-                              <input type="text" class="form-control" placeholder="Email Address" #email>
+                                      <input type="text" class="form-control" placeholder="Email Address" #email>
+                                      <span class="text-muted-custom text-black-50"><small>admin@web.com</small></span>
+
+
+
                               </div> <!-- End -->
                       
                       
                               <div class="form-group">
-                              <input type="password" class="form-control" placeholder="Password" #password>
+                                  <input type="password" class="form-control" placeholder="Password" #password>
+                                  <span class="text-muted-custom text-black-50"><small>abcd1234</small></span>
                               </div> <!-- End -->
                   
                   
@@ -27,6 +32,7 @@
                                   <span class="p-2 text-muted-custom"><small>Does not have any account ? <span class="cp" (click)="t.select('signupTab')" style="color: #666">Signup</span></small></span>
                   
                                   <div class="d-flex justify-content-end mt-2 f-link">
+                                      <li class="text-muted-custom"></li>
                                       <li class="text-muted-custom"><small><a routerLink="/contact">&#9679; Need help</a></small></li>
                                   </div>
                               </span>
