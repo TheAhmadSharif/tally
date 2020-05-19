@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 import { TransactionService } from '../services/transaction.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -84,6 +85,7 @@ export class ExpenseComponent implements OnInit {
     }
   }
   isCollapsed:boolean = true;
+  expenseCollapse:boolean = true;
 
   expense:Expense = {
     amount: '',
@@ -172,7 +174,8 @@ addExpense(expense:any) {
         datetime_hr: datetime_hr,
         id: datetime,
         last_amount: parseInt(expense.amount),
-        last_total: last_category_amount
+        last_total: last_category_amount,
+         last_action_type: 'Add'
     } 
 
     if(expense.amount > 0 && expense.category.length > 1) {
@@ -199,7 +202,8 @@ addExpense(expense:any) {
                   datetime_hr: datetime_hr,
                   last_amount: parseInt(expense.amount),
                   last_total: parseInt(this.totalExpense),
-                  last_expense_type: expense_category
+                  last_expense_type: expense_category,
+                  last_action_type: 'Add'
               },
              expense_byCategory: expense_byCategoryObject
       }).then(result => {
@@ -212,20 +216,81 @@ addExpense(expense:any) {
         this.notification = 'Please put the financial information correctly.'
     }
   }
-removeObject(id:any) {
-  var object_id = id.toString();
-  var r = confirm("Are you sure you want to delete this Item?");
-  /* if (r == true) {
-          this.firestore.collection("Tally").doc(object_id).delete().then(result => {
+removeObject(object:any) {
+  var id = object.expense.id.toString();
+  var category = object.expense.category;
+  var expenseAmount = parseInt(this.totalExpense) - parseInt(object.expense.amount);
+
+  var datetime = new Date().getTime();
+  var d = datetime.toString(); 
+  var datetime_hr = new Date(datetime).toUTCString();
+
+
+   // throw new Error("Hi");
+   var r = confirm("Are you sure you want to delete this Item?");
+
+   
+   /* End Expense Category */
+
+
+   if (r == true) {
+
+     if(this.tallySummary.expense_byCategory[category] && this.tallySummary.expense_byCategory[category].amount) {
+        var last_category_amount = parseInt(this.tallySummary.expense_byCategory[category].amount);
+        var new_category_amount = last_category_amount - parseInt(object.expense.amount);
+
+
+
+
+        var expense_byCategory = this.tallySummary.expense_byCategory; 
+
+
+        //throw new Error("Hi");
+         expense_byCategory[category] = {
+              amount: new_category_amount,
+              category: category,
+              datetime_ms: d,
+              datetime_hr: datetime_hr,
+              id: datetime,
+              last_amount: parseInt(object.expense.amount),
+              last_total: last_category_amount,
+              last_action_type: 'Delete'
+          } 
+
+
+
+         this.firestore.collection("Tally").doc(id).delete().then(result => {
               console.log("Document successfully deleted!");
-              this.getTotalExpense();
+
+
+              this.firestore.collection('TallySummary').doc('total_expense').set({
+              expense_aggregate: {
+                  amount: expenseAmount,
+                  datetime_ms: d,
+                  datetime_hr: datetime_hr,
+                  last_amount: parseInt(object.expense.amount),
+                  last_total: parseInt(this.totalExpense),
+                  last_expense_type: category,
+                  last_action_type: 'Delete'
+              },
+             expense_byCategory: expense_byCategory
+              }).then(result => {
+                this.getTotalExpense();
+              });
+
           }).catch(function(error) {
               console.error("Error removing document: ", error);
           });
+    }
+
+   /* Expense Category */
+   
+         
   } else {
 
-  } */
+  } 
 }
+/* End Remove */
 getCategory(category:string) {
     this.expense.category = category;
 }

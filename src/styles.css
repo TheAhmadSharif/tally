@@ -10250,8 +10250,7 @@ ul,ol,li {
     transition: all .8s ease;
 }
 .date-range .range {
-  margin-bottom: 5px;
-  padding: 5px 0;
+  padding: 0;
   border-bottom: 1px solid #eee;
 }
 .h-80 {

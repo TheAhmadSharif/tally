@@ -278,4 +278,81 @@ getByRange(range:any) {
       }
 }
 
+/* Remove Object */
+removeObject(object:any) {
+  var id = object.deposit.id.toString();
+  var category = object.deposit.category;
+  var depositAmount = parseInt(this.totalDeposit) - parseInt(object.deposit.amount);
+
+  var datetime = new Date().getTime();
+  var d = datetime.toString(); 
+  var datetime_hr = new Date(datetime).toUTCString();
+
+
+   // throw new Error("Hi");
+   var r = confirm("Are you sure you want to delete this Item?");
+
+   
+   /* End Deposit Category */
+
+
+   if (r == true) {
+
+     if(this.tallySummary.deposit_byCategory[category] && this.tallySummary.deposit_byCategory[category].amount) {
+        var last_category_amount = parseInt(this.tallySummary.deposit_byCategory[category].amount);
+        var new_category_amount = last_category_amount - parseInt(object.deposit.amount);
+
+
+
+
+        var deposit_byCategory = this.tallySummary.deposit_byCategory; 
+
+
+        //throw new Error("Hi");
+         deposit_byCategory[category] = {
+              amount: new_category_amount,
+              category: category,
+              datetime_ms: d,
+              datetime_hr: datetime_hr,
+              id: datetime,
+              last_amount: parseInt(object.deposit.amount),
+              last_total: last_category_amount,
+              last_action_type: 'Delete'
+          } 
+
+
+
+         this.firestore.collection("Tally").doc(id).delete().then(result => {
+              console.log("Document successfully deleted!");
+
+
+              this.firestore.collection('TallySummary').doc('total_deposit').set({
+              deposit_aggregate: {
+                  amount: depositAmount,
+                  datetime_ms: d,
+                  datetime_hr: datetime_hr,
+                  last_amount: parseInt(object.deposit.amount),
+                  last_total: parseInt(this.totalDeposit),
+                  last_deposit_type: category,
+                  last_action_type: 'Delete'
+              },
+             deposit_byCategory: deposit_byCategory
+              }).then(result => {
+                this.getTotalDeposit();
+              });
+
+          }).catch(function(error) {
+              console.error("Error removing document: ", error);
+          });
+    }
+
+   /* Expense Category */
+   
+         
+  } else {
+
+  } 
+}
+/* End Remove */
+
 }

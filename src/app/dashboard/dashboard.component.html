@@ -46,9 +46,7 @@
 </div> <!-- End calculator -->
   
 <div class="navigation-switch">
-    <span class="material-icons-outlined" (click)="navSwitch()">
-        more_horiz
-        </span>
+    <i class="expand arrows alternate" (click)="navSwitch()"></i>
 </div> <!-- End navigation switch -->
 <div class="container-fluid h-100" style="width: 100%; max-width: 100%;">
         <div class="row h-100">
@@ -56,7 +54,7 @@
             <div class="sidebar shadow-sm" [ngClass]="{'active' : switch==true}">
                 <ul class="dashboard-link" style="margin-top: 80px">
                     <li>
-                        <i class=""></i>
+                        <i class="clone outline icon"></i>
                         <a routerLink="/dashboard/home" routerLinkActive="active">Home</a>
                     </li>
                     
