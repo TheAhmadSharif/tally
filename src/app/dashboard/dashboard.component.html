@@ -1,0 +1,102 @@
+<div class="navigation-switch">
+    <i class="list ul icon" (click)="navSwitch()"></i>
+</div> <!-- End navigation switch -->
+<div class="container-fluid h-100" style="width: 100%; max-width: 100%;">
+        <div class="row h-100">
+
+            <div class="sidebar shadow-sm" [ngClass]="{'active' : switch==true}">
+                <ul class="dashboard-link" style="margin-top: 80px">
+                    <li>
+                        <i class="clone outline icon" style="color: #6c757d;"></i> 
+                        <a routerLink="/dashboard/home" routerLinkActive="active">Home</a>
+                    </li>
+                    
+                    <li>
+                        <i class="dollar sign icon" style="color: #6c757d;"></i>
+                        <a routerLink="/dashboard/deposit" routerLinkActive="active">Deposit</a>
+                    </li>
+                    <li>
+                        <i class="money bill alternate outline icon" style="color: #6c757d;"></i>
+                        <a routerLink="/dashboard/expense" routerLinkActive="active">Expense</a>
+                    </li>
+                    <li>
+                        <i class="calculator icon" style="color: #6c757d;"></i>
+                        <span class="cp" (click)="switchCalculator()"
+                        [attr.aria-expanded]="!isCollapsed" aria-controls="calculator" style="color: #666">Calculator</span>
+                    </li>
+                    <li>
+                        <i class="chart bar icon" style="color: #6c757d;"></i> 
+                        <a routerLink="/dashboard/report" routerLinkActive="active">Report</a>
+                    </li>
+                    <li>
+                        <i class="sign-out icon" style="color: #6c757d;"></i> 
+                        <a routerLink="/" routerLinkActive="active" (click)="doLogout()">Logout</a>
+                    </li>
+                    
+                </ul>  <!-- End dashboard linkn -->
+               
+           </div> <!-- End sidebar -->
+           <div class="dashboard h-80">
+                <div class="col-sm-12">
+                        <div class="h-80" style="margin-top: 20px;">
+                                <router-outlet></router-outlet>
+                        </div> <!-- End -->
+                </div>  <!-- End col 12 -->
+
+                <footer class="p-4">
+                    &copy; <span>{{ year }}</span>. All rights reserved.
+                </footer>
+            </div> <!-- End Dashboard -->
+           
+        </div> <!-- End row -->
+</div> <!-- End container -->
+
+
+
+
+<div [ngClass]="{'overlay-active' : isCollapsed==false}" draggable="true"></div>  <!-- End overlay -->
+
+<div class="calculator-div" id="calculator" [ngbCollapse]="isCollapsed">
+   <div class="calculator-block">
+       <div>
+            
+            <div class="d-flex justify-content-between pb-1">
+                <div class="cm">
+                    <i class="expand arrows alternate icon" style="color: #c7c7c7; font-size: 18px"></i>
+                 </div> 
+                <button type="button" class="close" aria-label="Close" (click)="switchCalculator()" aria-controls="calculator">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>  <!-- End div -->
+
+        <div>
+                <div>
+                    <input type="text" id="inputbox" class="inputbox" placeholder="0" name="calculateBox" [(ngModel)]="calculateBox" #equation (keyup.enter)="getResult(equation.value)">
+                    <span class="d-flex output-screen">{{ output }}</span>
+                </div>  <!-- End div -->
+                <div class="d-flex justify-content-between flex-wrap dialpad">
+                    <li (click)="goInitialState()" class="removeContent">CLR</li>
+                    <li (click)="removeElement()" class="removeContent">DEL</li>
+                    <li (click)="addToDisplay('%')">%</li>
+                    <li (click)="addToDisplay('/')">&divide;</li>
+                    <li (click)="addToDisplay('9')" class="decimal-obj">9</li>
+                    <li (click)="addToDisplay('8')" class="decimal-obj">8</li>
+                    <li (click)="addToDisplay('7')" class="decimal-obj">7</li>
+                    <li (click)="addToDisplay('*')">x</li>
+                    <li (click)="addToDisplay('6')" class="decimal-obj">6</li>
+                    <li (click)="addToDisplay('5')" class="decimal-obj">5</li>
+                    <li (click)="addToDisplay('4')" class="decimal-obj">4</li>
+                    <li (click)="addToDisplay('-')" class="">&minus;</li>
+                    <li (click)="addToDisplay('3')" class="decimal-obj">3</li>
+                    <li (click)="addToDisplay('2')" class="decimal-obj">2</li>
+                    <li (click)="addToDisplay('1')" class="decimal-obj">1</li>
+                    <li (click)="addToDisplay('+')" class="">+</li>
+                    <li (click)="addToDisplay('.')" class="decimal-obj">&sdot;</li>
+                    <li (click)="addToDisplay('0')" class="decimal-obj">0</li>
+                    <li (click)="addToDisplay('00')" class="decimal-obj">00</li>
+                    <li (click)="getResult(equation.value)" class="bg-black" (keyup.enter)="getResult(equation.value)">=</li>
+                </div>  <!-- End -flex -->
+        </div>  <!-- End div -->
+       </div> <!-- End div -->
+    </div> <!-- End calculator block-->
+</div> <!-- End calculator -->

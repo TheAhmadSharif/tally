@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "profile-71c5e": {
+      "hosting": {
+        "accounting-app": [
+          "profile-71c5e"
+        ]
+      }
+    }
+  }
+}
