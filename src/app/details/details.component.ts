@@ -29,8 +29,10 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
           var objectId = this.routeParameter.objectId; 
-          this.firestore.collection('Tally').doc(objectId).valueChanges().subscribe(object=> {
+          var transaction_type = this.routeParameter.category;
+          this.firestore.collection(transaction_type).doc(objectId).valueChanges().subscribe(object=> {
             this.object = object;
+
         }, error => {
 
         });

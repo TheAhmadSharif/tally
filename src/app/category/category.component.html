@@ -20,7 +20,13 @@
 
                   <div class="d-flex arrow-block" style="margin: 0;">
                               <div>
-                                
+                                <span class="cp arrow" (click)="getPrevDate(selected_day)">
+                                 <i class="chevron left icon"></i>
+                                  </span>
+
+                                  <span class="cp arrow" (click)="getNextDate(selected_day)">
+                                    <i class="chevron right icon"></i>
+                                  </span>
                               </div> <!-- End div  -->
                               <div>
                                 <span class="btn btn-sm btn-outline-success" (click)="getByDay(selected_day)">Get Data</span>
@@ -33,10 +39,7 @@
                     <div class="d-flex flex-column align-items-end">
                           <div class="cp" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
                           Get Data By Range
-                          <i class="chevron down icon cp"></i>
-
-                           <i class="chevron left icon cp" (click)="getPrevDate(selected_day)"></i>
-                           <i class="chevron right icon cp" (click)="getNextDate(selected_day)"></i>
+                          <i class="chevron down icon"></i>
                           </div>
                         <div id="collapseExample" [ngbCollapse]="isCollapsed">
                           <div class="d-flex flex-column align-items-end date-range">
@@ -72,31 +75,34 @@
             </div>  <!-- End -->
             
             <div *ngIf="objects">
+              <div class="d-flex justify-content-end">
+                <select [(ngModel)]="objectPerPage" (click)="getPerPage(objectPerPage)">
+                    <option value="2">2</option>
+                    <option value="5" selected>5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
+          </div> <!-- End D Flex -->
+
               <table class="table">
                 <tr>
                   <td>#Serial</td>
-                  <td class="cp" (click)="getDataSort('amount')">Amount 
-                    <i [class]="sortedIcon.amount.icon"></i>
-                  </td>
+                  <td class="cp" (click)="getDataSort('amount')">Amount <i [class]="sortedIcon.amount.icon"></i> </td>
                   <td class="cp">Bill Type </td>
-                  <td class="cp" (click)="getDataSort('userdate_ms')">Date 
-                    <i [class]="sortedIcon.userdate_ms.icon"></i>
-
-                  </td>
-                  <td class="cp" (click)="getDataSort('datetime')">Creatime Time 
-                    <i [class]="sortedIcon.datetime.icon"></i>
-                  </td>
+                  <td class="cp" (click)="getDataSort('userdate_ms')">Date <i [class]="sortedIcon.userdate_ms.icon"></i></td>
+                  <td class="cp" (click)="getDataSort('datetime')">Creatime Time <i [class]="sortedIcon.datetime.icon"></i></td>
                   <td>Note</td>
                 </tr>
-                <tr *ngFor="let object of objects | paginate: { itemsPerPage: 4, currentPage: p }; let i = index;">
+                <tr *ngFor="let object of objects | paginate: { itemsPerPage: objectPerPage, currentPage: p }; let i = index;">
                   <td> {{ i + 1 }}</td>
 
-                  <td> <a routerLink="/dashboard/{{ routeParameter.category + '/'+ object[routeParameter.category]['category'].split(' ')[0]  + '/' + object[routeParameter.category]['datetime'] }}"> <span class="span_amount">{{ object[routeParameter.category]['amount'] | number }} </span> </a>  TK </td>
+                  <td> <a routerLink="/finance/{{ routeParameter.transactionType + '/'+ object['category']  + '/' + object['id'] }}"> <span class="span_amount">{{ object['amount'] | number }} </span> </a>  TK </td>
 
-                  <td> {{ object[routeParameter.category]['category']  }} </td>
-                  <td> {{ object[routeParameter.category]['userdate'] | date:'MMM d, y, EE' }} </td>
-                  <td> {{ object[routeParameter.category]['datetime'] | date:'MMM d, y, EE, h:mm:ss a' }} </td>
-                  <td> {{ object[routeParameter.category]['note']  }} </td>
+                  <td> {{ object['category']  }} </td>
+                  <td> {{ object['userdate'] | date:'MMM d, y, EE' }} </td>
+                  <td> {{ object['id'] | date:'MMM d, y, EE, h:mm:ss a' }} </td>
+                  <td> {{ object['note']  }} </td>
                 </tr>
               </table>
 
@@ -116,6 +122,3 @@
     </div> <!-- End card  -->
   </div>  <!-- End col -->
 </div>  <!-- End row -->
-
-
-

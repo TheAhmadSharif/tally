@@ -1,27 +1,26 @@
 <div class="row">
-    <div class="col-sm-12 col-12" style="margin-bottom: 20px;"> 
+    <div class="col-sm-4" style="margin-bottom: 20px;"> 
       <div class="card">
           <div class="card-body">
-
-            <div (click)="depositCollapse = !depositCollapse" [attr.aria-expanded]="!depositCollapse" aria-controls="addDepositBlock" style="cursor: pointer;">
-              <i class="bars icon d-inline-block"></i> <h5 class="h5 d-inline-block">  Add Deposit </h5>
-          </div>  <!-- End Title Div -->
-
-
-
+            <form #depositForm="ngForm">
+                  <h6 class="h6">Add Deposit</h6>
             <div class="divider"></div>
-            <div id="addDepositBlock" [ngbCollapse]="depositCollapse" style="margin-top: 20px;">
       
-                    <div *ngIf="notification" class="alert alert-warning">
-                        {{ notification }}
-                    </div> <!-- End Alert -->
+            <div *ngIf="notification" class="alert alert-warning">
+                {{ notification }}
+            </div> <!-- End Alert -->
       
       
                           
                   <div class="form-group">
                     <div class="input-group">
-                      <input class="form-control" placeholder="yyyy/Fmm/dd"
-                              ngbDatepicker #depositDate="ngbDatepicker" (click)="depositDate.toggle()" [(ngModel)]="deposit.date">
+
+                      <input type="hidden" 
+                            ngbDatepicker #depositDate="ngbDatepicker" [(ngModel)]="deposit.date" name="deposit.date">
+
+                    <input class="form-control" 
+                            ngbDatepicker #depositDate="ngbDatepicker" (click)="depositDate.toggle()" [value]="deposit?.date.year + '-' + deposit?.date.month + '-' + deposit?.date.day | date: 'dd, MMM y'">
+
                       <div class="input-group-append">
                         <button class="btn btn-outline-secondary disabled calendar" (click)="depositDate.toggle()" style="padding: 0 5px;"><span class="calendar-icon"></span>
                           </button>
@@ -32,39 +31,37 @@
   
   
                   <div class="form-group">
-                    <input type="hidden" [(ngModel)]="deposit.category">
-                    <select name="deposit_type" class="custom-select" #category (click)="getCategory(category.value)">
+                    <input type="hidden" [(ngModel)]="deposit.category" name="deposit.category">
+                    <select name="deposit_type" class="custom-select" #category (click)="getCategory(category.value)" required>
                         <option selected="true" disabled value="0">Select Deposit Type </option>
-                        <option value="Salary">Salary</option>
-                        <option value="Business">Business</option>
-                        <option value="FreelanceProject">Freelance Project</option>
-                        <option value="Gift">Gift</option>
+                        <option value="customer">Customer Payment</option>
+                        <option value="houserent">House Rent</option>
+                        <option value="Others">Others</option>
                     </select>    
                   </div> <!-- End form-group-->
       
       
       
               <div class="form-group">  
-                  <input type="number" min="0" placeholder="Deposit Amount" class="form-control mb-2" [(ngModel)]="deposit.amount">
+                  <input type="number" min="0" placeholder="Deposit Amount" class="form-control mb-2" [(ngModel)]="deposit.amount" name="deposit.amount" required>
                </div> <!-- End --> 
       
       
               <div class="form-group">  
-                <input type="text" placeholder="Deposit note" class="form-control mb-2" [(ngModel)]="deposit.note">
+                <input type="text" placeholder="Deposit note" class="form-control mb-2" [(ngModel)]="deposit.note" name="deposit.note">
              </div> <!-- End form-group-->
       
               <div class="form-group mb-0">
-                <button class="btn btn-sm btn-success" (click)="addDeposit(deposit)">Add Deposit</button>
+                <button class="btn btn-sm btn-success" (click)="addDeposit(deposit)" [disabled]="!depositForm.valid">Add Deposit</button>
               </div>  <!-- End form-group-->
-            </div> <!-- End  Deposit Block -->
+            </form>  <!-- End Form -->
         </div> <!-- End card body -->
         </div> <!-- End card  -->
       </div> <!-- End col 6 -->
-  </div> <!-- End row -->
-
-
-<div class="row">
-    <div class="col-sm-12 col-12">
+  
+  
+  
+      <div class="col-sm-8">
         <div class="card" style="margin-bottom: 30px">
             <div class="card-body">
                 <div class="" style="margin: 0;">
@@ -95,7 +92,7 @@
                                       </span>
                                   </div> <!-- End div  -->
                                   <div>
-                                    <span class="btn btn-sm btn-outline-success" (click)="getByDay(selected_day)" style="line-height: 1">Get Data</span>
+                                    <span class="btn btn-sm btn-outline-success" (click)="getByDay(selected_day)">Get Data</span>
                                   </div> <!-- End div  -->
                       </div> <!-- End div d-flex -->
                       </div>   <!-- End d-flex -->
@@ -103,20 +100,18 @@
   
                     <div class="col-sm-6 col-12">
                         <div class="d-flex flex-column align-items-end">
-                              <div class="cp" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="dateRangeDiv">
+                              <div class="cp" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
                               Get Data By Range
                               <i class="chevron down icon"></i>
                               </div>
-
-                              
-                            <div id="dateRangeDiv" [ngbCollapse]="isCollapsed">
+                            <div id="collapseExample" [ngbCollapse]="isCollapsed">
                               <div class="d-flex flex-column align-items-end date-range">
                                 <div class="range">
                                   <input type="hidden"
                                   name="range.prevdate" [(ngModel)]="range.prevdate" ngbDatepicker #prevdate="ngbDatepicker" [placement]="placement">
                                   <div class="date-block">
                                     <span>{{  range.prevdate.year + '-' + range.prevdate.month + '-' + range.prevdate.day | date: 'dd, MMM y' }}</span>
-                                    <span class="btn disabled cp calendar" (click)="prevdate.toggle()"><span class="calendar-icon"></span></span>
+                                    <span class="btn disabled cp calendar" (click)="prevdate.toggle()"><i class="calendar alternate outline icon"></i></span>
                                   </div>  <!-- End date-block -->
                                 </div> <!-- End div -->
           
@@ -126,22 +121,35 @@
                                   <div class="date-block">
                                     <span>{{  range.nextdate.year + '-' + range.nextdate.month + '-' + range.nextdate.day | date: 'dd, MMM y' }}</span>
                                       
-                                    <span class="btn disabled cp calendar" (click)="nextdate.toggle()"><span class="calendar-icon"></span></span>
+                                    <span class="btn disabled cp calendar" (click)="nextdate.toggle()"><i class="calendar alternate outline icon"></i></span>
                                   </div>  <!-- End date-block -->
                                 </div> <!-- End div -->
           
                                
           
                               <div class="date-block my-2">
-                                  <span class="btn btn-sm btn-outline-success" (click)="getByRange(range)" style="line-height: 1">Search</span>
+                                  <span class="btn btn-sm btn-outline-success" (click)="getByRange(range)">Search</span>
                               </div>  <!-- End d-flex -->
                             </div> <!-- End Col 6 -->
                             </div>  <!-- End collapse -->
                         </div>  <!-- End d-flex -->
                   </div> <!-- End row -->
                   </div>  <!-- End row -->
+
+              <div *ngIf="deleteNotification" class="alert alert-warning">
+                  {{ deleteNotification }}
+              </div> <!-- End Alert -->
   
                 <div *ngIf="deposits">
+                  <div class="d-flex justify-content-end">
+                    <select [(ngModel)]="objectPerPage" (click)="getPerPage(objectPerPage)">
+                        <option value="2">2</option>
+                        <option value="5" selected>5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+              </div> <!-- End D Flex -->
                   <table class="table table-bordered">
                     <tr>
                       <td>#Serial</td>
@@ -159,18 +167,17 @@
                       <td>Action</td>
                     </tr>
       
-                    <tr *ngFor="let object of deposits | paginate: { itemsPerPage: 4, currentPage: p }; let i = index;">
+                    <tr *ngFor="let object of deposits | paginate: { itemsPerPage: objectPerPage, currentPage: p }; let i = index;">
                       <td> {{ i + 1 }} </td>
                       
-                      <td> <a routerLink="/dashboard/{{object.deposit.transaction_type}}/{{ object.deposit.category.split(' ')[0]  + '/' + object.deposit.datetime }}"><span class="span_amount">{{ object.deposit.amount | number }}</span> </a> TK</td>
+                      <td> <a routerLink="/finance/deposit/{{ object.category  + '/' + object.id }}"><span class="span_amount">{{ object.amount | number }}</span> </a> TK</td>
 
-                      <td> <a routerLink="/dashboard/{{object.deposit.transaction_type}}/{{ object.deposit.category.split(' ')[0] }}">{{ object.deposit.category  }}</a> </td>
-                      <td> {{ object.deposit.userdate | date:'MMM d, y, EE' }} </td>
-                      <td> {{ object.deposit.note  }} </td>
+                      <td> <a routerLink="/finance/deposit/{{ object.category }}">{{ object.category  }}</a> </td>
+                      <td> {{ object.userdate | date:'MMM d, y, EE' }} </td>
+                      <td> {{ object.note }} </td>
                       <td>
-                          <span placement="top" ngbTooltip="Delete" (click)="removeObject(object)"> <i class="trash alternate outline icon cp"></i> </span>
-                      </td>
-                      
+                        <span placement="top" ngbTooltip="Delete" (click)="removeObject(object)"> <i class="trash alternate outline icon cp"></i> </span>
+                    </td>
                     </tr>
                   </table>
                   
@@ -193,4 +200,4 @@
             </div> <!-- End card  -->
         </div> <!-- End card  -->
       </div>  <!-- End col -->
-</div>  <!-- End row -->
+</div> <!-- End row -->

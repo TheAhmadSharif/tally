@@ -42,8 +42,8 @@ export class CategoryComponent implements OnInit {
   };
   
   routeParameter = {
-    category: '',
-    categoryname: '',
+    transactionType: null,
+    categoryname: null,
   }
   totalAmount:any = 0;
   objects:any;
@@ -54,6 +54,7 @@ export class CategoryComponent implements OnInit {
   };
   placement = 'bottom';
   p: number = 1;
+  objectPerPage:number = 10;
 
   range:any = {
     prevdate: {
@@ -72,7 +73,7 @@ export class CategoryComponent implements OnInit {
 constructor( private route: ActivatedRoute,
     private firestore: AngularFirestore) { 
     this.routeParameter = {
-      category: this.route.snapshot.paramMap.get('category'),
+      transactionType: this.route.snapshot.paramMap.get('category'),
       categoryname: this.route.snapshot.paramMap.get('categoryname')
     }
 
@@ -80,39 +81,40 @@ constructor( private route: ActivatedRoute,
 
 ngOnInit(): void {
     this.totalAmount = 0;
-    var category = `${this.routeParameter.category}.category`;
-    this.firestore.collection('Tally', ref => ref.where(category, '==', this.routeParameter.categoryname)).valueChanges().subscribe(object=> {
+    var transactionType = this.routeParameter.transactionType;
+
+
+    this.firestore.collection(transactionType, ref => ref.where('category', '==', this.routeParameter.categoryname)).valueChanges().subscribe(object=> {
+
       this.objects = object;
       this.objects.forEach((element:any) => {
-        this.totalAmount = element[this.routeParameter.category]['amount'] + this.totalAmount;
+        this.totalAmount = element['amount'] + this.totalAmount;
       });
    });
 }
 
 getDataSort(sorting_type:any) {
-  var transactioType = this.routeParameter.category;
   var sortingType = sorting_type;
   this.sortedIcon[sortingType].order =! this.sortedIcon[sortingType].order;
   if(this.sortedIcon[sortingType].order) {
-    var sortedDataDesc = _.sortBy(this.objects, [function(o) { return o[transactioType][sortingType]}]);
+    var sortedDataDesc = _.sortBy(this.objects, [function(o) { return o[sortingType]}]);
     this.objects = sortedDataDesc;
     this.sortedIcon[sorting_type].icon = 'chevron down icon';
   }
   else {
-      var sortedDataAsc = _.sortBy(this.objects, [function(o) { return o[transactioType][sortingType];}]).reverse();
+      var sortedDataAsc = _.sortBy(this.objects, [function(o) { return o[sortingType];}]).reverse();
       this.objects = sortedDataAsc;
       this.sortedIcon[sorting_type].icon = 'chevron up icon';
   }
 }
 getByDay(date:any) {
-    var category = `${this.routeParameter.category}.category`;
-    var userdate  = `${this.routeParameter.category}.userdate`;
+    var transactionType = this.routeParameter.transactionType;;
     this.totalAmount = 0;
     var givendate = date.year + '-' + date.month + '-' + date.day;  
-    this.firestore.collection('Tally', ref => ref.where(category, '==', this.routeParameter.categoryname).where(userdate, '==',givendate)).valueChanges().subscribe(object=> {
+    this.firestore.collection(transactionType, ref => ref.where("category", '==', this.routeParameter.categoryname).where("userdate", '==',givendate)).valueChanges().subscribe(object=> {
           this.objects = object; 
           this.objects.forEach(element => {
-            this.totalAmount = element[this.routeParameter.category]['amount'] + this.totalAmount;
+            this.totalAmount = element['amount'] + this.totalAmount;
           });
       },
       error => {
@@ -148,8 +150,7 @@ getNextDate(date:any) {
 }
   
 getByRange(range:any) {
-    var category = `${this.routeParameter.category}.category`;
-    var userdate_ms = `${this.routeParameter.category}.userdate_ms`;
+    var transactionType = this.routeParameter.transactionType;;
     var prevdate = range.prevdate.year + '-' + range.prevdate.month + '-' + range.prevdate.day;
     var prevdate_ms = new Date(prevdate).getTime();
     var nextdate = range.nextdate.year + '-' + range.nextdate.month + '-' + range.nextdate.day;
@@ -157,13 +158,16 @@ getByRange(range:any) {
 
       if(prevdate_ms < nextdate_ms) {
           this.totalAmount = 0;
-          this.firestore.collection('Tally', ref => ref.where(category, '==', this.routeParameter.categoryname).where(userdate_ms, '>=', prevdate_ms).where(userdate_ms, '<=', nextdate_ms)).valueChanges().subscribe(object=> {
+          this.firestore.collection(transactionType, ref => ref.where('category', '==', this.routeParameter.categoryname).where("userdate_ms", '>=', prevdate_ms).where("userdate_ms", '<=', nextdate_ms)).valueChanges().subscribe(object=> {
             this.objects = object;
             this.objects.forEach(element => {
-            this.totalAmount = element[this.routeParameter.category]['amount'] + this.totalAmount;
+            this.totalAmount = element['amount'] + this.totalAmount;
             });
         });
       }
+}
+getPerPage(item) {
+
 }
   
 }

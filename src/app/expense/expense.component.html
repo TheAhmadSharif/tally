@@ -1,25 +1,24 @@
+
 <div class="row">
-  <div class="col-sm-12 col-12" style="margin-bottom: 20px;"> 
+  <div class="col-sm-4" style="margin-bottom: 20px;"> 
     <div class="card">
         <div class="card-body">
-          <div (click)="expenseCollapse = !expenseCollapse" [attr.aria-expanded]="!expenseCollapse" aria-controls="addExpenseBlock" style="cursor: pointer;">
-              <i class="bars icon d-inline-block"></i> <h5 class="h5 d-inline-block">  Add Expense </h5>
-          </div>  <!-- End Title Div -->
-
-
+            <form #expenseForm="ngForm">
+                <span class="h6">Add Expense</span>
           <div class="divider"></div>
-
-          <div id="addExpenseBlock" [ngbCollapse]="expenseCollapse" style="margin-top: 20px;">
-                <div *ngIf="notification" class="alert alert-warning">
+    
+          <div *ngIf="notification" class="alert alert-warning">
               {{ notification }}
           </div> <!-- End Alert -->
                 <div class="form-group">
                   <div class="input-group">
-                    <input class="form-control" placeholder="yyyy/mm/dd"
-                            ngbDatepicker #expenseDate="ngbDatepicker" (click)="expenseDate.toggle()" [(ngModel)]="expense.date">
-                    <div class="input-group-append">
-                      
+                    <input type="hidden" 
+                            ngbDatepicker #expenseDate="ngbDatepicker" [(ngModel)]="expense.date" name="expense.date">
 
+                    <input class="form-control" 
+                            ngbDatepicker #expenseDate="ngbDatepicker" (click)="expenseDate.toggle()" 
+                            [value]="expense?.date.year + '-' + expense?.date.month + '-' + expense?.date.day | date: 'dd, MMM y'">
+                    <div class="input-group-append">
                         <button class="btn btn-outline-secondary disabled calendar" (click)="expenseDate.toggle()" style="padding: 0 5px;"><span class="calendar-icon"></span>
                           </button>
                     </div>
@@ -29,48 +28,55 @@
 
 
                 <div class="form-group">
-                  <input type="hidden" [(ngModel)]="expense.category">
-                  <select name="expense_type" class="custom-select" #category (click)="getCategory(category.value)">
+                  <input type="hidden" [(ngModel)]="expense.category" name="expense.category">
+                  <select name="expense_type" class="custom-select" #category (click)="getCategory(category.value)" required>
                       <option selected="true" disabled value="0">Select Bill Type </option>
+                      <option value="Utility">Utlity Bill</option>
+                      <option value="Overtime">Employee Overtime/Bounus Bill</option>
                       <option value="Foods">Foods</option>
-                      <option value="Transport">Transport </option>
-                      <option value="Cloths">Shopping (Cloths)</option>
-                      <option value="Decoration">Home Decoration</option>
-                      <option value="Utility">Utility</option>
-                      <option value="LifeStyle">LifeStyle</option>
-                      <option value="LifeStyle">Gift</option>
-                      <option value="Loan">Loan Payment</option>
+                      <option value="Salary">Employee Salary</option>
                       <option value="Others">Others</option>
                   </select>    
                 </div> <!-- End form-group-->
     
     
-               
+                <div *ngIf="category.value == 'Utility' " class="form-group" (click)="getSubCategory(subcategory.value)">
+                 
+                  <input type="hidden" [(ngModel)]="expense.subcategory" name="expense.subcategory">
+                  <select name="expense_type" class="custom-select" #subcategory>
+                      <option selected="true" disabled value="0">Select a Sub category</option>
+                      <option value="Electric">Electric Bill</option>
+                      <option value="Internet">Internet Bill</option>
+                      <option value="Market Maintainance">Market Maintainance</option>
+                      <option value="Others">Others</option>
+                  </select>    
+                  <div *ngIf="sub_others">
+                    <input type="text" placeholder="Write " [(ngModel)]="expense.subcategory_others" name ="expense.others" class="form-control">
+                  </div>
+                </div> <!-- End form-group-->
                 
             
     
             <div class="form-group">  
-                <input type="number" min="0" placeholder="Expense Amount" class="form-control mb-2" [(ngModel)]="expense.amount">
+                <input type="number" min="0" placeholder="Expense Amount" class="form-control mb-2" [(ngModel)]="expense.amount" name="expense.amount" required>
              </div> <!-- End --> 
     
     
             <div class="form-group">  
-              <input type="text" placeholder="Expense note" class="form-control mb-2" [(ngModel)]="expense.note">
+              <input type="text" placeholder="Expense note" class="form-control mb-2" [(ngModel)]="expense.note" name="expense.note">
            </div> <!-- End form-group-->
     
             <div class="form-group mb-0">
-              <button class="btn btn-sm btn-success" (click)="addExpense(expense)">Add Expense</button>
+              <button class="btn btn-sm btn-success" (click)="addExpense(expense)" [disabled]="!expenseForm.valid">Add Expense</button>
             </div>  <!-- End form-group-->
-
-          </div> <!-- End Add Expense Form -->
+            </form>  <!-- End -->
       </div> <!-- End card body -->
       </div> <!-- End card  -->
     </div> <!-- End col 6 -->
-</div> <!-- End row -->
 
 
-<div class="row">
-    <div class="col-sm-12 col-12">
+
+    <div class="col-sm-8">
       <div class="card" style="margin-bottom: 30px">
           <div class="card-body">
               <div class="" style="margin: 0;">
@@ -100,7 +106,7 @@
                                     </span>
                                 </div> <!-- End div  -->
                                 <div>
-                                  <span class="btn btn-sm btn-outline-success" (click)="getByDay(selected_day)" style="line-height: 1">Get Data</span>
+                                  <span class="btn btn-sm btn-outline-success" (click)="getByDay(selected_day)">Get Data</span>
                                 </div> <!-- End div  -->
                     </div> <!-- End div d-flex -->
                     </div>   <!-- End d-flex -->
@@ -108,48 +114,60 @@
 
                   <div class="col-sm-6 col-12">
                       <div class="d-flex flex-column align-items-end">
-                            <div class="cp" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="dateRangeDiv">
+                            <div class="cp" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
                             Get Data By Range
                             <i class="chevron down icon"></i>
                             </div>
-
-
-                          <div id="dateRangeDiv" [ngbCollapse]="isCollapsed">
+                          <div id="collapseExample" [ngbCollapse]="isCollapsed">
                             <div class="d-flex flex-column align-items-end date-range">
-                                    <div class="range">
-                                      <input type="hidden"
-                                      name="range.prevdate" [(ngModel)]="range.prevdate" ngbDatepicker #prevdate="ngbDatepicker" [placement]="placement">
-                                      <div class="date-block">
-                                        <span>{{  range.prevdate.year + '-' + range.prevdate.month + '-' + range.prevdate.day | date: 'dd, MMM y' }}</span>
-                                        <span class="btn disabled cp calendar" (click)="prevdate.toggle()">
-                                          <span class="calendar-icon"></span>
-                                          
-                                        </span>
-                                      </div>  <!-- End date-block -->
-                                    </div> <!-- End div -->
-              
-                                    <div class="range">
-                                      <input type="hidden"
-                                      name="range.nextdate" [(ngModel)]="range.nextdate" ngbDatepicker #nextdate="ngbDatepicker" [placement]="placement">
-                                      <div class="date-block">
-                                        <span>{{  range.nextdate.year + '-' + range.nextdate.month + '-' + range.nextdate.day | date: 'dd, MMM y' }}</span>
-                                          
-                                        <span class="btn disabled cp calendar" (click)="nextdate.toggle()">
-                                         <span class="calendar-icon"></span>
-                                       </span>
-                                      </div>  <!-- End date-block -->
-                                    </div> <!-- End div -->
-                                  <div class="date-block my-2">
-                                      <span class="btn btn-sm btn-outline-success" (click)="getByRange(range)" style="line-height: 1">Search</span>
-                                  </div>  <!-- End d-flex -->
-                            </div> <!-- End d-flex -->
+                              <div class="range">
+                                <input type="hidden"
+                                name="range.prevdate" [(ngModel)]="range.prevdate" ngbDatepicker #prevdate="ngbDatepicker" [placement]="placement">
+                                <div class="date-block">
+                                  <span>{{  range.prevdate.year + '-' + range.prevdate.month + '-' + range.prevdate.day | date: 'dd, MMM y' }}</span>
+                                  <span class="btn disabled cp calendar" (click)="prevdate.toggle()">
+                                    <i class="calendar alternate outline icon"></i>
+                                    
+                                  </span>
+                                </div>  <!-- End date-block -->
+                              </div> <!-- End div -->
+        
+                              <div class="range">
+                                <input type="hidden"
+                                name="range.nextdate" [(ngModel)]="range.nextdate" ngbDatepicker #nextdate="ngbDatepicker" [placement]="placement">
+                                <div class="date-block">
+                                  <span>{{  range.nextdate.year + '-' + range.nextdate.month + '-' + range.nextdate.day | date: 'dd, MMM y' }}</span>
+                                    
+                                  <span class="btn disabled cp calendar" (click)="nextdate.toggle()"> <i class="calendar alternate outline icon"></i></span>
+                                </div>  <!-- End date-block -->
+                              </div> <!-- End div -->
+        
+                             
+        
+                            <div class="date-block my-2">
+                                <span class="btn btn-sm btn-outline-success" (click)="getByRange(range)">Search</span>
+                            </div>  <!-- End d-flex -->
+                          </div> <!-- End Col 6 -->
                           </div>  <!-- End collapse -->
                       </div>  <!-- End d-flex -->
                 </div> <!-- End row -->
                 </div>  <!-- End row -->
 
+              <div *ngIf="deleteNotification" class="alert alert-warning">
+                  {{ deleteNotification }}
+              </div> <!-- End Alert -->
+
               <div *ngIf="expenses">
-                <div class = "table-responsive mt-2">
+                    <div class="d-flex justify-content-end">
+                          <select [(ngModel)]="objectPerPage" (click)="getPerPage(objectPerPage)">
+                              <option value="2">2</option>
+                              <option value="5" selected>5</option>
+                              <option value="10">10</option>
+                              <option value="20">20</option>
+                              <option value="50">50</option>
+                          </select>
+                    </div> <!-- End D Flex -->
+                <div class = "table-responsive">
                   <table class="table table-bordered">
                     <tr>
                       <td>#SL</td>
@@ -163,13 +181,26 @@
                       <td>Action</td>
                     </tr>
       
-                    <tr *ngFor="let object of expenses | paginate: { itemsPerPage: 20, currentPage: p }; let i = index;">
+                    <tr *ngFor="let object of expenses | paginate: { itemsPerPage: objectPerPage, currentPage: p }; let i = index;">
                       <td> {{ i + 1 }} </td>
-                      <td> <a routerLink="/dashboard/{{object.expense.transaction_type}}/{{ object.expense.category.split(' ')[0]  + '/' + object.expense.datetime }}"> <span class="span_amount">{{ object.expense.amount | number}}</span></a> TK</td>
+                      <td>  
+                        <a routerLink="/finance/expense/{{ object.category.split(' ')[0]  + '/' + object.id }}"><span class="span_amount">{{ object.amount | number }}</span> </a> TK
 
-                      <td> <a routerLink="/dashboard/{{object.expense.transaction_type}}/{{ object.expense.category.split(' ')[0] }}">{{ object.expense.category  }}</a> </td>
-                      <td> {{ object.expense.userdate | date:'MMM d, y, EE' }} </td>
-                      <td> {{ object.expense.note  }} </td>
+
+
+                      </td>
+
+                      <td> 
+
+                        <a routerLink="/finance/expense/{{ object.category.split(' ')[0] }}">
+                            {{ object.category  }}
+                        </a>
+
+
+
+                      </td>
+                      <td> {{ object.userdate | date}} </td>
+                      <td> {{ object.note }} </td>
                       <td>
                           <span placement="top" ngbTooltip="Delete" (click)="removeObject(object)"> <i class="trash alternate outline icon cp"></i> </span>
                       </td>
