@@ -71,6 +71,7 @@ export class DepositComponent implements OnInit {
   };
   p: number = 1;
   placement = 'bottom';
+  objectPerPage:number = 10;
   range:any = {
     prevdate: {
       year: new Date().getFullYear(), 
@@ -193,7 +194,7 @@ addDeposit(deposit:any) {
       }).catch(function(error) {
       });
 
-      this.firestore.collection('tallySummary').doc('total_deposit').set({
+      this.firestore.collection('tally_summary').doc('total_deposit').set({
         deposit_aggregate: {
           amount: depositAmount,
           last_deposit_type: deposit_category,
@@ -334,7 +335,7 @@ removeObject(object:any) {
             }, 1500);
 
 
-              this.firestore.collection('tallySummary').doc('total_deposit').set({
+              this.firestore.collection('tally_summary').doc('total_deposit').set({
               deposit_aggregate: {
                   amount: depositAmount,
                   datetime_ms: d,

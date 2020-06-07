@@ -184,7 +184,7 @@
                     <tr *ngFor="let object of expenses | paginate: { itemsPerPage: objectPerPage, currentPage: p }; let i = index;">
                       <td> {{ i + 1 }} </td>
                       <td>  
-                        <a routerLink="/finance/expense/{{ object.category.split(' ')[0]  + '/' + object.id }}"><span class="span_amount">{{ object.amount | number }}</span> </a> TK
+                        <a routerLink="{{ object.category.split(' ')[0]  + '/' + object.id }}"><span class="span_amount">{{ object.amount | number }}</span> </a> TK
 
 
 
@@ -192,7 +192,7 @@
 
                       <td> 
 
-                        <a routerLink="/finance/expense/{{ object.category.split(' ')[0] }}">
+                        <a routerLink="{{ object.category.split(' ')[0] }}">
                             {{ object.category  }}
                         </a>
 

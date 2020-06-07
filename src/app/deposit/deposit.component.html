@@ -170,9 +170,9 @@
                     <tr *ngFor="let object of deposits | paginate: { itemsPerPage: objectPerPage, currentPage: p }; let i = index;">
                       <td> {{ i + 1 }} </td>
                       
-                      <td> <a routerLink="/finance/deposit/{{ object.category  + '/' + object.id }}"><span class="span_amount">{{ object.amount | number }}</span> </a> TK</td>
+                      <td> <a routerLink="/deposit/{{ object.category  + '/' + object.id }}"><span class="span_amount">{{ object.amount | number }}</span> </a> TK</td>
 
-                      <td> <a routerLink="/finance/deposit/{{ object.category }}">{{ object.category  }}</a> </td>
+                      <td> <a routerLink="/deposit/{{ object.category }}">{{ object.category  }}</a> </td>
                       <td> {{ object.userdate | date:'MMM d, y, EE' }} </td>
                       <td> {{ object.note }} </td>
                       <td>

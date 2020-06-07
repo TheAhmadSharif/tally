@@ -193,7 +193,7 @@ addExpense(expense:any) {
 
       });
       
-      this.firestore.collection('tallySummary').doc('total_expense').set({
+      this.firestore.collection('tally_summary').doc('total_expense').set({
               expense_aggregate: {
                   amount: expenseAmount,
                   datetime_ms: d,
@@ -264,7 +264,7 @@ removeObject(object:any) {
           }, 1500);
 
 
-              this.firestore.collection('tallySummary').doc('total_expense').set({
+              this.firestore.collection('tally_summary').doc('total_expense').set({
               expense_aggregate: {
                   amount: expenseAmount,
                   datetime_ms: d,

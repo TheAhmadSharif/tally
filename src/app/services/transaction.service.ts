@@ -24,7 +24,7 @@ export class TransactionService implements OnInit{
   ngOnInit(): void {}
 
   getTransactionSummary(): Observable<any> {
-      var summary = this.firestore.collection('TallySummary').valueChanges()
+      var summary = this.firestore.collection('tally_summary').valueChanges()
       return summary;
   }
 }

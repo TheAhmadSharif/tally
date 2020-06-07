@@ -83,6 +83,8 @@ ngOnInit(): void {
     this.totalAmount = 0;
     var transactionType = this.routeParameter.transactionType;
 
+    console.log(this.routeParameter, '86');
+
 
     this.firestore.collection(transactionType, ref => ref.where('category', '==', this.routeParameter.categoryname)).valueChanges().subscribe(object=> {
 
