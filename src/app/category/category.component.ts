@@ -55,6 +55,7 @@ export class CategoryComponent implements OnInit {
   placement = 'bottom';
   p: number = 1;
   objectPerPage:number = 10;
+  url:any;
 
   range:any = {
     prevdate: {
@@ -83,7 +84,9 @@ ngOnInit(): void {
     this.totalAmount = 0;
     var transactionType = this.routeParameter.transactionType;
 
-    console.log(this.routeParameter, '86');
+    console.log(this.route.snapshot.paramMap.get('category'), '86');
+
+
 
 
     this.firestore.collection(transactionType, ref => ref.where('category', '==', this.routeParameter.categoryname)).valueChanges().subscribe(object=> {

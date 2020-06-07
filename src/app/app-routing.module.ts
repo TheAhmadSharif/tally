@@ -21,8 +21,8 @@ const routes: Routes = [
         { path: 'expense', component: ExpenseComponent, pathMatch: 'full'},
         { path: 'deposit', component: DepositComponent, pathMatch: 'full'},        
         { path: 'report', component: ReportComponent, pathMatch: 'full'},        
-        { path: 'dashboard/:category/:categoryname', component: CategoryComponent, pathMatch: 'full'},        
-        { path: 'dashboard/:category/:categoryname/:objectId', component: DetailsComponent, pathMatch: 'full'},        
+        { path: ':category/:categoryname', component: CategoryComponent, pathMatch: 'full'},        
+        { path: ':category/:categoryname/:objectId', component: DetailsComponent, pathMatch: 'full'},        
       ]
   },
   { path: '**', component: NopageComponent}
