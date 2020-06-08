@@ -68,17 +68,13 @@
                   <div class="row">
                     <div class="col-sm-6 col-12">
                       <div class="d-flex">
-                          <div class="form-group">
-                        <div class="input-group">
-                          <input type="hidden"
-                                 name="selected_day" [(ngModel)]="selected_day" ngbDatepicker #d2="ngbDatepicker" [placement]="placement" [positionTarget]="buttonEl">
-                          <div class="date-block">
-                            <span>{{  selected_day.year + '-' + selected_day.month + '-' + selected_day.day | date: 'dd, MMM y' }}</span>
-                              
-                            <span #buttonEl class="btn disabled cp calendar" (click)="d2.toggle()"></span>
-                          </div>  <!-- End date-block -->
-                        </div> <!-- End input group -->
-                      </div> <!-- End Form group -->
+                                <input type="hidden"
+                                       name="selected_day" [(ngModel)]="selected_day" ngbDatepicker #d2="ngbDatepicker" [placement]="placement" [positionTarget]="buttonEl">
+                                <div class="date-block">
+                                  <span>{{  selected_day.year + '-' + selected_day.month + '-' + selected_day.day | date: 'dd, MMM y' }}</span>
+                                    
+                                  <span #buttonEl class="btn disabled cp calendar" (click)="d2.toggle()"></span>
+                                </div>  <!-- End date-block -->
   
                       <div class="d-flex arrow-block" style="margin: 0;">
                                   <div>
@@ -92,7 +88,7 @@
                                       </span>
                                   </div> <!-- End div  -->
                                   <div>
-                                    <span class="btn btn-sm btn-outline-success" (click)="getByDay(selected_day)">Get Data</span>
+                                    <span class="btn btn-sm btn-outline-success" (click)="getByDay(selected_day)" style="line-height: 1">Get Data</span>
                                   </div> <!-- End div  -->
                       </div> <!-- End div d-flex -->
                       </div>   <!-- End d-flex -->
@@ -128,7 +124,7 @@
                                
           
                               <div class="date-block my-2">
-                                  <span class="btn btn-sm btn-outline-success" (click)="getByRange(range)">Search</span>
+                                  <span class="btn btn-sm btn-outline-success" (click)="getByRange(range)" style="line-height: 1">Search</span>
                               </div>  <!-- End d-flex -->
                             </div> <!-- End Col 6 -->
                             </div>  <!-- End collapse -->

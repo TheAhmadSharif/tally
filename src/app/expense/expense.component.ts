@@ -123,12 +123,12 @@ getDataSort(sorting_type:any) {
     var sortingType = sorting_type;
     this.sortedIcon[sortingType].order =! this.sortedIcon[sortingType].order;
     if(this.sortedIcon[sortingType].order) {
-      var sortedDataDesc = _.sortBy(this.expenses, [function(o) { return o.expense[sortingType]}]);
+      var sortedDataDesc = _.sortBy(this.expenses, [function(o) { return o[sortingType]}]);
       this.expenses = sortedDataDesc;
       this.sortedIcon[sorting_type].icon = 'chevron down icon';
     }
     else {
-        var sortedDataAsc = _.sortBy(this.expenses, [function(o) { return o.expense[sortingType];}]).reverse();
+        var sortedDataAsc = _.sortBy(this.expenses, [function(o) { return o[sortingType];}]).reverse();
         this.expenses = sortedDataAsc;
         this.sortedIcon[sorting_type].icon = 'chevron up icon';
     }
