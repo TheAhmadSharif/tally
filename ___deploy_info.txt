@@ -1,6 +1,6 @@
 ng build --prod --base-href https://theahmadsharif.github.io/tally/
 
-git remote set-url origin git@github.com:TheAhmadSharif/finance.git
+git remote set-url origin git@github.com:TheAhmadSharif/tally.git
 
 
 ng deploy
