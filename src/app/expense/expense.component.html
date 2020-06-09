@@ -40,20 +40,6 @@
                 </div> <!-- End form-group-->
     
     
-                <div *ngIf="category.value == 'Utility' " class="form-group" (click)="getSubCategory(subcategory.value)">
-                 
-                  <input type="hidden" [(ngModel)]="expense.subcategory" name="expense.subcategory">
-                  <select name="expense_type" class="custom-select" #subcategory>
-                      <option selected="true" disabled value="0">Select a Sub category</option>
-                      <option value="Electric">Electric Bill</option>
-                      <option value="Internet">Internet Bill</option>
-                      <option value="Market Maintainance">Market Maintainance</option>
-                      <option value="Others">Others</option>
-                  </select>    
-                  <div *ngIf="sub_others">
-                    <input type="text" placeholder="Write " [(ngModel)]="expense.subcategory_others" name ="expense.others" class="form-control">
-                  </div>
-                </div> <!-- End form-group-->
                 
             
     
@@ -72,7 +58,15 @@
             </form>  <!-- End -->
       </div> <!-- End card body -->
       </div> <!-- End card  -->
+
+      <div class="card">
+          <div class="card-body">
+              <a href="#" class="btn btn-sm btn-primary" title="Download JSON" [href]="downloadJsonHref" download="download.json">Download Expense Data</a>
+           </div> <!-- End card body -->
+      </div> <!-- End card  -->
     </div> <!-- End col 6 -->
+
+
 
 
 

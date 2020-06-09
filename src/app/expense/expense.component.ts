@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { TransactionService } from '../services/transaction.service';
@@ -10,8 +11,6 @@ interface Expense {
   amount: string,
   date: object,
   category: string,
-  subcategory: string,
-  subcategory_others: string,
   note: string
 }
 interface TallySummary {
@@ -60,10 +59,9 @@ export class ExpenseComponent implements OnInit {
   };
 
   expenses:any;
+  downloadJsonHref:any = null;
   totalExpense:any = 0;
   notification:any;
-  subcategory:string;
-  sub_others:boolean = false;
   selected_day:any = {
     year: new Date().getFullYear(), 
     month: new Date().getMonth() + 1, 
@@ -91,8 +89,6 @@ export class ExpenseComponent implements OnInit {
     amount: '',
     date: {year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate()},
     category: '',
-    subcategory: null,
-    subcategory_others: null,
     note: null,
   }
   
@@ -100,15 +96,20 @@ export class ExpenseComponent implements OnInit {
     private firestore: AngularFirestore,
     public angularFireAuth: AngularFireAuth,
     private router: Router,
-    private transactionService: TransactionService
+    private transactionService: TransactionService,
+    private sanitizer: DomSanitizer
     ) {}
-  
+
   ngOnInit(): void {
 
     this.totalExpense = 0;
     this.firestore.collection('expense').valueChanges().subscribe(object=> {
 
       this.expenses = object;
+
+      var theJSON = JSON.stringify(this.expenses);
+      var uri = this.sanitizer.bypassSecurityTrustUrl("data:text/json;charset=UTF-8," + encodeURIComponent(theJSON));
+      this.downloadJsonHref = uri;
 
 
     }, error => {
@@ -184,8 +185,6 @@ addExpense(expense:any) {
             id: datetime,
             amount: expense.amount,
             category: expense.category,
-            subcategory: expense.subcategory,
-            subcategory_others: expense.subcategory_others,
             userdate: userdate,
             userdate_ms: userdate_ms,
             note: expense.note,
@@ -293,15 +292,7 @@ removeObject(object:any) {
 getCategory(category:string) {
     this.expense.category = category;
 }
-getSubCategory(subcategory:string) {
-  this.expense.subcategory = subcategory;
-  if(subcategory=== 'Others'){
-      this.sub_others = true;
-  }
-  else {
-    this.sub_others = false;
-  }
-}
+
 getByDay(date:any) {
   this.totalExpense = 0;
   var givendate = date.year + '-' + date.month + '-' + date.day;  

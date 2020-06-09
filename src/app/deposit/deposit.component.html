@@ -32,7 +32,7 @@
   
                   <div class="form-group">
                     <input type="hidden" [(ngModel)]="deposit.category" name="deposit.category">
-                    <select name="deposit_type" class="custom-select" #category (click)="getCategory(category.value)" required>
+                    <select name="deposit_type" class="custom-select" #category required>
                         <option selected="true" disabled value="0">Select Deposit Type </option>
                         <option value="customer">Customer Payment</option>
                         <option value="houserent">House Rent</option>
