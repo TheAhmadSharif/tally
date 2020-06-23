@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthenticationService } from '../services/authentication.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
 import { Observable } from 'rxjs';
 
