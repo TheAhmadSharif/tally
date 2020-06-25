@@ -46,6 +46,7 @@ export class ReportComponent implements OnInit {
   ngOnInit(): void {
 
       this.transactionService.getTransactionSummary().subscribe((object:any)=> {
+        console.log(object, '49');
           var data = object.forEach((item:any) => {
                 if(item.expense_byCategory){
                     var data = _.flatMap(item.expense_byCategory);

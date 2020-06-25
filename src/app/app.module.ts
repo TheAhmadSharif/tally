@@ -28,6 +28,17 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NopageComponent } from './nopage/nopage.component';
 import { ContactComponent } from './contact/contact.component';
 
+
+/* State Manegement */
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+import { DepositEffects } from './_state/deposit.effects';
+import { DepsoitReducer } from './_state/deposit.reducers';
+import { DueComponent } from './due/due.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +51,8 @@ import { ContactComponent } from './contact/contact.component';
     LoginComponent,
     DashboardComponent,
     NopageComponent,
-    ContactComponent
+    ContactComponent,
+    DueComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +62,16 @@ import { ContactComponent } from './contact/contact.component';
     FormsModule,
     NgbModule,
     NgxPaginationModule,
-    NgxChartsModule
+    NgxChartsModule,
+    EffectsModule.forRoot([DepositEffects]),
+    StoreModule.forRoot({
+      deposits: DepsoitReducer
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, 
+      logOnly: environment.production, // Restrict extension to log-only mode
+
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
