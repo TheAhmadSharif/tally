@@ -7,6 +7,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import 'firebase/firestore';
 
+import { Store , select } from '@ngrx/store';
+import { initiateExpenses } from '../_state/finance.actions';
+
 interface Expense {
   amount: string,
   date: object,
@@ -97,24 +100,28 @@ export class ExpenseComponent implements OnInit {
     public angularFireAuth: AngularFireAuth,
     private router: Router,
     private transactionService: TransactionService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private store: Store
     ) {}
+
 
   ngOnInit(): void {
 
     this.totalExpense = 0;
-    this.firestore.collection('expense').valueChanges().subscribe(object=> {
 
-      this.expenses = object;
+    this.store.dispatch(initiateExpenses());
+    
+    this.store.pipe(select((state: any) => {
+        console.log(state, 'state');
+        return state.expenses;
+      })).subscribe((object:any) => {
+            this.expenses = object;
+            var theJSON = JSON.stringify(this.expenses);
+            var uri = this.sanitizer.bypassSecurityTrustUrl("data:text/json;charset=UTF-8," + encodeURIComponent(theJSON));
+            this.downloadJsonHref = uri;
 
-      var theJSON = JSON.stringify(this.expenses);
-      var uri = this.sanitizer.bypassSecurityTrustUrl("data:text/json;charset=UTF-8," + encodeURIComponent(theJSON));
-      this.downloadJsonHref = uri;
+      });
 
-
-    }, error => {
-
-    });
      
   this.getTotalExpense();
    

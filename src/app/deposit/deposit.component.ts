@@ -5,6 +5,8 @@ import { TransactionService } from '../services/transaction.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
 
+import { Store , select } from '@ngrx/store';
+import { initiateDeposits } from '../_state/finance.actions';
 
 interface Deposit {
   amount: string,
@@ -31,7 +33,6 @@ interface SortedIcon {
     order: boolean
   }
 }
-
 
 
 @Component({
@@ -98,32 +99,27 @@ export class DepositComponent implements OnInit {
   constructor(
     private firestore: AngularFirestore,
     private router: Router,
-    private transactionService: TransactionService
+    private transactionService: TransactionService,
+    private store: Store
     ) {
       
   }
 ngOnInit(): void {
     this.totalDeposit = 0;
-    this.firestore.collection('deposit').valueChanges().subscribe(object=> {
-      this.deposits = object;
-    });
+    
+    this.store.dispatch(initiateDeposits());
+    
+    this.store.pipe(select((state: any) => {
+        console.log(state, 'state');
+        return state.deposits;
+      })).subscribe((object:any) => {
+            this.deposits = object;
+      });
     this.getTotalDeposit();
+
 }
 
-getDataSort(sorting_type:any) {
-  var sortingType = sorting_type;
-  this.sortedIcon[sortingType].order =! this.sortedIcon[sortingType].order;
-  if(this.sortedIcon[sortingType].order) {
-    var sortedDataDesc = _.sortBy(this.deposits, [function(o) { return o[sortingType]}]);
-    this.deposits = sortedDataDesc;
-    this.sortedIcon[sorting_type].icon = 'chevron down icon'; 
-  }
-  else {
-    var sortedDataAsc = _.sortBy(this.deposits, [function(o) { return o[sortingType];}]).reverse();
-    this.deposits = sortedDataAsc;
-    this.sortedIcon[sorting_type].icon = 'chevron up icon';  
-  }
-}
+
 getTotalDeposit() {
   this.totalDeposit = 0;
   this.transactionService.getTransactionSummary().subscribe(object => {
@@ -142,7 +138,20 @@ getTotalDeposit() {
     this.totalDeposit = 0;
   });
 }
-
+getDataSort(sorting_type:any) {
+  var sortingType = sorting_type;
+  this.sortedIcon[sortingType].order =! this.sortedIcon[sortingType].order;
+  if(this.sortedIcon[sortingType].order) {
+    var sortedDataDesc = _.sortBy(this.deposits, [function(o) { return o[sortingType]}]);
+    this.deposits = sortedDataDesc;
+    this.sortedIcon[sorting_type].icon = 'chevron down icon'; 
+  }
+  else {
+    var sortedDataAsc = _.sortBy(this.deposits, [function(o) { return o[sortingType];}]).reverse();
+    this.deposits = sortedDataAsc;
+    this.sortedIcon[sorting_type].icon = 'chevron up icon';  
+  }
+}
 
 addDeposit(deposit:any) {
     this.notification = null;

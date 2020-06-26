@@ -5,13 +5,18 @@ import 'firebase/firestore';
 
 import { Store, Action } from '@ngrx/store';
 import { createEffect, Actions, ofType, Effect } from '@ngrx/effects';
-import { initiateDeposits, getDeposits } from './deposit.actions';
+import { 
+	initiateDeposits, 
+	getDeposits,
+	initiateExpenses,
+	getExpenses
+} from './finance.actions';
 
 import { EMPTY, of, Observable,  } from 'rxjs';
 import { map, mergeMap, switchMap, catchError } from 'rxjs/operators';
 
 @Injectable()
-export class DepositEffects {
+export class FinanceEffects {
 	constructor(public angularFirestore: AngularFirestore,
 				public actions$: Actions,
 		) {}
@@ -23,6 +28,19 @@ export class DepositEffects {
 				.pipe(
 					map(deposits => {
 							return ({type: 'getDeposits', deposits: deposits })
+						}),
+					catchError(() => EMPTY)
+					)
+
+		))
+	)
+
+	getExpenses$ : Observable<any> = createEffect(() => this.actions$.pipe(
+			ofType(initiateExpenses),
+			mergeMap(() => this.angularFirestore.collection('expense').valueChanges()
+				.pipe(
+					map(expenses => {
+							return ({type: 'getExpenses', expenses: expenses })
 						}),
 					catchError(() => EMPTY)
 					)

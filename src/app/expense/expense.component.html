@@ -1,6 +1,6 @@
 
 <div class="row">
-  <div class="col-sm-4" style="margin-bottom: 20px;"> 
+  <div class="col-sm-4 col-12" style="margin-bottom: 20px;"> 
     <div class="card">
         <div class="card-body">
             <form #expenseForm="ngForm">
@@ -57,20 +57,20 @@
             </div>  <!-- End form-group-->
             </form>  <!-- End -->
       </div> <!-- End card body -->
-      </div> <!-- End card  -->
+    </div> <!-- End card  -->
 
       <div class="card">
           <div class="card-body">
               <a href="#" class="btn btn-sm btn-primary" title="Download JSON" [href]="downloadJsonHref" download="download.json">Download Expense Data</a>
            </div> <!-- End card body -->
       </div> <!-- End card  -->
-    </div> <!-- End col 6 -->
+    </div> <!-- End col 4 -->
 
 
 
 
 
-    <div class="col-sm-8">
+    <div class="col-sm-8 col-12">
       <div class="card" style="margin-bottom: 30px">
           <div class="card-body">
               <div class="" style="margin: 0;">
@@ -147,7 +147,7 @@
                   {{ deleteNotification }}
               </div> <!-- End Alert -->
 
-              <div *ngIf="expenses">
+              <div *ngIf="expenses?.length > 0">
                     <div class="d-flex justify-content-end">
                           <select [(ngModel)]="objectPerPage" (click)="getPerPage(objectPerPage)">
                               <option value="2">2</option>

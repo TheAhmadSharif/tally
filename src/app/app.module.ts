@@ -34,8 +34,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { DepositEffects } from './_state/deposit.effects';
-import { DepsoitReducer } from './_state/deposit.reducers';
+import { FinanceEffects } from './_state/finance.effects';
+import { DepsoitReducer, ExpenseReducer } from './_state/finance.reducers';
 import { DueComponent } from './due/due.component';
 
 
@@ -63,9 +63,10 @@ import { DueComponent } from './due/due.component';
     NgbModule,
     NgxPaginationModule,
     NgxChartsModule,
-    EffectsModule.forRoot([DepositEffects]),
+    EffectsModule.forRoot([FinanceEffects]),
     StoreModule.forRoot({
-      deposits: DepsoitReducer
+      deposits: DepsoitReducer,
+      expenses: ExpenseReducer,
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, 
