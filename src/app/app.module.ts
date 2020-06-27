@@ -30,13 +30,14 @@ import { ContactComponent } from './contact/contact.component';
 
 
 /* State Manegement */
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, ActionReducer, MetaReducer } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { FinanceEffects } from './_state/finance.effects';
-import { DepsoitReducer, ExpenseReducer } from './_state/finance.reducers';
+import { DepsoitReducer, ExpenseReducer, metaReducers } from './_state/finance.reducers';
 import { DueComponent } from './due/due.component';
+
 
 
 @NgModule({
@@ -67,7 +68,7 @@ import { DueComponent } from './due/due.component';
     StoreModule.forRoot({
       deposits: DepsoitReducer,
       expenses: ExpenseReducer,
-    }),
+    }, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, 
       logOnly: environment.production, // Restrict extension to log-only mode

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
 
-
 import { Store, Action } from '@ngrx/store';
 import { createEffect, Actions, ofType, Effect } from '@ngrx/effects';
 import { 
